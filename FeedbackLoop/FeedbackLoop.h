@@ -18,7 +18,7 @@
 
 + (void)setSlackApiKey:(NSString *)apiKey forAppId:(NSString *)appId;
 
-+ (void)presentSlackChannel;
++ (void)presentChatChannel;
 
 + (void)presentConversationList;
 

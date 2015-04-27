@@ -29,7 +29,7 @@
     // Set the slack key in the auth store
 }
 
-+ (void)presentSlackChannel {
++ (void)presentChatChannel {
     // Present the anyone chat channel
     FeedbackLoop *singleton = [self sharedInstance];
     singleton.feedbackLoopWindow = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
