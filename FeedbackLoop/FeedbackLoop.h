@@ -16,7 +16,9 @@
 
 @interface FeedbackLoop : NSObject
 
-+ (void)setSlackApiKey:(NSString *)apiKey forAppId:(NSString *)appId;
++ (void)setApiKey:(NSString *)apiKey forAppId:(NSString *)appId;
+
++ (void)setSlackToken:(NSString *)slackToken;
 
 + (void)presentChatChannel;
 

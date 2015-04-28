@@ -13,6 +13,8 @@ pod 'ParseUI', '~> 1.1'
 pod 'ParseFacebookUtils', '~> 1.7'
 pod 'JSONModel', '~> 1.0'
 pod 'SocketRocket', '0.3.1-beta2'
+pod 'MBProgressHUD', '~> 0.9'
+pod 'SIAlertView', '~> 1.3'
 end
 
 target 'FeedbackLoopTests' do

@@ -8,6 +8,12 @@
 
 #import "FeedbackLoop.h"
 
+// Data Layer
+#import "FBLAuthStore.h"
+
+// Components
+#import "FBLFeedbackTabBarController.h"
+
 @interface FeedbackLoop ()
 @property (nonatomic, strong) UIWindow *feedbackLoopWindow;
 @end
@@ -25,12 +31,20 @@
     return feedbackLoop;
 }
 
-+ (void)setSlackApiKey:(NSString *)apiKey forAppId:(NSString *)appId {
++ (void)setApiKey:(NSString *)apiKey forAppId:(NSString *)appId;
     // Set the slack key in the auth store
+}
+
++ (void)setSlackToken:(NSString *)slackToken {
+    [[self sharedInstance] setSlackToken:slackToken];
 }
 
 + (void)presentChatChannel {
     // Present the anyone chat channel
+    FBLFeedbackTabBarController *feedbackTabBarViewController = [[FBLFeedbackTabBarController alloc] initWithNibName:kFeedbackTabBarController bundle:nil];
+    feedbackTabBarViewController.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentViewController:feedbackTabBarViewController animated:YES completion:nil];
+
     FeedbackLoop *singleton = [self sharedInstance];
     singleton.feedbackLoopWindow = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
     [singleton.feedbackLoopWindow setWindowLevel:UIWindowLevelAlert];
