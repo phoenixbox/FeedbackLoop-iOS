@@ -79,7 +79,7 @@
     _bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
     _bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
 
-    _avatarImageBlank = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"Persona.png"] diameter:30.0];
+    _avatarImageBlank = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"FeedbackLoop.bundle/Persona.png"] diameter:30.0];
 
     _isLoading = NO;
     _initialized = NO;
@@ -93,12 +93,12 @@
     UIImageView *logoView = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 44.0f)];
     logoView.contentMode = UIViewContentModeScaleAspectFit;
 
-    UIImage *logoImage = [UIImage imageNamed:@"FBLTitle.png"];;
+    UIImage *logoImage = [UIImage imageNamed:@"FeedbackLoop.bundle/FBLTitle.png"];;
     [logoView setImage:logoImage];
     [logoView setCenter:navBar.center];
     [navBar addSubview:logoView];
 
-    UIImage *removeIcon = [UIImage imageNamed:@"removeIcon.png"];
+    UIImage *removeIcon = [UIImage imageNamed:@"FeedbackLoop.bundle/removeIcon.png"];
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(5.0,5.0,40.0,40.0)];
     [button setBackgroundImage:removeIcon forState:UIControlStateNormal];
     [button addTarget:self action:@selector(hideFeedbackLoopWindow) forControlEvents:UIControlEventTouchUpInside];
