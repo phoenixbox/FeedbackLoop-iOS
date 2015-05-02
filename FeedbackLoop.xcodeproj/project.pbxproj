@@ -23,6 +23,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		CB56A1BB1AF4B9A40019BB70 /* FBLAuthenticationStore.h in Headers */ = {isa = PBXBuildFile; fileRef = CB56A1B91AF4B9A40019BB70 /* FBLAuthenticationStore.h */; };
+		CB56A1BC1AF4B9A40019BB70 /* FBLAuthenticationStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CB56A1BA1AF4B9A40019BB70 /* FBLAuthenticationStore.m */; };
 		CBC8F6641AEDB145001DDB07 /* FeedbackLoop.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CBC8F6631AEDB145001DDB07 /* FeedbackLoop.h */; };
 		CBC8F6661AEDB145001DDB07 /* FeedbackLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC8F6651AEDB145001DDB07 /* FeedbackLoop.m */; };
 		CBC8F66C1AEDB145001DDB07 /* libFeedbackLoop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8F6601AEDB145001DDB07 /* libFeedbackLoop.a */; };
@@ -101,6 +103,8 @@
 
 /* Begin PBXFileReference section */
 		02798D12E644895F9B4541B8 /* Pods-FeedbackLoop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FeedbackLoop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FeedbackLoop/Pods-FeedbackLoop.debug.xcconfig"; sourceTree = "<group>"; };
+		CB56A1B91AF4B9A40019BB70 /* FBLAuthenticationStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLAuthenticationStore.h; sourceTree = "<group>"; };
+		CB56A1BA1AF4B9A40019BB70 /* FBLAuthenticationStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLAuthenticationStore.m; sourceTree = "<group>"; };
 		CBC8F6601AEDB145001DDB07 /* libFeedbackLoop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeedbackLoop.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC8F6631AEDB145001DDB07 /* FeedbackLoop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedbackLoop.h; sourceTree = "<group>"; };
 		CBC8F6651AEDB145001DDB07 /* FeedbackLoop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedbackLoop.m; sourceTree = "<group>"; };
@@ -276,6 +280,8 @@
 				CBF758931AEE156D00ABE378 /* FBLSlackStore.h */,
 				CBF758951AEE156D00ABE378 /* FBLChatStore.m */,
 				CBF758991AEE156D00ABE378 /* FBLChatStore.h */,
+				CB56A1B91AF4B9A40019BB70 /* FBLAuthenticationStore.h */,
+				CB56A1BA1AF4B9A40019BB70 /* FBLAuthenticationStore.m */,
 			);
 			name = Stores;
 			sourceTree = "<group>";
@@ -368,6 +374,7 @@
 				CBF758D01AEE156D00ABE378 /* FBLSlackStore.h in Headers */,
 				CBC8F67F1AEDB6FB001DDB07 /* FeedbackLoop.h in Headers */,
 				CBF758E61AEE156D00ABE378 /* FBLHelpers.h in Headers */,
+				CB56A1BB1AF4B9A40019BB70 /* FBLAuthenticationStore.h in Headers */,
 				CBF758CF1AEE156D00ABE378 /* FBLChatViewController.h in Headers */,
 				CBF758D51AEE156D00ABE378 /* FBLChatCollection.h in Headers */,
 				CBF758C31AEE156D00ABE378 /* FBLChannelStore.h in Headers */,
@@ -569,6 +576,7 @@
 				CBF758E11AEE156D00ABE378 /* FBLMemberCollection.m in Sources */,
 				CBF758C61AEE156D00ABE378 /* FBLChannel.m in Sources */,
 				CBF758E01AEE156D00ABE378 /* FBLMember.m in Sources */,
+				CB56A1BC1AF4B9A40019BB70 /* FBLAuthenticationStore.m in Sources */,
 				CBF758D21AEE156D00ABE378 /* FBLChatStore.m in Sources */,
 				CBF758CC1AEE156D00ABE378 /* FBLSlackStore.m in Sources */,
 				CBF758C01AEE156D00ABE378 /* FBLChannelStore.m in Sources */,

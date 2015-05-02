@@ -66,7 +66,7 @@
     NSString *requestURL = [base stringByAppendingString:FBL_TEAMS_URI];
     requestURL = [NSString stringWithFormat:@"%@/%@%@", requestURL, self.AppId,@"?"];
     requestURL = [NSString stringWithFormat:@"%@email=%@", requestURL, self.userEmail];
-
+    
     return requestURL;
 }
 
