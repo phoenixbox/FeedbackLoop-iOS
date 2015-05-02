@@ -30,8 +30,6 @@
 		CBC8F67B1AEDB6D2001DDB07 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8F67A1AEDB6D2001DDB07 /* UIKit.framework */; };
 		CBC8F67D1AEDB6DB001DDB07 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8F67C1AEDB6DB001DDB07 /* Foundation.framework */; };
 		CBC8F67F1AEDB6FB001DDB07 /* FeedbackLoop.h in Headers */ = {isa = PBXBuildFile; fileRef = CBC8F6631AEDB145001DDB07 /* FeedbackLoop.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CBF758801AEE150A00ABE378 /* FBLAuthStore.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF7587E1AEE150A00ABE378 /* FBLAuthStore.h */; };
-		CBF758811AEE150A00ABE378 /* FBLAuthStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF7587F1AEE150A00ABE378 /* FBLAuthStore.m */; };
 		CBF758BF1AEE156D00ABE378 /* FBLChatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF758821AEE156D00ABE378 /* FBLChatsViewController.m */; };
 		CBF758C01AEE156D00ABE378 /* FBLChannelStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF758831AEE156D00ABE378 /* FBLChannelStore.m */; };
 		CBF758C11AEE156D00ABE378 /* FBLAppConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF758841AEE156D00ABE378 /* FBLAppConstants.h */; };
@@ -135,8 +133,6 @@
 		CBC8F67C1AEDB6DB001DDB07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CBC8F68C1AEDB902001DDB07 /* FeedbackLoop.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedbackLoop.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC8F68F1AEDB902001DDB07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CBF7587E1AEE150A00ABE378 /* FBLAuthStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLAuthStore.h; sourceTree = "<group>"; };
-		CBF7587F1AEE150A00ABE378 /* FBLAuthStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLAuthStore.m; sourceTree = "<group>"; };
 		CBF758821AEE156D00ABE378 /* FBLChatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLChatsViewController.m; sourceTree = "<group>"; };
 		CBF758831AEE156D00ABE378 /* FBLChannelStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLChannelStore.m; sourceTree = "<group>"; };
 		CBF758841AEE156D00ABE378 /* FBLAppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLAppConstants.h; sourceTree = "<group>"; };
@@ -336,8 +332,6 @@
 				CBF758931AEE156D00ABE378 /* FBLSlackStore.h */,
 				CBF758951AEE156D00ABE378 /* FBLChatStore.m */,
 				CBF758991AEE156D00ABE378 /* FBLChatStore.h */,
-				CBF7587E1AEE150A00ABE378 /* FBLAuthStore.h */,
-				CBF7587F1AEE150A00ABE378 /* FBLAuthStore.m */,
 			);
 			name = Stores;
 			sourceTree = "<group>";
@@ -515,7 +509,6 @@
 				CBF758CD1AEE156D00ABE378 /* FBLMembersStore.h in Headers */,
 				CBF758C41AEE156D00ABE378 /* FBLChannelCollection.h in Headers */,
 				CBF758DC1AEE156D00ABE378 /* FBLMessageController.h in Headers */,
-				CBF758801AEE150A00ABE378 /* FBLAuthStore.h in Headers */,
 				CBF758E31AEE156D00ABE378 /* FBLAuth.h in Headers */,
 				CBF758D91AEE156D00ABE378 /* FBLChatsEmptyMessageView.h in Headers */,
 				CBF758E21AEE156D00ABE378 /* FBLMemberCollection.h in Headers */,
@@ -724,7 +717,6 @@
 				CBF758D21AEE156D00ABE378 /* FBLChatStore.m in Sources */,
 				CBF758C21AEE156D00ABE378 /* FBLChatCell.m in Sources */,
 				CBF758DE1AEE156D00ABE378 /* FBLMemberListCell.m in Sources */,
-				CBF758811AEE150A00ABE378 /* FBLAuthStore.m in Sources */,
 				CBF758CC1AEE156D00ABE378 /* FBLSlackStore.m in Sources */,
 				CBF758C01AEE156D00ABE378 /* FBLChannelStore.m in Sources */,
 				CBF758DB1AEE156D00ABE378 /* FBLMemberListView.m in Sources */,

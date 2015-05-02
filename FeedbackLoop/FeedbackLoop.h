@@ -1,27 +1,23 @@
 //
 //  FeedbackLoop.h
-//  FeedbackLoop
+//  Stndout
 //
-//  Created by Shane Rogers on 4/26/15.
-//  Copyright (c) 2015 FBL. All rights reserved.
+//  Created by Shane Rogers on 4/27/15.
+//  Copyright (c) 2015 REPL. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_7_0
-#error The FeedbackLoop iOS SDK supports iOS 7.0 upwards.
-#endif
-
 
 @interface FeedbackLoop : NSObject
 
++ (void)configureWithSlackToken:(NSString *)slackToken;
+
 + (void)setApiKey:(NSString *)apiKey forAppId:(NSString *)appId;
 
-+ (void)setSlackToken:(NSString *)slackToken;
++ (void)registerUserWithEmail:(NSString *)userEmail;
+
++ (void)initWithAppId:(NSString *)appId;
 
 + (void)presentChatChannel;
-
-+ (void)presentConversationList;
 
 @end

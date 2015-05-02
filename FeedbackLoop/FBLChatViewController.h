@@ -14,6 +14,6 @@
 
 @interface FBLChatViewController : JSQMessagesViewController <SRWebSocketDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate>
 
-- (id)initWithSlackChannel:(NSString *)channelId;
+@property (nonatomic, copy) void (^popWindow)();
 
 @end

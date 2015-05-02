@@ -20,25 +20,23 @@
 #import "FBLChatStore.h"
 #import "FBLMembersStore.h"
 #import "FBLSlackStore.h"
+#import "FBLAuthenticationStore.h"
 
 // Libs
-#import <Parse/Parse.h>
 #import "MBProgressHUD.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 // Utils
-#import "FBLViewhelpers.h"
 #import "FBLCameraUtil.h"
-#import "FBLMessageController.h"
-#import "FBLPushNotificationController.h"
 
 @interface FBLChatViewController ()
 
-@property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) BOOL isLoading;
 @property (nonatomic, assign) BOOL initialized;
 
-@property (nonatomic, strong) NSString *channelId;
+@property (nonatomic, strong) NSString *userChannelId;
+@property (nonatomic, strong) UIView *emptyMessage;
+
+@property (nonatomic, strong) UIView *navBar;
 
 @property (nonatomic, strong) FBLChannel *channel;
 
@@ -60,35 +58,22 @@
 
 @implementation FBLChatViewController
 
-- (id)initWithSlackChannel:(NSString *)channelId {
-    self = [super init];
-    self.channelId = channelId;
-
-    self.channel = [[FBLChannelStore sharedStore] find:channelId];
-
-    // TODO: A better error pattern would be to try to reconnect the user to an active room
-    if (!self.channel) {
-        SIAlertView *alert = [FBLViewHelpers createAlertForError:nil
-                                                       withTitle:@"Ooops!" andMessage:@"We had trouble connecting to that channel"];
-        [alert show];
-    }
-
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addNavigationBar];
     [self setupHUD];
+    [self initializeCollectionErrorView];
 
-    self.title = [NSString stringWithFormat:@"The %@ Channel", self.channelId];
+    self.title = [NSString stringWithFormat:@"FeedbackLoop Chat"];
 
     _users = [[NSMutableArray alloc] init];
     _messages = [[NSMutableArray alloc] init];
     _chatCollection = [[FBLChatCollection alloc] init];
     _avatars = [[NSMutableDictionary alloc] init];
 
-    self.senderId = [[PFUser currentUser] objectForKey:@"facebookId"];
-    self.senderDisplayName = [[PFUser currentUser] objectForKey:@"fullname"];
+    // NOTE: We need to satisfy the JSQMessages internal prop requirements
+    self.senderId = [[FBLAuthenticationStore sharedInstance] AppId];
+    self.senderDisplayName = [[FBLAuthenticationStore sharedInstance] userEmail];
 
     JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
     _bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
@@ -99,29 +84,115 @@
     _isLoading = NO;
     _initialized = NO;
 
-    // Need some sort of promise like chaining of completion blocks
-    void(^completionBlock)(NSError *err)=^(NSError *error) {
-        [self loadSlackMessages];
-    };
+    [self slackOauth];
+}
+
+- (void)addNavigationBar {
+    UIView *navBar = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,50)];
+    [navBar setBackgroundColor:[UIColor whiteColor]];
+    UIImageView *logoView = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 44.0f)];
+    logoView.contentMode = UIViewContentModeScaleAspectFit;
+    UIImage *logoImage = [UIImage imageNamed:@"newTitlebar.png"];
+    [logoView setImage:logoImage];
+    [logoView setCenter:navBar.center];
+    [navBar addSubview:logoView];
+
+    UIImage *removeIcon = [UIImage imageNamed:@"removeIcon.png"];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(5.0,5.0,40.0,40.0)];
+    [button setBackgroundImage:removeIcon forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(hideFeedbackLoopWindow) forControlEvents:UIControlEventTouchUpInside];
+    [navBar addSubview:button];
+
+    [self.view addSubview:navBar];
+}
+
+- (void)initializeCollectionErrorView {
+    CGRect collectionViewBounds = [self.collectionView bounds];
+    _emptyMessage = [[UIView alloc] initWithFrame:collectionViewBounds];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,collectionViewBounds.size.width-20.0f, 50.0f)];
+    [label setText:@"Uh Oh! We had trouble connecting"];
+    [label setTextAlignment:NSTextAlignmentCenter];
+    [label setCenter:_emptyMessage.center];
+    [_emptyMessage addSubview:label];
+
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(collectionViewBounds.size.width/4,
+                                                                  label.frame.origin.y + label.frame.size.height + 10.0f,
+                                                                  collectionViewBounds.size.width/2,
+                                                                  40.0f)];
+    [button addTarget:self
+                 action:@selector(slackOauth)
+       forControlEvents:UIControlEventTouchUpInside];
+
+    [self styleButton:button withColor:[UIColor blackColor]];
+
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+
+    [_emptyMessage addSubview:button];
+    [self.collectionView setBackgroundView:_emptyMessage];
+    [self hideErrorView:YES];
+}
+
+- (void)styleButton:(UIButton *)button withColor:(UIColor *)color {
+    button.layer.cornerRadius = 4;
+    button.layer.borderWidth = 2;
+    button.layer.borderColor = color.CGColor;
+    [button setBackgroundColor:[UIColor whiteColor]];
+    [button setTitleColor:color forState:UIControlStateNormal];
+    [button setTintColor:color];
+
+}
+
+- (void)hideErrorView:(BOOL)show {
+    if (show) {
+        [self.collectionView.backgroundView setHidden:YES];
+    } else {
+        [self.collectionView.backgroundView setHidden:NO];
+    }
+}
+
+- (void)slackOauth {
+    [_hud show:YES];
+    [self hideErrorView:YES];
 
     void(^refreshWebhook)(NSError *err)=^(NSError *error) {
+        [_hud hide:YES];
+
         if (error == nil) {
+            [self setChannelDetails];
             [self setupWebsocket];
-            [[FBLMembersStore sharedStore] fetchMembersWithCompletion:completionBlock];
+            [self loadSlackMessages];
+        } else {
+            [self hideErrorView:NO];
         }
     };
 
-    [[FBLSlackStore sharedStore] setupWebhook:refreshWebhook];
-//    [self loadParseMessages];
+    [[FBLSlackStore sharedStore] slackOAuth:refreshWebhook];
+}
+
+- (void)hideFeedbackLoopWindow {
+    [self flushWebSocket];
+    _popWindow();
+}
+
+- (void)flushWebSocket {
+    [_webSocket close];
+    [FBLSlackStore sharedStore].webhookUrl = nil;
+    _webSocket.delegate = nil;
+    _webSocket = nil;
+}
+
+- (void)setChannelDetails {
+    self.userChannelId = [[FBLSlackStore sharedStore] userChannelId];
+    self.channel = [[FBLChannelStore sharedStore] find:self.userChannelId];
 }
 
 - (void)setupWebsocket {
     NSString *websocketUrl = [FBLSlackStore sharedStore].webhookUrl;
 
-    SRWebSocket *newWebSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:websocketUrl]];
-    newWebSocket.delegate = self;
+    _webSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:websocketUrl]];
+    _webSocket.delegate = self;
 
-    [newWebSocket open];
+    [_webSocket open];
 }
 
 - (void)setupHUD {
@@ -133,19 +204,10 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.collectionView.collectionViewLayout.springinessEnabled = YES;
-
-//    TODO: Setup the incoming webhook for slack to receive messages from the channel
-//    _timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(loadSlackMessages) userInfo:nil repeats:YES];
-
-//    Parse Polling for Messages
-//    _timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(loadParseMessages) userInfo:nil repeats:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-
-    ClearMessageCounter(_channelId);
-    [_timer invalidate];
 }
 
 #pragma mark - Backend methods
@@ -185,67 +247,16 @@
                 [_hud hide:YES];
             }
             else {
-                SIAlertView *alert = [FBLViewHelpers createAlertForError:nil
-                                                               withTitle:@"Ooops!" andMessage:error];
-                [alert show];
+                // Todo replace background view with the correct title
             }
 
             [self.collectionView reloadData];
             _isLoading = NO;
         };
 
-        [[FBLChatStore sharedStore] fetchHistoryForChannel:_channelId withCompletion:completionBlock];
+        [[FBLChatStore sharedStore] fetchHistoryForChannel:_userChannelId withCompletion:completionBlock];
     }
 }
-
-//- (void)loadParseMessages {
-//    if (_isLoading == NO)
-//    {
-//        _isLoading = YES;
-//        JSQMessage *message_last = [_messages lastObject];
-//
-//        PFQuery *query = [PFQuery queryWithClassName:PF_MESSAGE_CLASS_NAME];
-//        [query whereKey:PF_MESSAGE_GROUPID equalTo:_channelId];
-//
-//        if (message_last != nil) {
-//            [query whereKey:PF_MESSAGE_CREATEDAT greaterThan:message_last.date];
-//        }
-//
-//        [query includeKey:PF_MESSAGE_USER];
-//        [query orderByDescending:PF_MESSAGE_CREATEDAT];
-//        [query setLimit:50];
-//        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//             if (error == nil) {
-//                 BOOL incoming = NO;
-//                 self.automaticallyScrollsToMostRecentMessage = NO;
-//                 for (PFObject *object in [objects reverseObjectEnumerator])
-//                 {
-//                     JSQMessage *message = [self addParseMessage:object];
-//                     if ([self incoming:message]) {
-//                         incoming = YES;
-//                     }
-//                 }
-//                 if ([objects count] != 0)
-//                 {
-//                     if (_initialized && incoming)
-//                         [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
-//                     [self finishReceivingMessage];
-//                     [self scrollToBottomAnimated:NO];
-//                 }
-//                 self.automaticallyScrollsToMostRecentMessage = YES;
-//                 _initialized = YES;
-//                 [_hud hide:YES];
-//             }
-//             else {
-//                 SIAlertView *alert = [FBLViewHelpers createAlertForError:error
-//                                           withTitle:@"Ooops!" andMessage:@"We had trouble loading messages"];
-//                 [alert show];
-//             }
-//
-//             _isLoading = NO;
-//         }];
-//    }
-//}
 
 - (JSQMessage *)addSlackMessage:(FBLChat *)chat {
     JSQMessage *message;
@@ -255,12 +266,16 @@
 
     if ([username isEqualToString:@"bot"]) {
 
-        // A user is added for every message - paired collection
-        PFUser *user = [PFUser currentUser];
-        [_users addObject:user];
+        // Add a user which can be pulled on an
+        FBLMember *member = [[FBLMember alloc] init];
+        [member setId:self.senderId];
+        [member setEmail:self.senderDisplayName];
+        [member setProfileImage:nil];
 
-        senderId = [[PFUser currentUser] objectForKey:@"facebookId"];
-        displayName = [[PFUser currentUser] objectForKey:@"fullname"];
+        [_users addObject:member];
+
+        senderId = self.senderId;
+        displayName = self.senderDisplayName;
     } else {
         senderId = chat.user;
         FBLMember *member = [[FBLMembersStore sharedStore] find:chat.user];
@@ -280,132 +295,24 @@
     return message;
 }
 
-//- (JSQMessage *)addParseMessage:(PFObject *)object {
-//    JSQMessage *message;
-//
-//    PFUser *user = object[PF_MESSAGE_USER];
-//    NSString *name = user[PF_CUSTOMER_FULLNAME];
-//
-//    PFFile *fileVideo = object[PF_MESSAGE_VIDEO];
-//    PFFile *filePicture = object[PF_MESSAGE_PICTURE];
-//
-//    if ((filePicture == nil) && (fileVideo == nil))
-//    {
-//        message = [[JSQMessage alloc] initWithSenderId:user.objectId senderDisplayName:name date:object.createdAt text:object[PF_MESSAGE_TEXT]];
-//    }
-//
-//    if (fileVideo != nil)
-//    {
-//        JSQVideoMediaItem *mediaItem = [[JSQVideoMediaItem alloc] initWithFileURL:[NSURL URLWithString:fileVideo.url] isReadyToPlay:YES];
-//        mediaItem.appliesMediaViewMaskAsOutgoing = [user.objectId isEqualToString:self.senderId];
-//        message = [[JSQMessage alloc] initWithSenderId:user.objectId senderDisplayName:name date:object.createdAt media:mediaItem];
-//    }
-//
-//    if (filePicture != nil)
-//    {
-//        JSQPhotoMediaItem *mediaItem = [[JSQPhotoMediaItem alloc] initWithImage:nil];
-//        mediaItem.appliesMediaViewMaskAsOutgoing = [user.objectId isEqualToString:self.senderId];
-//        message = [[JSQMessage alloc] initWithSenderId:user.objectId senderDisplayName:name date:object.createdAt media:mediaItem];
-//
-//        [filePicture getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
-//         {
-//             if (error == nil)
-//             {
-//                 mediaItem.image = [UIImage imageWithData:imageData];
-//                 [self.collectionView reloadData];
-//             }
-//         }];
-//    }
-//
-//    [_users addObject:user];
-//    [_messages addObject:message];
-//
-//    return message;
-//}
-
 - (void)sendMessageToSlack:(NSString *)text Video:(NSURL *)video Picture:(UIImage *)picture {
 
     void(^completionBlock)(FBLChat *chat, NSString *error)=^(FBLChat *chat, NSString *error) {
         if (error == nil)
         {
             [JSQSystemSoundPlayer jsq_playMessageSentSound];
-
-            // Reload not necessary - optimize load feel
-            [self loadSlackMessages];
         }
         else {
-            // TODO: Add a retry send message helper - and flag the error in the UI
-            SIAlertView *alert = [FBLViewHelpers createAlertForError:nil
-                                                           withTitle:@"Ooops!" andMessage:error];
-            [alert show];
+            // Update the background view message
+            // Add the retry sending message helper to message button
+
         };
     };
 
     [[FBLChatStore sharedStore] sendSlackMessage:text toChannel:self.channel withCompletion:completionBlock];
 
-//    SendPushNotification(_channelId, text);
-//    UpdateMessageCounter(_channelId, text);
-
     [self finishSendingMessage];
 }
-
-//- (void)sendMessageToParse:(NSString *)text Video:(NSURL *)video Picture:(UIImage *)picture {
-//    PFFile *fileVideo = nil;
-//    PFFile *filePicture = nil;
-//
-//    if (video != nil)
-//    {
-//        text = @"[Video message]";
-//        fileVideo = [PFFile fileWithName:@"video.mp4" data:[[NSFileManager defaultManager] contentsAtPath:video.path]];
-//        [fileVideo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-//         {
-//             if (error != nil) {
-//                 SIAlertView *alert = [FBLViewHelpers createAlertForError:error
-//                                                                withTitle:@"Ooops!" andMessage:@"We had trouble saving that video"];
-//                 [alert show];
-//             }
-//         }];
-//    }
-//
-//    if (picture != nil)
-//    {
-//        text = @"[Picture message]";
-//        filePicture = [PFFile fileWithName:@"picture.jpg" data:UIImageJPEGRepresentation(picture, 0.6)];
-//        [filePicture saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-//         {
-//             if (error != nil) {
-//                 SIAlertView *alert = [FBLViewHelpers createAlertForError:error
-//                                                                withTitle:@"Ooops!" andMessage:@"We had trouble saving picture"];
-//                 [alert show];
-//             }
-//         }];
-//    }
-//
-//    PFObject *object = [PFObject objectWithClassName:PF_MESSAGE_CLASS_NAME];
-//    object[PF_MESSAGE_USER] = [PFUser currentUser];
-//    object[PF_MESSAGE_GROUPID] = _channelId;
-//    object[PF_MESSAGE_TEXT] = text;
-//    if (fileVideo != nil) object[PF_MESSAGE_VIDEO] = fileVideo;
-//    if (filePicture != nil) object[PF_MESSAGE_PICTURE] = filePicture;
-//    [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
-//     {
-//         if (error == nil)
-//         {
-//             [JSQSystemSoundPlayer jsq_playMessageSentSound];
-//             [self loadParseMessages];
-//         }
-//         else {
-//             SIAlertView *alert = [FBLViewHelpers createAlertForError:error
-//                                                        withTitle:@"Ooops!" andMessage:@"We had trouble saving that message"];
-//             [alert show];
-//         };
-//     }];
-//
-//    SendPushNotification(_channelId, text);
-//    UpdateMessageCounter(_channelId, text);
-//
-//    [self finishSendingMessage];
-//}
 
 #pragma mark - JSQMessagesViewController protocol methods
 
@@ -413,13 +320,14 @@
 
     // Send to Slack
     [self sendMessageToSlack:text Video:nil Picture:nil];
-    // Send to Parse
-//    [self sendMessageToParse:text Video:nil Picture:nil];
 }
 
 - (void)didPressAccessoryButton:(UIButton *)sender {
-    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil
-                                               otherButtonTitles:@"Share Photo", @"Share Video", nil];
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil
+                                                        delegate:self
+                                               cancelButtonTitle:@"Cancel"
+                                          destructiveButtonTitle:nil
+                                               otherButtonTitles:@"Share Photo", nil];
     [action showInView:self.view];
 }
 
@@ -442,62 +350,21 @@
     }
 }
 
-- (id<JSQMessageAvatarImageDataSource>)getParseUserImage:(PFObject *)user {
-    if (_avatars[user.objectId] == nil) {
+- (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView
+                    avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath {
 
-        PFFile *file = user[PF_CUSTOMER_THUMBNAIL];
-        [file getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
-         {
-             if (error == nil)
-             {
-                 _avatars[user.objectId] = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageWithData:imageData] diameter:30.0];
-                 [self.collectionView reloadData];
-             }
-         }];
-        return _avatarImageBlank;
-    } else {
-        return _avatars[user.objectId];
-    }
-}
+    FBLMember *member = _users[indexPath.item];
 
-
-- (id<JSQMessageAvatarImageDataSource>)getFBLUserImage:(FBLMember *)member {
     if (_avatars[member.id] == nil) {
-        PFQuery *query = [PFQuery queryWithClassName:PF_MEMBER_CLASS_NAME];
-        [query whereKey:PF_MEMBER_SLACKID equalTo:member.id];
-        NSArray *members = [query findObjects];
-
-        if ([members count]>0) {
-            PFFile *file = members[0][PF_CUSTOMER_THUMBNAIL];
-            [file getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
-             {
-                 if (error == nil)
-                 {
-                     _avatars[member.id] = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageWithData:imageData] diameter:30.0];
-                     [self.collectionView reloadData];
-                 }
-             }];
-            return _avatarImageBlank;
+        if (member.profileImage) {
+            JSQMessagesAvatarImage *avatar = [JSQMessagesAvatarImageFactory avatarImageWithImage:member.profileImage diameter:30.0];
+            _avatars[member.id] = avatar;
+            return avatar;
         } else {
             return _avatarImageBlank;
         }
     } else {
         return _avatars[member.id];
-    }
-}
-
-- (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView
-                    avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath {
-    // Meta FTW
-    id newObject = _users[indexPath.item];
-    NSString *className = NSStringFromClass([newObject class]);
-
-    if ([className isEqualToString:@"PFUser"]) {
-        PFObject *user = (PFObject *)newObject;
-        return [self getParseUserImage:user];
-    } else {
-        FBLMember *user = (FBLMember *)newObject;
-        return [self getFBLUserImage:user];
     }
 }
 
@@ -624,8 +491,6 @@
     {
         if (buttonIndex == 0) {
             ShouldStartPhotoLibrary(self, YES);
-        } else if (buttonIndex == 1) {
-            ShouldStartVideoLibrary(self, YES);
         } else {
             NSLog(@"Error: No Action for Button Index");
         }
@@ -635,25 +500,15 @@
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    NSURL *video = info[UIImagePickerControllerMediaURL];
-    UIImage *picture = info[UIImagePickerControllerEditedImage];
+//    NSURL *video = info[UIImagePickerControllerMediaURL];
+//    UIImage *picture = info[UIImagePickerControllerEditedImage];
 
     // TODO: Implement image picker transfer
-//    [self sendMessageToParse:nil Video:video Picture:picture];
 
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Helper methods
-
-- (BOOL)isIncomingChat:(FBLChat *)chat {
-    return ![chat.username isEqualToString:@"bot"];
-}
-
-- (BOOL)isOutgoingChat:(FBLChat *)chat {
-    return ![chat respondsToSelector:@selector(username)]; // Janky
-//     [chat.username isEqualToString:@"bot"];
-}
 
 - (BOOL)incoming:(JSQMessage *)message {
 
@@ -661,7 +516,6 @@
 }
 
 - (BOOL)outgoing:(JSQMessage *)message {
-
     return ([message.senderId isEqualToString:self.senderId] == YES);
 }
 
@@ -675,24 +529,24 @@
     NSString *eventType = [json objectForKey:@"type"];
 
     if ([eventType isEqualToString:@"hello"]) {
-        NSLog(@"WEBSOCKET PING RECEIVED");
+        NSLog(@"WEBSOCKET RESPONSE RECEIVED");
     } else if ([eventType isEqualToString:@"message"]) {
         NSString *channelId = [json objectForKey:@"channel"];;
 
-        if ([channelId isEqualToString:self.channelId]) {
+        if ([channelId isEqualToString:self.userChannelId]) {
             FBLChat *newMessage = [[FBLChat alloc] initWithDictionary:json error:nil];
             [self addSlackMessage:newMessage];
 
             [self.collectionView reloadData];
             [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
             [self finishReceivingMessage];
-//            [self scrollToBottomAnimated:NO];
+            [self scrollToBottomAnimated:NO];
         }
     }
 }
 
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket {
-    NSLog(@"WEBSOCKET OPENED ");
+    NSLog(@"WEBSOCKET OPENED");
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
@@ -700,6 +554,7 @@
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
+    NSLog(@"WEBSOCKET CLOSED");
 }
 
 @end

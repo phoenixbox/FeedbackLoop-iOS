@@ -9,13 +9,17 @@
 #import "FeedbackLoop.h"
 
 // Data Layer
-#import "FBLAuthStore.h"
+#import "FBLAuthenticationStore.h"
+#import "FBLAppConstants.h"
 
 // Components
-#import "FBLFeedbackTabBarController.h"
+#import "FBLChatViewController.h"
+
+static NSString * const kFeedbackTabBarController = @"FBLFeedbackTabBarController";
 
 @interface FeedbackLoop ()
 @property (nonatomic, strong) UIWindow *feedbackLoopWindow;
+@property (nonatomic, strong) FBLChatViewController *chatViewController;
 @end
 
 @implementation FeedbackLoop
@@ -31,29 +35,50 @@
     return feedbackLoop;
 }
 
-+ (void)setApiKey:(NSString *)apiKey forAppId:(NSString *)appId;
-    // Set the slack key in the auth store
++ (void)configureWithSlackToken:(NSString *)slackToken {
+    FBLAuthenticationStore *store = [FBLAuthenticationStore sharedInstance];
+    [store setSlackToken:slackToken];
 }
 
-+ (void)setSlackToken:(NSString *)slackToken {
-    [[self sharedInstance] setSlackToken:slackToken];
++ (void)initWithAppId:(NSString *)appId {
+    FBLAuthenticationStore *store = [FBLAuthenticationStore sharedInstance];
+    [store setAppId:appId];
+}
+
++ (void)setApiKey:(NSString *)apiKey forAppId:(NSString *)appId {
+}
+
++ (void)registerUserWithEmail:(NSString *)userEmail {
+    FBLAuthenticationStore *store = [FBLAuthenticationStore sharedInstance];
+    [store setUserEmail:userEmail];
 }
 
 + (void)presentChatChannel {
-    // Present the anyone chat channel
-    FBLFeedbackTabBarController *feedbackTabBarViewController = [[FBLFeedbackTabBarController alloc] initWithNibName:kFeedbackTabBarController bundle:nil];
-    feedbackTabBarViewController.modalPresentationStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:feedbackTabBarViewController animated:YES completion:nil];
-
     FeedbackLoop *singleton = [self sharedInstance];
-    singleton.feedbackLoopWindow = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+    if (singleton.feedbackLoopWindow && singleton.feedbackLoopWindow.hidden) {
+        [singleton.feedbackLoopWindow setHidden:NO];
+    }
+
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+
+    singleton.feedbackLoopWindow = [[UIWindow alloc]initWithFrame:screenBounds];
     [singleton.feedbackLoopWindow setWindowLevel:UIWindowLevelAlert];
+
+    void (^popWindow)() = ^void() {
+        [self popWindow];
+    };
+
+    singleton.chatViewController = [[FBLChatViewController alloc] init];
+    singleton.chatViewController.popWindow = popWindow;
+
+    [singleton.feedbackLoopWindow setRootViewController:singleton.chatViewController];
     [singleton.feedbackLoopWindow makeKeyAndVisible];
 }
 
-+ (void)presentConversationList {
-    // Present the historical conversation thread
++ (void)popWindow {
+    FeedbackLoop *singleton = [self sharedInstance];
+    NSLog(@"Remove FeedbackLoop Window");
+    singleton.feedbackLoopWindow = nil;
 }
-
 
 @end
