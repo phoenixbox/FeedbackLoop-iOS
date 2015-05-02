@@ -23,7 +23,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		6C165E585C97983CF789DD2A /* libPods-FeedbackLoop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BE0388F629143A58D9C1EA /* libPods-FeedbackLoop.a */; };
 		CBC8F6641AEDB145001DDB07 /* FeedbackLoop.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CBC8F6631AEDB145001DDB07 /* FeedbackLoop.h */; };
 		CBC8F6661AEDB145001DDB07 /* FeedbackLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC8F6651AEDB145001DDB07 /* FeedbackLoop.m */; };
 		CBC8F66C1AEDB145001DDB07 /* libFeedbackLoop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8F6601AEDB145001DDB07 /* libFeedbackLoop.a */; };
@@ -183,7 +182,6 @@
 			files = (
 				CBC8F67D1AEDB6DB001DDB07 /* Foundation.framework in Frameworks */,
 				CBC8F67B1AEDB6D2001DDB07 /* UIKit.framework in Frameworks */,
-				6C165E585C97983CF789DD2A /* libPods-FeedbackLoop.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
