@@ -20,7 +20,7 @@
                                                        @"guid": @"guid",
                                                        @"tokenizer": @"tokenizer",
                                                        @"slack_team": @"slackTeam",
-                                                       @"slack_team_id": @"slackTeamId",                                                       
+                                                       @"slack_team_id": @"slackTeamId",
                                                        @"token.s": @"tokenS",
                                                        @"token.l": @"tokenL",
                                                        @"token.a": @"tokenA",

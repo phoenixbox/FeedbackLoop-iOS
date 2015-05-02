@@ -39,6 +39,10 @@
 		CBE36FBA1AF552F4008579F8 /* FBLChatStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF758951AEE156D00ABE378 /* FBLChatStore.m */; };
 		CBE36FBB1AF552F8008579F8 /* FBLAuthenticationStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CB56A1BA1AF4B9A40019BB70 /* FBLAuthenticationStore.m */; };
 		CBE36FBC1AF5530C008579F8 /* FBLAuthenticationStore.h in Headers */ = {isa = PBXBuildFile; fileRef = CB56A1B91AF4B9A40019BB70 /* FBLAuthenticationStore.h */; };
+		CBE36FD41AF55BF0008579F8 /* FBLTeam.h in Headers */ = {isa = PBXBuildFile; fileRef = CBE36FD21AF55BF0008579F8 /* FBLTeam.h */; };
+		CBE36FD51AF55BF0008579F8 /* FBLTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE36FD31AF55BF0008579F8 /* FBLTeam.m */; };
+		CBE36FD81AF55C36008579F8 /* FBLTeamStore.h in Headers */ = {isa = PBXBuildFile; fileRef = CBE36FD61AF55C36008579F8 /* FBLTeamStore.h */; };
+		CBE36FD91AF55C36008579F8 /* FBLTeamStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE36FD71AF55C36008579F8 /* FBLTeamStore.m */; };
 		CBF758C01AEE156D00ABE378 /* FBLChannelStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF758831AEE156D00ABE378 /* FBLChannelStore.m */; };
 		CBF758C11AEE156D00ABE378 /* FBLAppConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF758841AEE156D00ABE378 /* FBLAppConstants.h */; };
 		CBF758C31AEE156D00ABE378 /* FBLChannelStore.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF758861AEE156D00ABE378 /* FBLChannelStore.h */; };
@@ -67,8 +71,6 @@
 		CBF758EA1AEE156D00ABE378 /* FBLLoginViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF758B01AEE156D00ABE378 /* FBLLoginViewController.h */; };
 		CBF758EB1AEE156D00ABE378 /* FBLCameraUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF758B21AEE156D00ABE378 /* FBLCameraUtil.h */; };
 		CBF758EC1AEE156D00ABE378 /* FBLCameraUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF758B31AEE156D00ABE378 /* FBLCameraUtil.m */; };
-		CBF758EF1AEE156D00ABE378 /* FBLGroupsViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF758B81AEE156D00ABE378 /* FBLGroupsViewController.h */; };
-		CBF758F01AEE156D00ABE378 /* FBLGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF758B91AEE156D00ABE378 /* FBLGroupsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +130,10 @@
 		CBE36FB41AF552B8008579F8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		CBE36FB61AF552C1008579F8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CBE36FB81AF552CA008579F8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CBE36FD21AF55BF0008579F8 /* FBLTeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLTeam.h; sourceTree = "<group>"; };
+		CBE36FD31AF55BF0008579F8 /* FBLTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLTeam.m; sourceTree = "<group>"; };
+		CBE36FD61AF55C36008579F8 /* FBLTeamStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLTeamStore.h; sourceTree = "<group>"; };
+		CBE36FD71AF55C36008579F8 /* FBLTeamStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLTeamStore.m; sourceTree = "<group>"; };
 		CBF758831AEE156D00ABE378 /* FBLChannelStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLChannelStore.m; sourceTree = "<group>"; };
 		CBF758841AEE156D00ABE378 /* FBLAppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLAppConstants.h; sourceTree = "<group>"; };
 		CBF758861AEE156D00ABE378 /* FBLChannelStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLChannelStore.h; sourceTree = "<group>"; };
@@ -158,9 +164,6 @@
 		CBF758B11AEE156D00ABE378 /* FBLLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLLoginViewController.xib; sourceTree = "<group>"; };
 		CBF758B21AEE156D00ABE378 /* FBLCameraUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLCameraUtil.h; sourceTree = "<group>"; };
 		CBF758B31AEE156D00ABE378 /* FBLCameraUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLCameraUtil.m; sourceTree = "<group>"; };
-		CBF758B81AEE156D00ABE378 /* FBLGroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLGroupsViewController.h; sourceTree = "<group>"; };
-		CBF758B91AEE156D00ABE378 /* FBLGroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLGroupsViewController.m; sourceTree = "<group>"; };
-		CBF758BA1AEE156D00ABE378 /* FBLGroupsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLGroupsViewController.xib; sourceTree = "<group>"; };
 		E73B38F933FEE30E849E8865 /* Pods-FeedbackLoop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FeedbackLoop.release.xcconfig"; path = "Pods/Target Support Files/Pods-FeedbackLoop/Pods-FeedbackLoop.release.xcconfig"; sourceTree = "<group>"; };
 		E7BE0388F629143A58D9C1EA /* libPods-FeedbackLoop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FeedbackLoop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -253,7 +256,6 @@
 			children = (
 				CBF759021AEF2A2700ABE378 /* Constants */,
 				CBF758FE1AEE980000ABE378 /* Chats */,
-				CBF758FD1AEE97FB00ABE378 /* Groups */,
 				CBF758FA1AEE97E900ABE378 /* Utils */,
 				CBF758F91AEE97E200ABE378 /* Login */,
 				CBF758F61AEE96B900ABE378 /* Collection */,
@@ -310,6 +312,8 @@
 				CBF758991AEE156D00ABE378 /* FBLChatStore.h */,
 				CB56A1B91AF4B9A40019BB70 /* FBLAuthenticationStore.h */,
 				CB56A1BA1AF4B9A40019BB70 /* FBLAuthenticationStore.m */,
+				CBE36FD61AF55C36008579F8 /* FBLTeamStore.h */,
+				CBE36FD71AF55C36008579F8 /* FBLTeamStore.m */,
 			);
 			name = Stores;
 			sourceTree = "<group>";
@@ -323,6 +327,8 @@
 				CBF758961AEE156D00ABE378 /* FBLChat.h */,
 				CBF758971AEE156D00ABE378 /* FBLChat.m */,
 				CBF758A61AEE156D00ABE378 /* FBLMember.m */,
+				CBE36FD21AF55BF0008579F8 /* FBLTeam.h */,
+				CBE36FD31AF55BF0008579F8 /* FBLTeam.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -361,16 +367,6 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
-		CBF758FD1AEE97FB00ABE378 /* Groups */ = {
-			isa = PBXGroup;
-			children = (
-				CBF758B81AEE156D00ABE378 /* FBLGroupsViewController.h */,
-				CBF758B91AEE156D00ABE378 /* FBLGroupsViewController.m */,
-				CBF758BA1AEE156D00ABE378 /* FBLGroupsViewController.xib */,
-			);
-			name = Groups;
-			sourceTree = "<group>";
-		};
 		CBF758FE1AEE980000ABE378 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,10 +394,11 @@
 				CBF758EB1AEE156D00ABE378 /* FBLCameraUtil.h in Headers */,
 				CBE36FBC1AF5530C008579F8 /* FBLAuthenticationStore.h in Headers */,
 				CBF758D11AEE156D00ABE378 /* FBLMember.h in Headers */,
-				CBF758EF1AEE156D00ABE378 /* FBLGroupsViewController.h in Headers */,
+				CBE36FD81AF55C36008579F8 /* FBLTeamStore.h in Headers */,
 				CBF758EA1AEE156D00ABE378 /* FBLLoginViewController.h in Headers */,
 				CBF758D01AEE156D00ABE378 /* FBLSlackStore.h in Headers */,
 				CBC8F67F1AEDB6FB001DDB07 /* FeedbackLoop.h in Headers */,
+				CBE36FD41AF55BF0008579F8 /* FBLTeam.h in Headers */,
 				CBF758E61AEE156D00ABE378 /* FBLHelpers.h in Headers */,
 				CBF758CF1AEE156D00ABE378 /* FBLChatViewController.h in Headers */,
 				CBF758D51AEE156D00ABE378 /* FBLChatCollection.h in Headers */,
@@ -604,6 +601,7 @@
 				CBF758E11AEE156D00ABE378 /* FBLMemberCollection.m in Sources */,
 				CBF758C61AEE156D00ABE378 /* FBLChannel.m in Sources */,
 				CBF758E01AEE156D00ABE378 /* FBLMember.m in Sources */,
+				CBE36FD91AF55C36008579F8 /* FBLTeamStore.m in Sources */,
 				CBF758CC1AEE156D00ABE378 /* FBLSlackStore.m in Sources */,
 				CBF758C01AEE156D00ABE378 /* FBLChannelStore.m in Sources */,
 				CBE36FBB1AF552F8008579F8 /* FBLAuthenticationStore.m in Sources */,
@@ -617,7 +615,7 @@
 				CBF758E71AEE156D00ABE378 /* FBLHelpers.m in Sources */,
 				CBF758CE1AEE156D00ABE378 /* FBLLoginViewController.m in Sources */,
 				CBF758EC1AEE156D00ABE378 /* FBLCameraUtil.m in Sources */,
-				CBF758F01AEE156D00ABE378 /* FBLGroupsViewController.m in Sources */,
+				CBE36FD51AF55BF0008579F8 /* FBLTeam.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
