@@ -110,18 +110,13 @@
 		CBC8F67C1AEDB6DB001DDB07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CBC8F68C1AEDB902001DDB07 /* FeedbackLoop.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedbackLoop.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC8F68F1AEDB902001DDB07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CBF758821AEE156D00ABE378 /* FBLChatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLChatsViewController.m; sourceTree = "<group>"; };
 		CBF758831AEE156D00ABE378 /* FBLChannelStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLChannelStore.m; sourceTree = "<group>"; };
 		CBF758841AEE156D00ABE378 /* FBLAppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLAppConstants.h; sourceTree = "<group>"; };
-		CBF758851AEE156D00ABE378 /* FBLChatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLChatCell.m; sourceTree = "<group>"; };
 		CBF758861AEE156D00ABE378 /* FBLChannelStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLChannelStore.h; sourceTree = "<group>"; };
 		CBF758871AEE156D00ABE378 /* FBLChannelCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLChannelCollection.h; sourceTree = "<group>"; };
 		CBF758881AEE156D00ABE378 /* FBLChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLChannel.h; sourceTree = "<group>"; };
 		CBF758891AEE156D00ABE378 /* FBLChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLChannel.m; sourceTree = "<group>"; };
-		CBF7588A1AEE156D00ABE378 /* FBLMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLMessageController.m; sourceTree = "<group>"; };
-		CBF7588B1AEE156D00ABE378 /* FBLChatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLChatsViewController.h; sourceTree = "<group>"; };
 		CBF7588C1AEE156D00ABE378 /* FBLChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLChatViewController.m; sourceTree = "<group>"; };
-		CBF7588D1AEE156D00ABE378 /* FBLPushNotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLPushNotificationController.m; sourceTree = "<group>"; };
 		CBF7588E1AEE156D00ABE378 /* FBLMembersStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLMembersStore.m; sourceTree = "<group>"; };
 		CBF7588F1AEE156D00ABE378 /* FBLSlackStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLSlackStore.m; sourceTree = "<group>"; };
 		CBF758901AEE156D00ABE378 /* FBLMembersStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLMembersStore.h; sourceTree = "<group>"; };
@@ -136,41 +131,18 @@
 		CBF758991AEE156D00ABE378 /* FBLChatStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLChatStore.h; sourceTree = "<group>"; };
 		CBF7589A1AEE156D00ABE378 /* FBLChatCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLChatCollection.m; sourceTree = "<group>"; };
 		CBF7589B1AEE156D00ABE378 /* FBLChannelCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLChannelCollection.m; sourceTree = "<group>"; };
-		CBF7589C1AEE156D00ABE378 /* FBLChatsEmptyMessageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLChatsEmptyMessageView.h; sourceTree = "<group>"; };
-		CBF7589D1AEE156D00ABE378 /* FBLChatsEmptyMessageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLChatsEmptyMessageView.m; sourceTree = "<group>"; };
-		CBF7589E1AEE156D00ABE378 /* FBLChatsEmptyMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLChatsEmptyMessageView.xib; sourceTree = "<group>"; };
-		CBF7589F1AEE156D00ABE378 /* FBLMemberListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLMemberListView.m; sourceTree = "<group>"; };
-		CBF758A01AEE156D00ABE378 /* FBLMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLMessageController.h; sourceTree = "<group>"; };
-		CBF758A11AEE156D00ABE378 /* FBLMemberListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLMemberListView.h; sourceTree = "<group>"; };
-		CBF758A21AEE156D00ABE378 /* FBLMemberListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLMemberListCell.m; sourceTree = "<group>"; };
-		CBF758A31AEE156D00ABE378 /* FBLMemberListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLMemberListCell.xib; sourceTree = "<group>"; };
-		CBF758A41AEE156D00ABE378 /* FBLChatCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLChatCell.xib; sourceTree = "<group>"; };
-		CBF758A51AEE156D00ABE378 /* FBLMemberListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLMemberListCell.h; sourceTree = "<group>"; };
 		CBF758A61AEE156D00ABE378 /* FBLMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLMember.m; sourceTree = "<group>"; };
 		CBF758A71AEE156D00ABE378 /* FBLMemberCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLMemberCollection.m; sourceTree = "<group>"; };
 		CBF758A81AEE156D00ABE378 /* FBLMemberCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLMemberCollection.h; sourceTree = "<group>"; };
-		CBF758A91AEE156D00ABE378 /* FBLAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLAuth.h; sourceTree = "<group>"; };
-		CBF758AA1AEE156D00ABE378 /* FBLAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLAuth.m; sourceTree = "<group>"; };
-		CBF758AB1AEE156D00ABE378 /* FBLViewHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLViewHelpers.m; sourceTree = "<group>"; };
 		CBF758AC1AEE156D00ABE378 /* FBLHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLHelpers.h; sourceTree = "<group>"; };
 		CBF758AD1AEE156D00ABE378 /* FBLHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLHelpers.m; sourceTree = "<group>"; };
-		CBF758AE1AEE156D00ABE378 /* FBLViewHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLViewHelpers.h; sourceTree = "<group>"; };
-		CBF758AF1AEE156D00ABE378 /* FBLFeedbackTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLFeedbackTabBarController.m; sourceTree = "<group>"; };
 		CBF758B01AEE156D00ABE378 /* FBLLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLLoginViewController.h; sourceTree = "<group>"; };
 		CBF758B11AEE156D00ABE378 /* FBLLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLLoginViewController.xib; sourceTree = "<group>"; };
 		CBF758B21AEE156D00ABE378 /* FBLCameraUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLCameraUtil.h; sourceTree = "<group>"; };
 		CBF758B31AEE156D00ABE378 /* FBLCameraUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLCameraUtil.m; sourceTree = "<group>"; };
-		CBF758B41AEE156D00ABE378 /* FBLChatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLChatCell.h; sourceTree = "<group>"; };
-		CBF758B51AEE156D00ABE378 /* FBLChatsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLChatsViewController.xib; sourceTree = "<group>"; };
-		CBF758B61AEE156D00ABE378 /* FBLFeedbackTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLFeedbackTabBarController.h; sourceTree = "<group>"; };
-		CBF758B71AEE156D00ABE378 /* FBLFeedbackTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLFeedbackTabBarController.xib; sourceTree = "<group>"; };
 		CBF758B81AEE156D00ABE378 /* FBLGroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLGroupsViewController.h; sourceTree = "<group>"; };
 		CBF758B91AEE156D00ABE378 /* FBLGroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLGroupsViewController.m; sourceTree = "<group>"; };
 		CBF758BA1AEE156D00ABE378 /* FBLGroupsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLGroupsViewController.xib; sourceTree = "<group>"; };
-		CBF758BB1AEE156D00ABE378 /* FBLProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLProfileViewController.h; sourceTree = "<group>"; };
-		CBF758BC1AEE156D00ABE378 /* FBLProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLProfileViewController.m; sourceTree = "<group>"; };
-		CBF758BD1AEE156D00ABE378 /* FBLProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLProfileViewController.xib; sourceTree = "<group>"; };
-		CBF758BE1AEE156D00ABE378 /* FBLPushNotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLPushNotificationController.h; sourceTree = "<group>"; };
 		E73B38F933FEE30E849E8865 /* Pods-FeedbackLoop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FeedbackLoop.release.xcconfig"; path = "Pods/Target Support Files/Pods-FeedbackLoop/Pods-FeedbackLoop.release.xcconfig"; sourceTree = "<group>"; };
 		E7BE0388F629143A58D9C1EA /* libPods-FeedbackLoop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FeedbackLoop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -248,14 +220,10 @@
 			isa = PBXGroup;
 			children = (
 				CBF759021AEF2A2700ABE378 /* Constants */,
-				CBF759011AEF29FC00ABE378 /* TabBar */,
 				CBF758FE1AEE980000ABE378 /* Chats */,
 				CBF758FD1AEE97FB00ABE378 /* Groups */,
-				CBF758FC1AEE97F400ABE378 /* Profile */,
-				CBF758FB1AEE97EE00ABE378 /* Networking */,
 				CBF758FA1AEE97E900ABE378 /* Utils */,
 				CBF758F91AEE97E200ABE378 /* Login */,
-				CBF758F81AEE97D000ABE378 /* Controllers */,
 				CBF758F61AEE96B900ABE378 /* Collection */,
 				CBF758F51AEE969200ABE378 /* Models */,
 				CBF758F41AEE967000ABE378 /* Stores */,
@@ -338,17 +306,6 @@
 			name = Collection;
 			sourceTree = "<group>";
 		};
-		CBF758F81AEE97D000ABE378 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				CBF7588A1AEE156D00ABE378 /* FBLMessageController.m */,
-				CBF7588D1AEE156D00ABE378 /* FBLPushNotificationController.m */,
-				CBF758A01AEE156D00ABE378 /* FBLMessageController.h */,
-				CBF758BE1AEE156D00ABE378 /* FBLPushNotificationController.h */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
 		CBF758F91AEE97E200ABE378 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,33 +319,12 @@
 		CBF758FA1AEE97E900ABE378 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				CBF758A91AEE156D00ABE378 /* FBLAuth.h */,
-				CBF758AA1AEE156D00ABE378 /* FBLAuth.m */,
-				CBF758AB1AEE156D00ABE378 /* FBLViewHelpers.m */,
 				CBF758AC1AEE156D00ABE378 /* FBLHelpers.h */,
 				CBF758AD1AEE156D00ABE378 /* FBLHelpers.m */,
-				CBF758AE1AEE156D00ABE378 /* FBLViewHelpers.h */,
 				CBF758B21AEE156D00ABE378 /* FBLCameraUtil.h */,
 				CBF758B31AEE156D00ABE378 /* FBLCameraUtil.m */,
 			);
 			name = Utils;
-			sourceTree = "<group>";
-		};
-		CBF758FB1AEE97EE00ABE378 /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Networking;
-			sourceTree = "<group>";
-		};
-		CBF758FC1AEE97F400ABE378 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				CBF758BB1AEE156D00ABE378 /* FBLProfileViewController.h */,
-				CBF758BC1AEE156D00ABE378 /* FBLProfileViewController.m */,
-				CBF758BD1AEE156D00ABE378 /* FBLProfileViewController.xib */,
-			);
-			name = Profile;
 			sourceTree = "<group>";
 		};
 		CBF758FD1AEE97FB00ABE378 /* Groups */ = {
@@ -404,50 +340,10 @@
 		CBF758FE1AEE980000ABE378 /* Chats */ = {
 			isa = PBXGroup;
 			children = (
-				CBF7588B1AEE156D00ABE378 /* FBLChatsViewController.h */,
-				CBF758821AEE156D00ABE378 /* FBLChatsViewController.m */,
-				CBF758B51AEE156D00ABE378 /* FBLChatsViewController.xib */,
-				CBF7589C1AEE156D00ABE378 /* FBLChatsEmptyMessageView.h */,
-				CBF7589D1AEE156D00ABE378 /* FBLChatsEmptyMessageView.m */,
-				CBF7589E1AEE156D00ABE378 /* FBLChatsEmptyMessageView.xib */,
 				CBF7588C1AEE156D00ABE378 /* FBLChatViewController.m */,
 				CBF758921AEE156D00ABE378 /* FBLChatViewController.h */,
-				CBF759001AEE981D00ABE378 /* Chat */,
-				CBF758FF1AEE980E00ABE378 /* MemberListView */,
 			);
 			name = Chats;
-			sourceTree = "<group>";
-		};
-		CBF758FF1AEE980E00ABE378 /* MemberListView */ = {
-			isa = PBXGroup;
-			children = (
-				CBF758A21AEE156D00ABE378 /* FBLMemberListCell.m */,
-				CBF758A31AEE156D00ABE378 /* FBLMemberListCell.xib */,
-				CBF758A51AEE156D00ABE378 /* FBLMemberListCell.h */,
-				CBF7589F1AEE156D00ABE378 /* FBLMemberListView.m */,
-				CBF758A11AEE156D00ABE378 /* FBLMemberListView.h */,
-			);
-			name = MemberListView;
-			sourceTree = "<group>";
-		};
-		CBF759001AEE981D00ABE378 /* Chat */ = {
-			isa = PBXGroup;
-			children = (
-				CBF758851AEE156D00ABE378 /* FBLChatCell.m */,
-				CBF758A41AEE156D00ABE378 /* FBLChatCell.xib */,
-				CBF758B41AEE156D00ABE378 /* FBLChatCell.h */,
-			);
-			name = Chat;
-			sourceTree = "<group>";
-		};
-		CBF759011AEF29FC00ABE378 /* TabBar */ = {
-			isa = PBXGroup;
-			children = (
-				CBF758AF1AEE156D00ABE378 /* FBLFeedbackTabBarController.m */,
-				CBF758B61AEE156D00ABE378 /* FBLFeedbackTabBarController.h */,
-				CBF758B71AEE156D00ABE378 /* FBLFeedbackTabBarController.xib */,
-			);
-			name = TabBar;
 			sourceTree = "<group>";
 		};
 		CBF759021AEF2A2700ABE378 /* Constants */ = {
