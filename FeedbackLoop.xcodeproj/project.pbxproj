@@ -23,14 +23,22 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		CB56A1BB1AF4B9A40019BB70 /* FBLAuthenticationStore.h in Headers */ = {isa = PBXBuildFile; fileRef = CB56A1B91AF4B9A40019BB70 /* FBLAuthenticationStore.h */; };
-		CB56A1BC1AF4B9A40019BB70 /* FBLAuthenticationStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CB56A1BA1AF4B9A40019BB70 /* FBLAuthenticationStore.m */; };
 		CBC8F6641AEDB145001DDB07 /* FeedbackLoop.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CBC8F6631AEDB145001DDB07 /* FeedbackLoop.h */; };
 		CBC8F6661AEDB145001DDB07 /* FeedbackLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC8F6651AEDB145001DDB07 /* FeedbackLoop.m */; };
 		CBC8F66C1AEDB145001DDB07 /* libFeedbackLoop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8F6601AEDB145001DDB07 /* libFeedbackLoop.a */; };
 		CBC8F67B1AEDB6D2001DDB07 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8F67A1AEDB6D2001DDB07 /* UIKit.framework */; };
-		CBC8F67D1AEDB6DB001DDB07 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8F67C1AEDB6DB001DDB07 /* Foundation.framework */; };
+		CBC8F67D1AEDB6DB001DDB07 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8F67C1AEDB6DB001DDB07 /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		CBC8F67F1AEDB6FB001DDB07 /* FeedbackLoop.h in Headers */ = {isa = PBXBuildFile; fileRef = CBC8F6631AEDB145001DDB07 /* FeedbackLoop.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CBE36FAD1AF55280008579F8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE36FAC1AF55280008579F8 /* Security.framework */; };
+		CBE36FAF1AF55294008579F8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE36FAE1AF55294008579F8 /* SystemConfiguration.framework */; };
+		CBE36FB11AF552A0008579F8 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE36FB01AF552A0008579F8 /* MobileCoreServices.framework */; };
+		CBE36FB31AF552AA008579F8 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE36FB21AF552AA008579F8 /* ImageIO.framework */; };
+		CBE36FB51AF552B8008579F8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE36FB41AF552B8008579F8 /* AVFoundation.framework */; };
+		CBE36FB71AF552C1008579F8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE36FB61AF552C1008579F8 /* QuartzCore.framework */; };
+		CBE36FB91AF552CA008579F8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE36FB81AF552CA008579F8 /* CoreGraphics.framework */; };
+		CBE36FBA1AF552F4008579F8 /* FBLChatStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF758951AEE156D00ABE378 /* FBLChatStore.m */; };
+		CBE36FBB1AF552F8008579F8 /* FBLAuthenticationStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CB56A1BA1AF4B9A40019BB70 /* FBLAuthenticationStore.m */; };
+		CBE36FBC1AF5530C008579F8 /* FBLAuthenticationStore.h in Headers */ = {isa = PBXBuildFile; fileRef = CB56A1B91AF4B9A40019BB70 /* FBLAuthenticationStore.h */; };
 		CBF758C01AEE156D00ABE378 /* FBLChannelStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF758831AEE156D00ABE378 /* FBLChannelStore.m */; };
 		CBF758C11AEE156D00ABE378 /* FBLAppConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF758841AEE156D00ABE378 /* FBLAppConstants.h */; };
 		CBF758C31AEE156D00ABE378 /* FBLChannelStore.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF758861AEE156D00ABE378 /* FBLChannelStore.h */; };
@@ -45,7 +53,6 @@
 		CBF758CF1AEE156D00ABE378 /* FBLChatViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF758921AEE156D00ABE378 /* FBLChatViewController.h */; };
 		CBF758D01AEE156D00ABE378 /* FBLSlackStore.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF758931AEE156D00ABE378 /* FBLSlackStore.h */; };
 		CBF758D11AEE156D00ABE378 /* FBLMember.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF758941AEE156D00ABE378 /* FBLMember.h */; };
-		CBF758D21AEE156D00ABE378 /* FBLChatStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF758951AEE156D00ABE378 /* FBLChatStore.m */; };
 		CBF758D31AEE156D00ABE378 /* FBLChat.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF758961AEE156D00ABE378 /* FBLChat.h */; };
 		CBF758D41AEE156D00ABE378 /* FBLChat.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF758971AEE156D00ABE378 /* FBLChat.m */; };
 		CBF758D51AEE156D00ABE378 /* FBLChatCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = CBF758981AEE156D00ABE378 /* FBLChatCollection.h */; };
@@ -114,6 +121,13 @@
 		CBC8F67C1AEDB6DB001DDB07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CBC8F68C1AEDB902001DDB07 /* FeedbackLoop.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedbackLoop.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC8F68F1AEDB902001DDB07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CBE36FAC1AF55280008579F8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		CBE36FAE1AF55294008579F8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CBE36FB01AF552A0008579F8 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		CBE36FB21AF552AA008579F8 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		CBE36FB41AF552B8008579F8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		CBE36FB61AF552C1008579F8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CBE36FB81AF552CA008579F8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CBF758831AEE156D00ABE378 /* FBLChannelStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLChannelStore.m; sourceTree = "<group>"; };
 		CBF758841AEE156D00ABE378 /* FBLAppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLAppConstants.h; sourceTree = "<group>"; };
 		CBF758861AEE156D00ABE378 /* FBLChannelStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLChannelStore.h; sourceTree = "<group>"; };
@@ -158,6 +172,13 @@
 			files = (
 				CBC8F67D1AEDB6DB001DDB07 /* Foundation.framework in Frameworks */,
 				CBC8F67B1AEDB6D2001DDB07 /* UIKit.framework in Frameworks */,
+				CBE36FB91AF552CA008579F8 /* CoreGraphics.framework in Frameworks */,
+				CBE36FB71AF552C1008579F8 /* QuartzCore.framework in Frameworks */,
+				CBE36FB51AF552B8008579F8 /* AVFoundation.framework in Frameworks */,
+				CBE36FB31AF552AA008579F8 /* ImageIO.framework in Frameworks */,
+				CBE36FB11AF552A0008579F8 /* MobileCoreServices.framework in Frameworks */,
+				CBE36FAF1AF55294008579F8 /* SystemConfiguration.framework in Frameworks */,
+				CBE36FAD1AF55280008579F8 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +212,13 @@
 		311997FE4238AC7B20B60A0C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CBE36FB81AF552CA008579F8 /* CoreGraphics.framework */,
+				CBE36FB61AF552C1008579F8 /* QuartzCore.framework */,
+				CBE36FB41AF552B8008579F8 /* AVFoundation.framework */,
+				CBE36FB21AF552AA008579F8 /* ImageIO.framework */,
+				CBE36FB01AF552A0008579F8 /* MobileCoreServices.framework */,
+				CBE36FAE1AF55294008579F8 /* SystemConfiguration.framework */,
+				CBE36FAC1AF55280008579F8 /* Security.framework */,
 				CBC8F67C1AEDB6DB001DDB07 /* Foundation.framework */,
 				CBC8F67A1AEDB6D2001DDB07 /* UIKit.framework */,
 				E7BE0388F629143A58D9C1EA /* libPods-FeedbackLoop.a */,
@@ -368,13 +396,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBF758EB1AEE156D00ABE378 /* FBLCameraUtil.h in Headers */,
+				CBE36FBC1AF5530C008579F8 /* FBLAuthenticationStore.h in Headers */,
 				CBF758D11AEE156D00ABE378 /* FBLMember.h in Headers */,
 				CBF758EF1AEE156D00ABE378 /* FBLGroupsViewController.h in Headers */,
 				CBF758EA1AEE156D00ABE378 /* FBLLoginViewController.h in Headers */,
 				CBF758D01AEE156D00ABE378 /* FBLSlackStore.h in Headers */,
 				CBC8F67F1AEDB6FB001DDB07 /* FeedbackLoop.h in Headers */,
 				CBF758E61AEE156D00ABE378 /* FBLHelpers.h in Headers */,
-				CB56A1BB1AF4B9A40019BB70 /* FBLAuthenticationStore.h in Headers */,
 				CBF758CF1AEE156D00ABE378 /* FBLChatViewController.h in Headers */,
 				CBF758D51AEE156D00ABE378 /* FBLChatCollection.h in Headers */,
 				CBF758C31AEE156D00ABE378 /* FBLChannelStore.h in Headers */,
@@ -576,12 +604,12 @@
 				CBF758E11AEE156D00ABE378 /* FBLMemberCollection.m in Sources */,
 				CBF758C61AEE156D00ABE378 /* FBLChannel.m in Sources */,
 				CBF758E01AEE156D00ABE378 /* FBLMember.m in Sources */,
-				CB56A1BC1AF4B9A40019BB70 /* FBLAuthenticationStore.m in Sources */,
-				CBF758D21AEE156D00ABE378 /* FBLChatStore.m in Sources */,
 				CBF758CC1AEE156D00ABE378 /* FBLSlackStore.m in Sources */,
 				CBF758C01AEE156D00ABE378 /* FBLChannelStore.m in Sources */,
+				CBE36FBB1AF552F8008579F8 /* FBLAuthenticationStore.m in Sources */,
 				CBF758D71AEE156D00ABE378 /* FBLChatCollection.m in Sources */,
 				CBF758D41AEE156D00ABE378 /* FBLChat.m in Sources */,
+				CBE36FBA1AF552F4008579F8 /* FBLChatStore.m in Sources */,
 				CBF758D81AEE156D00ABE378 /* FBLChannelCollection.m in Sources */,
 				CBF758C91AEE156D00ABE378 /* FBLChatViewController.m in Sources */,
 				CBF758CB1AEE156D00ABE378 /* FBLMembersStore.m in Sources */,
