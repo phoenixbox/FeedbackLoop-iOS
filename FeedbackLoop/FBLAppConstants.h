@@ -10,7 +10,6 @@
 #define Stndout_FBLAppConstants_h
 
 //--------------------- APP HELPERS ----------------------------
-#define     BLANK_AVATAR_IMG @"Persona"
 #define     FBL_DEFAULT_EMAIL @"help@feedbackloop.com"
 #define     FBL_DEFAULT_TITLE @"bot"
 
