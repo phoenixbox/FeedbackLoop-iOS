@@ -36,13 +36,16 @@
 
 //-------------------FEEDBACKLOOP ------------------------------
 #define     PROD_API_BASE_URL @"http://www.getfeedbackloop.com/api";
-
 #define     DEV_API_BASE_URL @"http://lvh.me:3000/api";
-//127.0.0.1
+
 //#define     DEV_API_BASE_URL @"http://192.168.0.109:3000/api";
 
 //--------------FEEDBACKLOOP ENDPOINTS------------------------------
 
 #define     FBL_TEAMS_URI @"/teams"
+
+//--------------FEEDBACKLOOP GENERAL------------------------------
+
+#define BUNDLE_NAME @"FeedbackLoop.bundle"
 
 #endif

@@ -21,6 +21,7 @@
 #import "FBLMembersStore.h"
 #import "FBLSlackStore.h"
 #import "FBLAuthenticationStore.h"
+#import "FBLUserDetailsEmptyMessage.h"
 
 // Libs
 #import "MBProgressHUD.h"
@@ -28,12 +29,16 @@
 // Utils
 #import "FBLCameraUtil.h"
 
+NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
+
 @interface FBLChatViewController ()
 
 @property (nonatomic, assign) BOOL isLoading;
 @property (nonatomic, assign) BOOL initialized;
 
 @property (nonatomic, strong) NSString *userChannelId;
+
+@property (nonatomic, strong) FBLUserDetailsEmptyMessage *userDetailsView;
 @property (nonatomic, strong) UIView *emptyMessage;
 
 @property (nonatomic, strong) UIView *navBar;
@@ -63,14 +68,72 @@
     [self addNavigationBar];
     [self setupHUD];
     [self initializeCollectionErrorView];
-
     self.title = [NSString stringWithFormat:@"FeedbackLoop Chat"];
+    FBLAuthenticationStore *authStore = [FBLAuthenticationStore sharedInstance];
+
+    [self provisionJSQMProperties];
 
     _users = [[NSMutableArray alloc] init];
     _messages = [[NSMutableArray alloc] init];
     _chatCollection = [[FBLChatCollection alloc] init];
     _avatars = [[NSMutableDictionary alloc] init];
+    _isLoading = NO;
+    _initialized = NO;
 
+    if (authStore.userEmail) {
+        [self showMissingUserDetailsView];
+    } else {
+        [self slackOauth];
+    }
+}
+
+- (void)setTableViewEmptyMessage:(BOOL)show withSelector:(NSString *)selectorName {
+    if (selectorName) {
+        SEL selector = NSSelectorFromString(selectorName);
+        IMP imp = [self methodForSelector:selector];
+        void (*func)(id, SEL) = (void *)imp;
+
+        func(self, selector);
+    } else {
+        if (show) {
+            [self.collectionView.backgroundView setHidden:YES];
+        } else {
+            [self.collectionView.backgroundView setHidden:NO];
+        }
+    }
+}
+
+- (void)showMissingUserDetailsView {
+    NSArray *nibContents = [[[self class] frameworkBundle] loadNibNamed:kUserDetailsEmptyMessageView owner:nil options:nil];
+
+    FBLUserDetailsEmptyMessage *userDetailsView = [nibContents lastObject];
+    userDetailsView.contentView.layer.cornerRadius = 4;
+    userDetailsView.contentView.layer.borderWidth = 1;
+    userDetailsView.contentView.layer.borderColor = [UIColor blackColor].CGColor;
+    [userDetailsView.contentView setBackgroundColor:[UIColor whiteColor]];
+
+    [self.collectionView setBackgroundView:userDetailsView];
+    // Show empty message by default
+    [self.collectionView.backgroundView setHidden:NO];
+}
+
+// Abstract these helpers to a BundleStore
+// Load the framework bundle.
++ (NSBundle *)frameworkBundle {
+    static NSBundle* frameworkBundle = nil;
+    static dispatch_once_t predicate;
+    dispatch_once(&predicate, ^{
+        NSString* mainBundlePath = [[NSBundle mainBundle] resourcePath];
+        NSString* frameworkBundlePath = [mainBundlePath stringByAppendingPathComponent:BUNDLE_NAME];
+        frameworkBundle = [NSBundle bundleWithPath:frameworkBundlePath];
+    });
+
+    return frameworkBundle;
+}
+
+// [UIImage imageWithContentsOfFile:[[[self class] frameworkBundle] pathForResource:@"image" ofType:@"png"]];
+
+- (void)provisionJSQMProperties {
     // NOTE: We need to satisfy the JSQMessages internal prop requirements
     self.senderId = [[FBLAuthenticationStore sharedInstance] AppId];
     self.senderDisplayName = [[FBLAuthenticationStore sharedInstance] userEmail];
@@ -80,11 +143,6 @@
     _bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
 
     _avatarImageBlank = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"FeedbackLoop.bundle/Persona.png"] diameter:30.0];
-
-    _isLoading = NO;
-    _initialized = NO;
-
-    [self slackOauth];
 }
 
 - (void)addNavigationBar {
@@ -140,7 +198,6 @@
     [button setBackgroundColor:[UIColor whiteColor]];
     [button setTitleColor:color forState:UIControlStateNormal];
     [button setTintColor:color];
-
 }
 
 - (void)hideErrorView:(BOOL)show {

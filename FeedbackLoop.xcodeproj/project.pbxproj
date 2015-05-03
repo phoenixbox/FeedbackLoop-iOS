@@ -23,6 +23,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		CB1DDCC61AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CB1DDCC41AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.h */; };
+		CB1DDCC71AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1DDCC51AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.m */; };
 		CBC8F6641AEDB145001DDB07 /* FeedbackLoop.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CBC8F6631AEDB145001DDB07 /* FeedbackLoop.h */; };
 		CBC8F6661AEDB145001DDB07 /* FeedbackLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC8F6651AEDB145001DDB07 /* FeedbackLoop.m */; };
 		CBC8F66C1AEDB145001DDB07 /* libFeedbackLoop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8F6601AEDB145001DDB07 /* libFeedbackLoop.a */; };
@@ -121,6 +123,9 @@
 
 /* Begin PBXFileReference section */
 		02798D12E644895F9B4541B8 /* Pods-FeedbackLoop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FeedbackLoop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FeedbackLoop/Pods-FeedbackLoop.debug.xcconfig"; sourceTree = "<group>"; };
+		CB1DDCC41AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLUserDetailsEmptyMessage.h; sourceTree = "<group>"; };
+		CB1DDCC51AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLUserDetailsEmptyMessage.m; sourceTree = "<group>"; };
+		CB1DDCC81AF5A1BD0003BFF7 /* FBLUserDetailsEmptyMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLUserDetailsEmptyMessage.xib; sourceTree = "<group>"; };
 		CB56A1B91AF4B9A40019BB70 /* FBLAuthenticationStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLAuthenticationStore.h; sourceTree = "<group>"; };
 		CB56A1BA1AF4B9A40019BB70 /* FBLAuthenticationStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLAuthenticationStore.m; sourceTree = "<group>"; };
 		CBC8F6601AEDB145001DDB07 /* libFeedbackLoop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeedbackLoop.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -407,6 +412,9 @@
 			children = (
 				CBF7588C1AEE156D00ABE378 /* FBLChatViewController.m */,
 				CBF758921AEE156D00ABE378 /* FBLChatViewController.h */,
+				CB1DDCC41AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.h */,
+				CB1DDCC51AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.m */,
+				CB1DDCC81AF5A1BD0003BFF7 /* FBLUserDetailsEmptyMessage.xib */,
 			);
 			name = Chats;
 			sourceTree = "<group>";
@@ -433,6 +441,7 @@
 				CBF758EA1AEE156D00ABE378 /* FBLLoginViewController.h in Headers */,
 				CBF758D01AEE156D00ABE378 /* FBLSlackStore.h in Headers */,
 				CBC8F67F1AEDB6FB001DDB07 /* FeedbackLoop.h in Headers */,
+				CB1DDCC61AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.h in Headers */,
 				CBE36FD41AF55BF0008579F8 /* FBLTeam.h in Headers */,
 				CBF758E61AEE156D00ABE378 /* FBLHelpers.h in Headers */,
 				CBF758CF1AEE156D00ABE378 /* FBLChatViewController.h in Headers */,
@@ -642,6 +651,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB1DDCC71AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.m in Sources */,
 				CBF758E11AEE156D00ABE378 /* FBLMemberCollection.m in Sources */,
 				CBF758C61AEE156D00ABE378 /* FBLChannel.m in Sources */,
 				CBF758E01AEE156D00ABE378 /* FBLMember.m in Sources */,
