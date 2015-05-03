@@ -39,7 +39,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
-    NSString *requestURL = [[FBLAuthenticationStore sharedInstance ]authenticateRequest:SLACK_API_BASE_URL withURLSegment:SLACK_API_RTM_START];
+    NSString *requestURL = [[FBLAuthenticationStore sharedInstance] authenticateRequest:SLACK_API_BASE_URL withURLSegment:SLACK_API_RTM_START];
 
     [manager GET:requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSMutableDictionary *rtmResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -80,6 +80,10 @@
             NSDictionary *teamAttrs = [oauthRequest objectForKey:@"team"];
             FBLTeam *team = [[FBLTeam alloc] initWithDictionary:teamAttrs error:nil];
             [team buildToken];
+
+            // TODO: Clean up this interface: team doesnt need a slack token - the auth store does
+            [[FBLAuthenticationStore sharedInstance] setSlackToken:team.slackToken];
+            
             NSString *teamImage = [[[rtm objectForKey:@"team"] objectForKey:@"icon"] objectForKey:@"image_132"];
             [team setTeamImage:teamImage];
             [[FBLTeamStore sharedStore] setTeam:team];

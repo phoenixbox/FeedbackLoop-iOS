@@ -85,7 +85,11 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
     if (authStore.userEmail) {
         [self showMissingUserDetailsView];
     } else {
-        [self slackOauth];
+        if ([[FBLAuthenticationStore sharedInstance] slackToken]) {
+            [self noOauth];
+        } else {
+            [self slackOauth];
+        }
     }
 }
 
@@ -197,6 +201,25 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
     } else {
         [self.collectionView.backgroundView setHidden:NO];
     }
+}
+
+- (void)noOauth {
+    [_hud show:YES];
+    [self hideErrorView:YES];
+
+    void(^refreshWebhook)(NSError *err)=^(NSError *error) {
+        [_hud hide:YES];
+
+        if (error == nil) {
+            [self setChannelDetails];
+            [self setupWebsocket];
+            [self loadSlackMessages];
+        } else {
+            [self hideErrorView:NO];
+        }
+    };
+
+    [[FBLSlackStore sharedStore] setupWebhook:refreshWebhook];
 }
 
 - (void)slackOauth {
@@ -376,7 +399,8 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
                                                         delegate:self
                                                cancelButtonTitle:@"Cancel"
                                           destructiveButtonTitle:nil
-                                               otherButtonTitles:@"Share Photo", nil];
+                                               otherButtonTitles:@"Use Last Taken Photo",
+                                                                 @"Choose Photo", nil];
     [action showInView:self.view];
 }
 
