@@ -12,6 +12,8 @@
 #import "FBLAuthenticationStore.h"
 #import "FBLAppConstants.h"
 
+#import "FBLBundleStore.h"
+
 // Components
 #import "FBLChatViewController.h"
 
@@ -20,6 +22,7 @@ static NSString * const kFeedbackTabBarController = @"FBLFeedbackTabBarControlle
 @interface FeedbackLoop ()
 @property (nonatomic, strong) UIWindow *feedbackLoopWindow;
 @property (nonatomic, strong) FBLChatViewController *chatViewController;
+@property (nonatomic, strong) NSBundle *frameworkBundle;
 @end
 
 @implementation FeedbackLoop
@@ -30,6 +33,8 @@ static NSString * const kFeedbackTabBarController = @"FBLFeedbackTabBarControlle
 
     dispatch_once(&once, ^ {
         feedbackLoop = [[self alloc] init];
+        
+        [FBLBundleStore frameworkBundle];
     });
 
     return feedbackLoop;
@@ -42,6 +47,7 @@ static NSString * const kFeedbackTabBarController = @"FBLFeedbackTabBarControlle
 
 + (void)initWithAppId:(NSString *)appId {
     FBLAuthenticationStore *store = [FBLAuthenticationStore sharedInstance];
+
     [store setAppId:appId];
 }
 

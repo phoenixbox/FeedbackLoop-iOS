@@ -8,6 +8,7 @@
 
 #import "FBLChatViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "FeedbackLoop.h"
 
 // Constants
 #import "FBLAppConstants.h"
@@ -22,6 +23,7 @@
 #import "FBLSlackStore.h"
 #import "FBLAuthenticationStore.h"
 #import "FBLUserDetailsEmptyMessage.h"
+#import "FBLBundleStore.h"
 
 // Libs
 #import "MBProgressHUD.h"
@@ -104,7 +106,7 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
 }
 
 - (void)showMissingUserDetailsView {
-    NSArray *nibContents = [[[self class] frameworkBundle] loadNibNamed:kUserDetailsEmptyMessageView owner:nil options:nil];
+    NSArray *nibContents = [[FBLBundleStore frameworkBundle] loadNibNamed:kUserDetailsEmptyMessageView owner:nil options:nil];
 
     FBLUserDetailsEmptyMessage *userDetailsView = [nibContents lastObject];
     userDetailsView.contentView.layer.cornerRadius = 4;
@@ -119,17 +121,6 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
 
 // Abstract these helpers to a BundleStore
 // Load the framework bundle.
-+ (NSBundle *)frameworkBundle {
-    static NSBundle* frameworkBundle = nil;
-    static dispatch_once_t predicate;
-    dispatch_once(&predicate, ^{
-        NSString* mainBundlePath = [[NSBundle mainBundle] resourcePath];
-        NSString* frameworkBundlePath = [mainBundlePath stringByAppendingPathComponent:BUNDLE_NAME];
-        frameworkBundle = [NSBundle bundleWithPath:frameworkBundlePath];
-    });
-
-    return frameworkBundle;
-}
 
 // [UIImage imageWithContentsOfFile:[[[self class] frameworkBundle] pathForResource:@"image" ofType:@"png"]];
 

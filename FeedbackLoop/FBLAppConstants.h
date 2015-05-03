@@ -45,7 +45,6 @@
 #define     FBL_TEAMS_URI @"/teams"
 
 //--------------FEEDBACKLOOP GENERAL------------------------------
-
 #define BUNDLE_NAME @"FeedbackLoop.bundle"
 
 #endif
