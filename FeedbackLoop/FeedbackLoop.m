@@ -40,8 +40,9 @@ static NSString * const kFeedbackTabBarController = @"FBLFeedbackTabBarControlle
     return feedbackLoop;
 }
 
-+ (void)configureWithSlackToken:(NSString *)slackToken {
++ (void)initWithSlackToken:(NSString *)slackToken {
     FBLAuthenticationStore *store = [FBLAuthenticationStore sharedInstance];
+    
     [store setSlackToken:slackToken];
 }
 
