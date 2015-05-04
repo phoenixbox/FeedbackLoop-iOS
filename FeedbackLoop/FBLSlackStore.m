@@ -58,6 +58,31 @@
     }];
 }
 
+- (void)joinOrCreateChannel:(void (^)(NSError *err))block {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+
+    NSString *requestURL = [[FBLAuthenticationStore sharedInstance] authenticateRequest:SLACK_API_BASE_URL withURLSegment:SLACK_API_CHANNEL_JOIN];
+
+    requestURL = [requestURL stringByAppendingString:(@"&name=")];
+    NSString *userEmail = [[FBLAuthenticationStore sharedInstance] userEmail];
+    requestURL = [requestURL stringByAppendingString:userEmail];
+
+    [manager GET:requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSMutableDictionary *response = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+
+        if ([response objectForKey:@"ok"]) {
+            _userChannelId = [[response objectForKey:@"channel"] objectForKey:@"id"];
+        } else {
+            NSLog(@"Failed to join channel");
+        }
+
+        block(nil);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        block(error);
+    }];
+}
+
 - (void)slackOAuth:(void (^)(NSError *err))block {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];

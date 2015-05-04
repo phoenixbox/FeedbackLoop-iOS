@@ -19,4 +19,6 @@
 
 - (void)slackOAuth:(void (^)(NSError *err))block;
 
+- (void)joinOrCreateChannel:(void (^)(NSError *err))block;
+
 @end

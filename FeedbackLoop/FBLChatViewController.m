@@ -71,7 +71,6 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
     [self setupHUD];
     [self initializeCollectionErrorView];
     self.title = [NSString stringWithFormat:@"FeedbackLoop Chat"];
-    FBLAuthenticationStore *authStore = [FBLAuthenticationStore sharedInstance];
 
     [self provisionJSQMProperties];
 
@@ -82,7 +81,7 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
     _isLoading = NO;
     _initialized = NO;
 
-    if (authStore.userEmail) {
+    if (![[FBLAuthenticationStore sharedInstance] userEmail]) {
         [self showMissingUserDetailsView];
     } else {
         if ([[FBLAuthenticationStore sharedInstance] slackToken]) {
@@ -130,8 +129,19 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
 
 - (void)provisionJSQMProperties {
     // NOTE: We need to satisfy the JSQMessages internal prop requirements
-    self.senderId = [[FBLAuthenticationStore sharedInstance] AppId];
-    self.senderDisplayName = [[FBLAuthenticationStore sharedInstance] userEmail];
+    NSString *appId = [[FBLAuthenticationStore sharedInstance] AppId];
+    if (appId) {
+        self.senderId = appId;
+    } else {
+        self.senderId = @"fbl-client";
+    }
+
+    NSString *displayName = [[FBLAuthenticationStore sharedInstance] userEmail];
+    if (displayName) {
+        self.senderDisplayName = displayName;
+    } else {
+        self.senderDisplayName = @"You";
+    }
 
     JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
     _bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
@@ -173,9 +183,14 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
                                                                   label.frame.origin.y + label.frame.size.height + 10.0f,
                                                                   collectionViewBounds.size.width/2,
                                                                   40.0f)];
-    [button addTarget:self
-                 action:@selector(slackOauth)
-       forControlEvents:UIControlEventTouchUpInside];
+
+    if ([[FBLAuthenticationStore sharedInstance] slackToken]) {
+        [button addTarget:self action:@selector(noOauth)
+         forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [button addTarget:self action:@selector(slackOauth)
+         forControlEvents:UIControlEventTouchUpInside];
+    }
 
     [self styleButton:button withColor:[UIColor blackColor]];
 
@@ -207,7 +222,7 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
     [_hud show:YES];
     [self hideErrorView:YES];
 
-    void(^refreshWebhook)(NSError *err)=^(NSError *error) {
+    void(^websocketConnect)(NSError *err)=^(NSError *error) {
         [_hud hide:YES];
 
         if (error == nil) {
@@ -219,7 +234,11 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
         }
     };
 
-    [[FBLSlackStore sharedStore] setupWebhook:refreshWebhook];
+    void(^setupWebhook)(NSError *err)=^(NSError *error) {
+        [[FBLSlackStore sharedStore] setupWebhook:websocketConnect];
+    };
+
+    [[FBLSlackStore sharedStore] joinOrCreateChannel:setupWebhook];
 }
 
 - (void)slackOauth {

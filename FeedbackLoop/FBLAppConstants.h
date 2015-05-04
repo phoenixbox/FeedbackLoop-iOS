@@ -14,10 +14,7 @@
 #define     FBL_DEFAULT_TITLE @"bot"
 
 //--------------------- SLACK ------------------------------
-#define     SLACK_API_KEY @"xoxp-4363020674-4363020680-4429695137-cdb875"
 #define     SLACK_API_BASE_URL @"https://slack.com/api"
-
-#define     SLACK_GEN_TOKEN @"64a702c6-d868-480a-aff1-1ec6ab90e267"
 
 //----------------- SLACK ENDPOINTS ------------------------------
 //------- RTM

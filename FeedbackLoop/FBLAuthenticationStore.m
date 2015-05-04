@@ -35,10 +35,8 @@
 }
 
 - (NSString *)oauthRequest:(NSString *)requestURL {
-    FBLTeam *team = [[FBLTeamStore sharedStore] team];
-
     requestURL = [requestURL stringByAppendingString:(@"?token=")];
-    requestURL = [requestURL stringByAppendingString:team.slackToken];
+    requestURL = [requestURL stringByAppendingString:self.slackToken];
 
     return requestURL;
 }
