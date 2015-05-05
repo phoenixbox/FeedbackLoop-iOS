@@ -16,4 +16,6 @@
 
 @property (nonatomic, copy) void (^popWindow)();
 
+- (void)hideFeedbackLoopWindow;
+
 @end

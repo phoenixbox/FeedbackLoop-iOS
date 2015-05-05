@@ -67,7 +67,7 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addNavigationBar];
+
     [self setupHUD];
     [self initializeCollectionErrorView];
     self.title = [NSString stringWithFormat:@"FeedbackLoop Chat"];
@@ -124,7 +124,6 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
 
 // Abstract these helpers to a BundleStore
 // Load the framework bundle.
-
 // [UIImage imageWithContentsOfFile:[[[self class] frameworkBundle] pathForResource:@"image" ofType:@"png"]];
 
 - (void)provisionJSQMProperties {
@@ -144,30 +143,10 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
     }
 
     JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
-    _bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
-    _bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+    _bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor colorWithRed:0.34 green:0.64 blue:0.94 alpha:1]];
+    _bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
 
     _avatarImageBlank = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"FeedbackLoop.bundle/Persona.png"] diameter:30.0];
-}
-
-- (void)addNavigationBar {
-    UIView *navBar = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.view.frame.size.width,50)];
-    [navBar setBackgroundColor:[UIColor whiteColor]];
-    UIImageView *logoView = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 44.0f)];
-    logoView.contentMode = UIViewContentModeScaleAspectFit;
-
-    UIImage *logoImage = [UIImage imageNamed:@"FeedbackLoop.bundle/FBLTitle.png"];;
-    [logoView setImage:logoImage];
-    [logoView setCenter:navBar.center];
-    [navBar addSubview:logoView];
-
-    UIImage *removeIcon = [UIImage imageNamed:@"FeedbackLoop.bundle/removeIcon.png"];
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(5.0,5.0,40.0,40.0)];
-    [button setBackgroundImage:removeIcon forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(hideFeedbackLoopWindow) forControlEvents:UIControlEventTouchUpInside];
-    [navBar addSubview:button];
-
-    [self.view addSubview:navBar];
 }
 
 - (void)initializeCollectionErrorView {
@@ -503,11 +482,11 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
 
     if ([self outgoing:_messages[indexPath.item]])
     {
-        cell.textView.textColor = [UIColor blackColor];
+        cell.textView.textColor = [UIColor whiteColor];
     }
     else
     {
-        cell.textView.textColor = [UIColor whiteColor];
+        cell.textView.textColor = [UIColor blackColor];
     }
     return cell;
 }

@@ -15,13 +15,14 @@
 #import "FBLBundleStore.h"
 
 // Components
-#import "FBLChatViewController.h"
+#import "FBLContainerViewController.h"
 
 static NSString * const kFeedbackTabBarController = @"FBLFeedbackTabBarController";
+static NSString * const kContainerViewController = @"FBLContainerViewController";
 
 @interface FeedbackLoop ()
 @property (nonatomic, strong) UIWindow *feedbackLoopWindow;
-@property (nonatomic, strong) FBLChatViewController *chatViewController;
+@property (nonatomic, strong) FBLContainerViewController *containerViewController;
 @property (nonatomic, strong) NSBundle *frameworkBundle;
 @end
 
@@ -67,7 +68,6 @@ static NSString * const kFeedbackTabBarController = @"FBLFeedbackTabBarControlle
     }
 
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-
     singleton.feedbackLoopWindow = [[UIWindow alloc]initWithFrame:screenBounds];
     [singleton.feedbackLoopWindow setWindowLevel:UIWindowLevelAlert];
 
@@ -75,10 +75,11 @@ static NSString * const kFeedbackTabBarController = @"FBLFeedbackTabBarControlle
         [self popWindow];
     };
 
-    singleton.chatViewController = [[FBLChatViewController alloc] init];
-    singleton.chatViewController.popWindow = popWindow;
-
-    [singleton.feedbackLoopWindow setRootViewController:singleton.chatViewController];
+    NSBundle *bundle = [FBLBundleStore frameworkBundle];
+    singleton.containerViewController = [[FBLContainerViewController alloc] initWithNibName:kContainerViewController bundle:bundle];
+    singleton.containerViewController.popWindow = popWindow;
+    
+    [singleton.feedbackLoopWindow setRootViewController:singleton.containerViewController];
     [singleton.feedbackLoopWindow makeKeyAndVisible];
 }
 
