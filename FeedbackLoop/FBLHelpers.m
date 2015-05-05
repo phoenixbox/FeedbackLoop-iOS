@@ -81,3 +81,25 @@ UIImage* CropImage(UIImage *image, CGFloat x, CGFloat y, CGFloat width, CGFloat 
     CGImageRelease(imageRef);
     return cropped;
 }
+
+NSString* ResourceExtension(NSString *resource) {
+    if ([UIScreen mainScreen].bounds.size.height == 480) {
+        // iPhone 4 - 3.5
+        return resource;
+    } else if ([UIScreen mainScreen].bounds.size.height == 568) {
+        // iPhone 5 - 4in
+        return [resource stringByAppendingString:@"@2x"];
+    } else if ([UIScreen mainScreen].bounds.size.width == 375) {
+        // iPhone 6 - 4.7in
+        return [resource stringByAppendingString:@"@2x"];
+    } else if ([UIScreen mainScreen].bounds.size.width == 414) {
+        // iPhone 6+ - 5.5in
+        return [resource stringByAppendingString:@"@3x"];
+    } else if ([UIScreen mainScreen].bounds.size.width == 768) {
+        // iPad
+        return [resource stringByAppendingString:@"@3x"];
+    }
+
+    return resource;
+}
+
