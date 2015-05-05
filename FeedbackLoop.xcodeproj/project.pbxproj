@@ -23,11 +23,20 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		CB04C87C1AF88DD300577694 /* closeWindow.png in Resources */ = {isa = PBXBuildFile; fileRef = CB04C8761AF88DD300577694 /* closeWindow.png */; };
+		CB04C87D1AF88DD300577694 /* closeWindow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB04C8771AF88DD300577694 /* closeWindow@2x.png */; };
+		CB04C87E1AF88DD300577694 /* closeWindow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB04C8781AF88DD300577694 /* closeWindow@3x.png */; };
+		CB04C87F1AF88DD300577694 /* closeWindowSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = CB04C8791AF88DD300577694 /* closeWindowSelected.png */; };
+		CB04C8801AF88DD300577694 /* closeWindowSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB04C87A1AF88DD300577694 /* closeWindowSelected@2x.png */; };
+		CB04C8811AF88DD300577694 /* closeWindowSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB04C87B1AF88DD300577694 /* closeWindowSelected@3x.png */; };
 		CB1DDCC61AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CB1DDCC41AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.h */; };
 		CB1DDCC71AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1DDCC51AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.m */; };
 		CB1DDCC91AF5A8670003BFF7 /* FBLUserDetailsEmptyMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1DDCC81AF5A1BD0003BFF7 /* FBLUserDetailsEmptyMessage.xib */; };
 		CB1DDCCC1AF5A9AE0003BFF7 /* FBLBundleStore.h in Headers */ = {isa = PBXBuildFile; fileRef = CB1DDCCA1AF5A9AE0003BFF7 /* FBLBundleStore.h */; };
 		CB1DDCCD1AF5A9AE0003BFF7 /* FBLBundleStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1DDCCB1AF5A9AE0003BFF7 /* FBLBundleStore.m */; };
+		CB6ADAC51AF706A8005DAD72 /* FBLContainerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CB6ADAC21AF706A7005DAD72 /* FBLContainerViewController.h */; };
+		CB6ADAC61AF706A8005DAD72 /* FBLContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6ADAC31AF706A7005DAD72 /* FBLContainerViewController.m */; };
+		CB6ADAC71AF86C1B005DAD72 /* FBLContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6ADAC41AF706A7005DAD72 /* FBLContainerViewController.xib */; };
 		CBC8F6641AEDB145001DDB07 /* FeedbackLoop.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CBC8F6631AEDB145001DDB07 /* FeedbackLoop.h */; };
 		CBC8F6661AEDB145001DDB07 /* FeedbackLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC8F6651AEDB145001DDB07 /* FeedbackLoop.m */; };
 		CBC8F66C1AEDB145001DDB07 /* libFeedbackLoop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8F6601AEDB145001DDB07 /* libFeedbackLoop.a */; };
@@ -48,9 +57,6 @@
 		CBE36FD51AF55BF0008579F8 /* FBLTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE36FD31AF55BF0008579F8 /* FBLTeam.m */; };
 		CBE36FD81AF55C36008579F8 /* FBLTeamStore.h in Headers */ = {isa = PBXBuildFile; fileRef = CBE36FD61AF55C36008579F8 /* FBLTeamStore.h */; };
 		CBE36FD91AF55C36008579F8 /* FBLTeamStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE36FD71AF55C36008579F8 /* FBLTeamStore.m */; };
-		CBF39E8B1AF585F000744C71 /* removeIcon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBF39E881AF5857300744C71 /* removeIcon@1x.png */; };
-		CBF39E8C1AF585F300744C71 /* removeIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBF39E891AF5857300744C71 /* removeIcon@2x.png */; };
-		CBF39E8D1AF585F500744C71 /* removeIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBF39E8A1AF5857300744C71 /* removeIcon@3x.png */; };
 		CBF39E8E1AF585F700744C71 /* FBLTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = CBF39E851AF5850A00744C71 /* FBLTitle.png */; };
 		CBF39E8F1AF585F900744C71 /* FBLTitle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBF39E861AF5850A00744C71 /* FBLTitle@2x.png */; };
 		CBF39E901AF585FB00744C71 /* FBLTitle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBF39E871AF5850A00744C71 /* FBLTitle@3x.png */; };
@@ -126,6 +132,12 @@
 
 /* Begin PBXFileReference section */
 		02798D12E644895F9B4541B8 /* Pods-FeedbackLoop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FeedbackLoop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FeedbackLoop/Pods-FeedbackLoop.debug.xcconfig"; sourceTree = "<group>"; };
+		CB04C8761AF88DD300577694 /* closeWindow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeWindow.png; sourceTree = "<group>"; };
+		CB04C8771AF88DD300577694 /* closeWindow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeWindow@2x.png"; sourceTree = "<group>"; };
+		CB04C8781AF88DD300577694 /* closeWindow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeWindow@3x.png"; sourceTree = "<group>"; };
+		CB04C8791AF88DD300577694 /* closeWindowSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeWindowSelected.png; sourceTree = "<group>"; };
+		CB04C87A1AF88DD300577694 /* closeWindowSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeWindowSelected@2x.png"; sourceTree = "<group>"; };
+		CB04C87B1AF88DD300577694 /* closeWindowSelected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeWindowSelected@3x.png"; sourceTree = "<group>"; };
 		CB1DDCC41AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLUserDetailsEmptyMessage.h; sourceTree = "<group>"; };
 		CB1DDCC51AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLUserDetailsEmptyMessage.m; sourceTree = "<group>"; };
 		CB1DDCC81AF5A1BD0003BFF7 /* FBLUserDetailsEmptyMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLUserDetailsEmptyMessage.xib; sourceTree = "<group>"; };
@@ -133,6 +145,9 @@
 		CB1DDCCB1AF5A9AE0003BFF7 /* FBLBundleStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLBundleStore.m; sourceTree = "<group>"; };
 		CB56A1B91AF4B9A40019BB70 /* FBLAuthenticationStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLAuthenticationStore.h; sourceTree = "<group>"; };
 		CB56A1BA1AF4B9A40019BB70 /* FBLAuthenticationStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLAuthenticationStore.m; sourceTree = "<group>"; };
+		CB6ADAC21AF706A7005DAD72 /* FBLContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLContainerViewController.h; sourceTree = "<group>"; };
+		CB6ADAC31AF706A7005DAD72 /* FBLContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLContainerViewController.m; sourceTree = "<group>"; };
+		CB6ADAC41AF706A7005DAD72 /* FBLContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLContainerViewController.xib; sourceTree = "<group>"; };
 		CBC8F6601AEDB145001DDB07 /* libFeedbackLoop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeedbackLoop.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC8F6631AEDB145001DDB07 /* FeedbackLoop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedbackLoop.h; sourceTree = "<group>"; };
 		CBC8F6651AEDB145001DDB07 /* FeedbackLoop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedbackLoop.m; sourceTree = "<group>"; };
@@ -156,9 +171,6 @@
 		CBF39E851AF5850A00744C71 /* FBLTitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FBLTitle.png; sourceTree = "<group>"; };
 		CBF39E861AF5850A00744C71 /* FBLTitle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FBLTitle@2x.png"; sourceTree = "<group>"; };
 		CBF39E871AF5850A00744C71 /* FBLTitle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FBLTitle@3x.png"; sourceTree = "<group>"; };
-		CBF39E881AF5857300744C71 /* removeIcon@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "removeIcon@1x.png"; sourceTree = "<group>"; };
-		CBF39E891AF5857300744C71 /* removeIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "removeIcon@2x.png"; sourceTree = "<group>"; };
-		CBF39E8A1AF5857300744C71 /* removeIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "removeIcon@3x.png"; sourceTree = "<group>"; };
 		CBF39EC31AF58C8B00744C71 /* Persona.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Persona.png; sourceTree = "<group>"; };
 		CBF39EC41AF58C8B00744C71 /* Persona@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Persona@2x.png"; sourceTree = "<group>"; };
 		CBF39EC51AF58C8B00744C71 /* Persona@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Persona@3x.png"; sourceTree = "<group>"; };
@@ -292,6 +304,9 @@
 				CBF758F41AEE967000ABE378 /* Stores */,
 				CBC8F6631AEDB145001DDB07 /* FeedbackLoop.h */,
 				CBC8F6651AEDB145001DDB07 /* FeedbackLoop.m */,
+				CB6ADAC21AF706A7005DAD72 /* FBLContainerViewController.h */,
+				CB6ADAC31AF706A7005DAD72 /* FBLContainerViewController.m */,
+				CB6ADAC41AF706A7005DAD72 /* FBLContainerViewController.xib */,
 			);
 			path = FeedbackLoop;
 			sourceTree = "<group>";
@@ -331,12 +346,15 @@
 		CBF39E841AF584DE00744C71 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				CB04C8761AF88DD300577694 /* closeWindow.png */,
+				CB04C8771AF88DD300577694 /* closeWindow@2x.png */,
+				CB04C8781AF88DD300577694 /* closeWindow@3x.png */,
+				CB04C8791AF88DD300577694 /* closeWindowSelected.png */,
+				CB04C87A1AF88DD300577694 /* closeWindowSelected@2x.png */,
+				CB04C87B1AF88DD300577694 /* closeWindowSelected@3x.png */,
 				CBF39EC31AF58C8B00744C71 /* Persona.png */,
 				CBF39EC41AF58C8B00744C71 /* Persona@2x.png */,
 				CBF39EC51AF58C8B00744C71 /* Persona@3x.png */,
-				CBF39E881AF5857300744C71 /* removeIcon@1x.png */,
-				CBF39E891AF5857300744C71 /* removeIcon@2x.png */,
-				CBF39E8A1AF5857300744C71 /* removeIcon@3x.png */,
 				CBF39E851AF5850A00744C71 /* FBLTitle.png */,
 				CBF39E861AF5850A00744C71 /* FBLTitle@2x.png */,
 				CBF39E871AF5850A00744C71 /* FBLTitle@3x.png */,
@@ -451,6 +469,7 @@
 				CB1DDCC61AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.h in Headers */,
 				CBE36FD41AF55BF0008579F8 /* FBLTeam.h in Headers */,
 				CBF758E61AEE156D00ABE378 /* FBLHelpers.h in Headers */,
+				CB6ADAC51AF706A8005DAD72 /* FBLContainerViewController.h in Headers */,
 				CBF758CF1AEE156D00ABE378 /* FBLChatViewController.h in Headers */,
 				CBF758D51AEE156D00ABE378 /* FBLChatCollection.h in Headers */,
 				CBF758C31AEE156D00ABE378 /* FBLChannelStore.h in Headers */,
@@ -579,16 +598,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBF39E8B1AF585F000744C71 /* removeIcon@1x.png in Resources */,
+				CB04C87C1AF88DD300577694 /* closeWindow.png in Resources */,
+				CB04C87D1AF88DD300577694 /* closeWindow@2x.png in Resources */,
 				CBF39EC61AF58DEE00744C71 /* Persona.png in Resources */,
 				CBF39E901AF585FB00744C71 /* FBLTitle@3x.png in Resources */,
+				CB04C87F1AF88DD300577694 /* closeWindowSelected.png in Resources */,
 				CBF39EC71AF58DEE00744C71 /* Persona@2x.png in Resources */,
+				CB04C8811AF88DD300577694 /* closeWindowSelected@3x.png in Resources */,
 				CBF39E8E1AF585F700744C71 /* FBLTitle.png in Resources */,
-				CBF39E8C1AF585F300744C71 /* removeIcon@2x.png in Resources */,
-				CBF39E8D1AF585F500744C71 /* removeIcon@3x.png in Resources */,
 				CBF39EC81AF58DEE00744C71 /* Persona@3x.png in Resources */,
 				CB1DDCC91AF5A8670003BFF7 /* FBLUserDetailsEmptyMessage.xib in Resources */,
 				CBF39E8F1AF585F900744C71 /* FBLTitle@2x.png in Resources */,
+				CB04C87E1AF88DD300577694 /* closeWindow@3x.png in Resources */,
+				CB04C8801AF88DD300577694 /* closeWindowSelected@2x.png in Resources */,
+				CB6ADAC71AF86C1B005DAD72 /* FBLContainerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -679,6 +702,7 @@
 				CBF758CE1AEE156D00ABE378 /* FBLLoginViewController.m in Sources */,
 				CBF758EC1AEE156D00ABE378 /* FBLCameraUtil.m in Sources */,
 				CB1DDCCD1AF5A9AE0003BFF7 /* FBLBundleStore.m in Sources */,
+				CB6ADAC61AF706A8005DAD72 /* FBLContainerViewController.m in Sources */,
 				CBE36FD51AF55BF0008579F8 /* FBLTeam.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
