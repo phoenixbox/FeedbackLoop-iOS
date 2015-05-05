@@ -8,18 +8,17 @@
 #import <Foundation/Foundation.h>
 #import "FBLHelpers.h"
 
-void LoginUser(id target)
-{
+#import "FBLMembersStore.h"
+
+void LoginUser(id target) {
     NSLog(@"Require idea of a user store");
 }
 
-void PostNotification(NSString *notification)
-{
+void PostNotification(NSString *notification) {
     [[NSNotificationCenter defaultCenter] postNotificationName:notification object:nil];
 }
 
-NSString* TimeElapsed(NSTimeInterval seconds)
-{
+NSString* TimeElapsed(NSTimeInterval seconds) {
     NSString *elapsed;
     if (seconds < 60)
     {
@@ -101,5 +100,20 @@ NSString* ResourceExtension(NSString *resource) {
     }
 
     return resource;
+}
+
+NSString* SanitizeMessage(NSString *text) {
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(?<=@)[^|]*(?=|)" options:0 error:NULL];
+    NSRange range   = [regex rangeOfFirstMatchInString:text
+                                               options:0
+                                                 range:NSMakeRange(0, [text length])];
+    NSString *memberId = [text substringWithRange:range];
+
+    if (memberId) {
+        FBLMember *member = [[FBLMembersStore sharedStore] find:memberId];
+        return [member.realName stringByAppendingString:@" joined the chat."];
+    }
+
+    return text;
 }
 

@@ -30,6 +30,7 @@
 
 // Utils
 #import "FBLCameraUtil.h"
+#import "FBLHelpers.h"
 
 NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
 
@@ -332,11 +333,11 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
     JSQMessage *message;
     NSString *senderId;
     NSString *displayName;
+    NSString *text;
     NSString *username = chat.username;
 
     if ([username isEqualToString:@"bot"]) {
 
-        // Add a user which can be pulled on an
         FBLMember *member = [[FBLMember alloc] init];
         [member setId:self.senderId];
         [member setEmail:self.senderDisplayName];
@@ -346,19 +347,21 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
 
         senderId = self.senderId;
         displayName = self.senderDisplayName;
+        text = chat.text;
     } else {
         senderId = chat.user;
         FBLMember *member = [[FBLMembersStore sharedStore] find:chat.user];
-        // Should the member attributes be transferred to an object with the same scheme as the PFUser?
+
         [_users addObject:member];
 
         displayName = member.realName;
+        text = SanitizeMessage(chat.text);
     }
 
     NSDate *dateStamp = [NSDate dateWithTimeIntervalSince1970:
                          [chat.ts doubleValue]];
 
-    message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:displayName date:dateStamp text:chat.text];
+    message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:displayName date:dateStamp text:text];
 
     [_messages addObject:message];
 

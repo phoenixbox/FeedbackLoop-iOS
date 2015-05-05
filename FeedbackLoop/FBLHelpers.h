@@ -17,3 +17,4 @@ UIImage* SquareImage (UIImage *image, CGFloat size);
 UIImage* ResizeImage (UIImage *image, CGFloat width, CGFloat height);
 UIImage* CropImage (UIImage *image, CGFloat x, CGFloat y, CGFloat width, CGFloat height);
 NSString* ResourceExtension(NSString *resource);
+NSString* SanitizeMessage(NSString *text);
