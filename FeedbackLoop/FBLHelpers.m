@@ -39,7 +39,7 @@ NSString* TimeElapsed(NSTimeInterval seconds) {
         int days = (int) (seconds / (24 * 60 * 60));
         elapsed = [NSString stringWithFormat:@"%d %@", days, (days > 1) ? @"days" : @"day"];
     }
-    
+
     return elapsed;
 }
 
@@ -102,18 +102,38 @@ NSString* ResourceExtension(NSString *resource) {
     return resource;
 }
 
-NSString* SanitizeMessage(NSString *text) {
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(?<=@)[^|]*(?=|)" options:0 error:NULL];
-    NSRange range   = [regex rangeOfFirstMatchInString:text
-                                               options:0
-                                                 range:NSMakeRange(0, [text length])];
-    NSString *memberId = [text substringWithRange:range];
+NSRange getRangeForPattern(NSString *text, NSString *pattern) {
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:NULL];
+    return [regex rangeOfFirstMatchInString:text
+                                    options:0
+                                      range:NSMakeRange(0, [text length])];
 
-    if (memberId) {
-        FBLMember *member = [[FBLMembersStore sharedStore] find:memberId];
-        return [member.realName stringByAppendingString:@" joined the chat."];
-    }
-
-    return text;
 }
 
+NSString* matchForPattern(NSString *text, NSString *pattern) {
+    NSRange range = getRangeForPattern(text, pattern);
+
+    return [text substringWithRange:range];
+}
+
+NSString* SanitizeMessage(NSString *text) {
+    NSString *mailtoPattern = @"mailto:(.+?)[\\s|]";
+    NSString *emailPattern = @"(?<=:)(.*?)(?=\\|)";
+    NSString *memberIdPattern = @"(?<=@)(.*?)(?=\\|)";
+
+    if (matchForPattern(text, mailtoPattern)) {
+        NSString *mailto = matchForPattern(text, mailtoPattern);
+        NSString *email = matchForPattern(mailto, emailPattern);
+
+        return email;
+    } else if (matchForPattern(text, memberIdPattern)) {
+        NSString *memberId = matchForPattern(text, memberIdPattern);
+
+        if (memberId) {
+            FBLMember *member = [[FBLMembersStore sharedStore] find:memberId];
+            return [member.realName stringByAppendingString:@" joined the chat."];
+        }
+    }
+    
+    return text;
+}

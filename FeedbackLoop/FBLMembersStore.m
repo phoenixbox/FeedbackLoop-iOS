@@ -15,9 +15,6 @@
 
 #import "FBLHelpers.h"
 
-// Libs
-#import <SDWebImage/UIImageView+WebCache.h>
-
 @implementation FBLMembersStore
 
 + (FBLMembersStore *)sharedStore {
