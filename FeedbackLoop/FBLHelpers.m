@@ -113,7 +113,11 @@ NSRange getRangeForPattern(NSString *text, NSString *pattern) {
 NSString* matchForPattern(NSString *text, NSString *pattern) {
     NSRange range = getRangeForPattern(text, pattern);
 
-    return [text substringWithRange:range];
+    if (range.length > 0) {
+        return [text substringWithRange:range];
+    } else {
+        return @"";
+    }
 }
 
 NSString* SanitizeMessage(NSString *text) {
@@ -121,12 +125,12 @@ NSString* SanitizeMessage(NSString *text) {
     NSString *emailPattern = @"(?<=:)(.*?)(?=\\|)";
     NSString *memberIdPattern = @"(?<=@)(.*?)(?=\\|)";
 
-    if (matchForPattern(text, mailtoPattern)) {
+    if (![matchForPattern(text, mailtoPattern) isEqualToString:@""]) {
         NSString *mailto = matchForPattern(text, mailtoPattern);
         NSString *email = matchForPattern(mailto, emailPattern);
 
         return email;
-    } else if (matchForPattern(text, memberIdPattern)) {
+    } else if (![matchForPattern(text, memberIdPattern) isEqualToString:@""]) {
         NSString *memberId = matchForPattern(text, memberIdPattern);
 
         if (memberId) {
