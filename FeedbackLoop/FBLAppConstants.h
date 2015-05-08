@@ -43,5 +43,11 @@
 
 //--------------FEEDBACKLOOP GENERAL------------------------------
 #define BUNDLE_NAME @"FeedbackLoop.bundle"
+#define FEEDBACK_BLUE [UIColor colorWithRed:0.34 green:0.64 blue:0.94 alpha:1]
+#define FEEDBACK_BLUE_80 [UIColor colorWithRed:0.34 green:0.64 blue:0.94 alpha:0.8]
+#define FEEDBACK_GREY [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4]
+#define WHITE [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1]
+#define FEEDBACK_FONT @"AvenirNext-Regular"
+
 
 #endif
