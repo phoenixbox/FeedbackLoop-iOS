@@ -11,5 +11,9 @@
 @interface FBLUserDetailsEmptyMessage : UIView
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet UILabel *welcomeTitle;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *title;
+@property (weak, nonatomic) IBOutlet UILabel *lowerTitle;
+@property (weak, nonatomic) IBOutlet UIImageView *chattyImage;
+
 @end
