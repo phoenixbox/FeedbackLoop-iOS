@@ -8,6 +8,7 @@
 
 #import "FBLContainerViewController.h"
 #import "FBLBundleStore.h"
+#import "FBLAppConstants.h"
 
 #import "FBLHelpers.h"
 
@@ -30,7 +31,7 @@
     [_headerView setFrame:CGRectMake(0,0,screenSize.width, _headerView.frame.size.height)];
     [self attributeNavBar];
     UIView *border = [[UIView alloc] initWithFrame:CGRectMake(0, _headerView.frame.size.height -2 , screenSize.width, 2)];
-    [border setBackgroundColor:[UIColor colorWithRed:0.34 green:0.64 blue:0.94 alpha:1]];
+    [border setBackgroundColor:FEEDBACK_BLUE];
     [_headerView addSubview:border];
 
     [_chatContainer addSubview:_chatViewController.view];

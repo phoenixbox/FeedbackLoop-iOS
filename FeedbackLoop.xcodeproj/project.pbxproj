@@ -29,6 +29,11 @@
 		CB04C87F1AF88DD300577694 /* closeWindowSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = CB04C8791AF88DD300577694 /* closeWindowSelected.png */; };
 		CB04C8801AF88DD300577694 /* closeWindowSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB04C87A1AF88DD300577694 /* closeWindowSelected@2x.png */; };
 		CB04C8811AF88DD300577694 /* closeWindowSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB04C87B1AF88DD300577694 /* closeWindowSelected@3x.png */; };
+		CB069F911AFC754C008C6A4E /* FBLViewHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = CB069F8F1AFC754C008C6A4E /* FBLViewHelpers.h */; };
+		CB069F921AFC754C008C6A4E /* FBLViewHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = CB069F901AFC754C008C6A4E /* FBLViewHelpers.m */; };
+		CB069F961AFC87D6008C6A4E /* Chatty.png in Resources */ = {isa = PBXBuildFile; fileRef = CB069F931AFC8670008C6A4E /* Chatty.png */; };
+		CB069F971AFC87DA008C6A4E /* Chatty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB069F941AFC8670008C6A4E /* Chatty@2x.png */; };
+		CB069F981AFC87DD008C6A4E /* Chatty@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB069F951AFC8670008C6A4E /* Chatty@3x.png */; };
 		CB1DDCC61AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = CB1DDCC41AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.h */; };
 		CB1DDCC71AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1DDCC51AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.m */; };
 		CB1DDCC91AF5A8670003BFF7 /* FBLUserDetailsEmptyMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1DDCC81AF5A1BD0003BFF7 /* FBLUserDetailsEmptyMessage.xib */; };
@@ -138,6 +143,11 @@
 		CB04C8791AF88DD300577694 /* closeWindowSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeWindowSelected.png; sourceTree = "<group>"; };
 		CB04C87A1AF88DD300577694 /* closeWindowSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeWindowSelected@2x.png"; sourceTree = "<group>"; };
 		CB04C87B1AF88DD300577694 /* closeWindowSelected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeWindowSelected@3x.png"; sourceTree = "<group>"; };
+		CB069F8F1AFC754C008C6A4E /* FBLViewHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLViewHelpers.h; sourceTree = "<group>"; };
+		CB069F901AFC754C008C6A4E /* FBLViewHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLViewHelpers.m; sourceTree = "<group>"; };
+		CB069F931AFC8670008C6A4E /* Chatty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Chatty.png; path = ../../../../../Desktop/feedback_loop/icons/chatty/Chatty.png; sourceTree = "<group>"; };
+		CB069F941AFC8670008C6A4E /* Chatty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Chatty@2x.png"; path = "../../../../../Desktop/feedback_loop/icons/chatty/Chatty@2x.png"; sourceTree = "<group>"; };
+		CB069F951AFC8670008C6A4E /* Chatty@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Chatty@3x.png"; path = "../../../../../Desktop/feedback_loop/icons/chatty/Chatty@3x.png"; sourceTree = "<group>"; };
 		CB1DDCC41AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLUserDetailsEmptyMessage.h; sourceTree = "<group>"; };
 		CB1DDCC51AF5A1AB0003BFF7 /* FBLUserDetailsEmptyMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLUserDetailsEmptyMessage.m; sourceTree = "<group>"; };
 		CB1DDCC81AF5A1BD0003BFF7 /* FBLUserDetailsEmptyMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLUserDetailsEmptyMessage.xib; sourceTree = "<group>"; };
@@ -346,6 +356,9 @@
 		CBF39E841AF584DE00744C71 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				CB069F931AFC8670008C6A4E /* Chatty.png */,
+				CB069F941AFC8670008C6A4E /* Chatty@2x.png */,
+				CB069F951AFC8670008C6A4E /* Chatty@3x.png */,
 				CB04C8761AF88DD300577694 /* closeWindow.png */,
 				CB04C8771AF88DD300577694 /* closeWindow@2x.png */,
 				CB04C8781AF88DD300577694 /* closeWindow@3x.png */,
@@ -428,6 +441,8 @@
 				CBF758AD1AEE156D00ABE378 /* FBLHelpers.m */,
 				CBF758B21AEE156D00ABE378 /* FBLCameraUtil.h */,
 				CBF758B31AEE156D00ABE378 /* FBLCameraUtil.m */,
+				CB069F8F1AFC754C008C6A4E /* FBLViewHelpers.h */,
+				CB069F901AFC754C008C6A4E /* FBLViewHelpers.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -460,6 +475,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBF758EB1AEE156D00ABE378 /* FBLCameraUtil.h in Headers */,
+				CB069F911AFC754C008C6A4E /* FBLViewHelpers.h in Headers */,
 				CBE36FBC1AF5530C008579F8 /* FBLAuthenticationStore.h in Headers */,
 				CBF758D11AEE156D00ABE378 /* FBLMember.h in Headers */,
 				CBE36FD81AF55C36008579F8 /* FBLTeamStore.h in Headers */,
@@ -600,6 +616,9 @@
 			files = (
 				CB04C87C1AF88DD300577694 /* closeWindow.png in Resources */,
 				CB04C87D1AF88DD300577694 /* closeWindow@2x.png in Resources */,
+				CB069F961AFC87D6008C6A4E /* Chatty.png in Resources */,
+				CB069F971AFC87DA008C6A4E /* Chatty@2x.png in Resources */,
+				CB069F981AFC87DD008C6A4E /* Chatty@3x.png in Resources */,
 				CBF39EC61AF58DEE00744C71 /* Persona.png in Resources */,
 				CBF39E901AF585FB00744C71 /* FBLTitle@3x.png in Resources */,
 				CB04C87F1AF88DD300577694 /* closeWindowSelected.png in Resources */,
@@ -696,6 +715,7 @@
 				CBE36FBA1AF552F4008579F8 /* FBLChatStore.m in Sources */,
 				CBF758D81AEE156D00ABE378 /* FBLChannelCollection.m in Sources */,
 				CBF758C91AEE156D00ABE378 /* FBLChatViewController.m in Sources */,
+				CB069F921AFC754C008C6A4E /* FBLViewHelpers.m in Sources */,
 				CBF758CB1AEE156D00ABE378 /* FBLMembersStore.m in Sources */,
 				CBC8F6661AEDB145001DDB07 /* FeedbackLoop.m in Sources */,
 				CBF758E71AEE156D00ABE378 /* FBLHelpers.m in Sources */,
