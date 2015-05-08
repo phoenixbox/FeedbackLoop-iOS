@@ -12,6 +12,7 @@
 
 // Constants
 #import "FBLAppConstants.h"
+#import "FBLViewHelpers.h"
 
 // Data Layer
 #import "FBLChannel.h"
@@ -31,6 +32,7 @@
 // Utils
 #import "FBLCameraUtil.h"
 #import "FBLHelpers.h"
+#import "FBLViewHelpers.h"
 
 NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
 
@@ -83,6 +85,9 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
     _initialized = NO;
 
     if (![[FBLAuthenticationStore sharedInstance] userEmail]) {
+        [_hud hide:YES];
+        [self enableChatbar:NO];
+
         [self showMissingUserDetailsView];
     } else {
         if ([[FBLAuthenticationStore sharedInstance] slackToken]) {
@@ -92,6 +97,16 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
         }
     }
 }
+
+- (void)enableChatbar:(BOOL)enabled {
+    if (enabled) {
+    } else {
+        [self.inputToolbar setUserInteractionEnabled:NO];
+        [self.inputToolbar.contentView.textView setPlaceHolder:@"Hi! Type your email to start :)"];
+        [self.inputToolbar.contentView.textView setPlaceHolderTextColor:FEEDBACK_GREY];
+    }
+}
+
 
 - (void)setTableViewEmptyMessage:(BOOL)show withSelector:(NSString *)selectorName {
     if (selectorName) {
@@ -113,10 +128,17 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
     NSArray *nibContents = [[FBLBundleStore frameworkBundle] loadNibNamed:kUserDetailsEmptyMessageView owner:nil options:nil];
 
     FBLUserDetailsEmptyMessage *userDetailsView = [nibContents lastObject];
-    userDetailsView.contentView.layer.cornerRadius = 4;
+    userDetailsView.contentView.layer.cornerRadius = 20;
     userDetailsView.contentView.layer.borderWidth = 1;
-    userDetailsView.contentView.layer.borderColor = [UIColor blackColor].CGColor;
-    [userDetailsView.contentView setBackgroundColor:[UIColor whiteColor]];
+    userDetailsView.contentView.layer.borderColor = (__bridge CGColorRef)(WHITE);
+    [userDetailsView.contentView setBackgroundColor:FEEDBACK_BLUE_80];
+    userDetailsView.contentView.clipsToBounds = YES;
+    [userDetailsView.welcomeTitle setFont:[UIFont fontWithName:FEEDBACK_FONT size:28]];
+    float bodySize = [FBLViewHelpers bodyCopyForScreenSize];
+    [userDetailsView.title setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
+    [userDetailsView.lowerTitle setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
+    [userDetailsView.chattyImage setImage:[UIImage imageNamed:@"FeedbackLoop.bundle/Chatty.png"]];
+    [userDetailsView.chattyImage setContentMode:UIViewContentModeScaleAspectFit];
 
     [self.collectionView setBackgroundView:userDetailsView];
     // Show empty message by default
@@ -144,7 +166,7 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
     }
 
     JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
-    _bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor colorWithRed:0.34 green:0.64 blue:0.94 alpha:1]];
+    _bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:FEEDBACK_BLUE];
     _bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
 
     _avatarImageBlank = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"FeedbackLoop.bundle/Persona.png"] diameter:30.0];
