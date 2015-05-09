@@ -35,6 +35,7 @@
 #import "FBLViewHelpers.h"
 
 NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
+NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
 @interface FBLChatViewController ()
 
@@ -85,25 +86,31 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
     _initialized = NO;
 
     if (![[FBLAuthenticationStore sharedInstance] userEmail]) {
+        // View Control Point
         [_hud hide:YES];
-        [self enableChatbar:NO];
+        [self placeholderChatbar:YES];
 
         [self showMissingUserDetailsView];
     } else {
-        if ([[FBLAuthenticationStore sharedInstance] slackToken]) {
-            [self noOauth];
-        } else {
-            [self slackOauth];
-        }
+        [self authenticate];
     }
 }
 
-- (void)enableChatbar:(BOOL)enabled {
-    if (enabled) {
+- (void)authenticate {
+    if ([[FBLAuthenticationStore sharedInstance] slackToken]) {
+        [self noOauth];
     } else {
-        [self.inputToolbar setUserInteractionEnabled:NO];
+        [self slackOauth];
+    }
+}
+
+- (void)placeholderChatbar:(BOOL)enabled {
+    [self.inputToolbar.contentView.textView setPlaceHolderTextColor:FEEDBACK_GREY];
+
+    if (enabled) {
         [self.inputToolbar.contentView.textView setPlaceHolder:@"Hi! Type your email to start :)"];
-        [self.inputToolbar.contentView.textView setPlaceHolderTextColor:FEEDBACK_GREY];
+    } else {
+        [self.inputToolbar.contentView.textView setPlaceHolder:@"What's on your mind?"];
     }
 }
 
@@ -312,9 +319,7 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
         void(^completionBlock)(FBLChatCollection *chatCollection, NSString *error)=^(FBLChatCollection *chatCollection, NSString *error) {
 
             if (error == nil) {
-
                 BOOL incoming = NO;
-
                 self.automaticallyScrollsToMostRecentMessage = NO;
 
                 for (FBLChat *chat in [chatCollection.messages reverseObjectEnumerator])
@@ -337,10 +342,13 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
                 }
                 self.automaticallyScrollsToMostRecentMessage = YES;
                 _initialized = YES;
+
                 [_hud hide:YES];
+                [self placeholderChatbar:NO];
             }
             else {
-                // Todo replace background view with the correct title
+                [self triggerGlobalNotificationWithMessage:@"Error loading Messages" andColor:FEEDBACK_ERROR];
+                // TODO: Show the reconnect prompt backgorund view
             }
 
             [self.collectionView reloadData];
@@ -393,14 +401,11 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
 - (void)sendMessageToSlack:(NSString *)text Video:(NSURL *)video Picture:(UIImage *)picture {
 
     void(^completionBlock)(FBLChat *chat, NSString *error)=^(FBLChat *chat, NSString *error) {
-        if (error == nil)
-        {
+        if (error == nil) {
             [JSQSystemSoundPlayer jsq_playMessageSentSound];
         }
         else {
-            // Update the background view message
-            // Add the retry sending message helper to message button
-
+            // TODO: Add the retry sending message helper to message button
         };
     };
 
@@ -413,8 +418,28 @@ NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
 
 - (void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date {
 
-    // Send to Slack
-    [self sendMessageToSlack:text Video:nil Picture:nil];
+    if (![[FBLAuthenticationStore sharedInstance] userEmail]) {
+        if (ValidateEmail(text)){
+            [[FBLAuthenticationStore sharedInstance] setUserEmail:text];
+            [JSQSystemSoundPlayer jsq_playMessageSentSound];
+            [self authenticate];
+        } else {
+            [self triggerGlobalNotificationWithMessage:@"Invalid Email!" andColor:FEEDBACK_ERROR];
+        }
+    } else {
+        [self sendMessageToSlack:text Video:nil Picture:nil];
+    }
+}
+
+- (void)triggerGlobalNotificationWithMessage:(NSString *)message andColor:(UIColor *)color {
+    NSNotification *notification = [NSNotification notificationWithName:kGlobalNotification
+                                                                 object:self
+                                                               userInfo:@{
+                                                                          @"error": message,
+                                                                          @"color": color
+                                                                          }];
+
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 - (void)didPressAccessoryButton:(UIButton *)sender {

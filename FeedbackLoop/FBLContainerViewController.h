@@ -17,6 +17,9 @@
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *chatContainer;
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *logoImage;
 
+@property (weak, nonatomic) IBOutlet UIView *errorMessage;
+@property (weak, nonatomic) IBOutlet UILabel *errorLabel;
+
 @property (nonatomic, copy) void (^popWindow)();
 @property (nonatomic, strong) FBLChatViewController *chatViewController;
 @end

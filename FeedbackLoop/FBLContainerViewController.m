@@ -7,6 +7,7 @@
 //
 
 #import "FBLContainerViewController.h"
+#import "FBLChatViewController.h"
 #import "FBLBundleStore.h"
 #import "FBLAppConstants.h"
 
@@ -28,13 +29,32 @@
 
     CGSize screenSize = UIScreen.mainScreen.bounds.size;
     [_chatViewController.view setFrame:CGRectMake(0,0,screenSize.width, screenSize.height - _headerView.frame.size.height)];
+
+    // Header View
     [_headerView setFrame:CGRectMake(0,0,screenSize.width, _headerView.frame.size.height)];
+    // Error Message View
+    [_errorMessage setFrame:CGRectMake(0, 20, screenSize.width, 30)];
+    [_errorMessage setBackgroundColor:[UIColor redColor]];
+
     [self attributeNavBar];
+
     UIView *border = [[UIView alloc] initWithFrame:CGRectMake(0, _headerView.frame.size.height -2 , screenSize.width, 2)];
     [border setBackgroundColor:FEEDBACK_BLUE];
     [_headerView addSubview:border];
 
+
     [_chatContainer addSubview:_chatViewController.view];
+    [self listenForErrorNotification];
+}
+
+
+- (void)listenForErrorNotification {
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+
+    [center addObserver:self
+               selector:@selector(toggleGlobalNotifcation:)
+                   name:kGlobalNotification
+                 object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,6 +77,39 @@
     [_closeButton setBackgroundImage:closeImageSelected forState:UIControlStateSelected];
 }
 
+-(void)toggleGlobalNotifcation:(NSNotification *)paramNotification {
+    NSString *error = paramNotification.userInfo[@"error"];
+    UIColor *color = paramNotification.userInfo[@"color"];
+    [_errorMessage setBackgroundColor:color];
+
+    float displacement = _errorMessage.frame.size.height;
+    [_errorLabel setText:error];
+    CGRect frameStart = _errorMessage.frame;
+//
+    CGRect frame1 = CGRectMake(frameStart.origin.x,
+                               frameStart.origin.y + displacement,
+                               frameStart.size.width,
+                               frameStart.size.height);
+
+    CGRect frame2 = CGRectMake(frameStart.origin.x,
+                               frame1.origin.y - displacement,
+                               frameStart.size.width,
+                               frameStart.size.height);
+
+
+    [UIView animateKeyframesWithDuration:2.0
+                                   delay:0.0
+                                 options:UIViewKeyframeAnimationOptionAutoreverse | UIViewAnimationOptionCurveEaseInOut animations:^{
+                                     [UIView addKeyframeWithRelativeStartTime:0.0 relativeDuration:0.2 animations:^{
+                                         _errorMessage.frame = frame1;
+                                     }];
+                                     [UIView addKeyframeWithRelativeStartTime:1.5 relativeDuration:0.2 animations:^{
+                                         _errorMessage.frame = frame2;
+                                     }];
+                                 } completion:nil];
+}
+
+
 /*
 #pragma mark - Navigation
 
@@ -69,6 +122,10 @@
 
 - (IBAction)closeWindow:(id)sender {
     [_chatViewController hideFeedbackLoopWindow];
+}
+
+- (void) dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

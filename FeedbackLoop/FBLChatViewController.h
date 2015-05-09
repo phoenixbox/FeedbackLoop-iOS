@@ -12,6 +12,8 @@
 #import "JSQMessages.h"
 #import <SocketRocket/SRWebSocket.h>
 
+extern NSString *const kGlobalNotification;
+
 @interface FBLChatViewController : JSQMessagesViewController <SRWebSocketDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, copy) void (^popWindow)();
