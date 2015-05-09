@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FBLUserDetailsEmptyMessage : UIView
+extern NSString* const kUserDetailsBGView;
+
+@interface FBLUserDetailsBGView : UIView
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UILabel *welcomeTitle;

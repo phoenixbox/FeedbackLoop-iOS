@@ -6,9 +6,11 @@
 //  Copyright (c) 2015 FBL. All rights reserved.
 //
 
-#import "FBLUserDetailsEmptyMessage.h"
+#import "FBLUserDetailsBGView.h"
 
-@implementation FBLUserDetailsEmptyMessage
+NSString* const kUserDetailsBGView = @"FBLUserDetailsBGView";
+
+@implementation FBLUserDetailsBGView
 
 
 /*
