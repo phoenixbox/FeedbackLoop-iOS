@@ -144,17 +144,13 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     float bodySize = [FBLViewHelpers bodyCopyForScreenSize];
     [userDetailsView.title setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
     [userDetailsView.lowerTitle setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
-    [userDetailsView.chattyImage setImage:[UIImage imageNamed:@"FeedbackLoop.bundle/Chatty.png"]];
+    [userDetailsView.chattyImage setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"Chatty.png"]]];
     [userDetailsView.chattyImage setContentMode:UIViewContentModeScaleAspectFit];
 
     [self.collectionView setBackgroundView:userDetailsView];
     // Show empty message by default
     [self.collectionView.backgroundView setHidden:NO];
 }
-
-// Abstract these helpers to a BundleStore
-// Load the framework bundle.
-// [UIImage imageWithContentsOfFile:[[[self class] frameworkBundle] pathForResource:@"image" ofType:@"png"]];
 
 - (void)provisionJSQMProperties {
     // NOTE: We need to satisfy the JSQMessages internal prop requirements
@@ -176,7 +172,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     _bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:FEEDBACK_BLUE];
     _bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
 
-    _avatarImageBlank = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:@"FeedbackLoop.bundle/Persona.png"] diameter:30.0];
+    _avatarImageBlank = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"Persona.png"]] diameter:30.0];
 }
 
 - (void)initializeCollectionErrorView {

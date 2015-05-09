@@ -12,4 +12,6 @@
 
 + (NSBundle *)frameworkBundle;
 
++ (NSString *)resourceNamed:(NSString *)namedResource;
+
 @end

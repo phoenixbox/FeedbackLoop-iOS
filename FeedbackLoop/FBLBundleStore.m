@@ -23,4 +23,8 @@
     return frameworkBundle;
 }
 
++ (NSString *)resourceNamed:(NSString *)namedResource {
+    return [[BUNDLE_NAME stringByAppendingString:@"/"] stringByAppendingString:namedResource];
+}
+
 @end

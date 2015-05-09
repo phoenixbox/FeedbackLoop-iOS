@@ -66,13 +66,17 @@
     [_headerView setBackgroundColor:[UIColor whiteColor]];
 
     _logoImage.contentMode = UIViewContentModeScaleAspectFit;
-    UIImage *titleImage = [UIImage imageWithContentsOfFile:[[FBLBundleStore frameworkBundle] pathForResource:@"FBLTitle" ofType:@"png"]];
+
+    // Set title image
+    UIImage *titleImage = [UIImage imageNamed:[FBLBundleStore resourceNamed:@"FBLTitle.png"]];
     [_logoImage setImage:titleImage];
 
-    UIImage *closeImage = [UIImage imageWithContentsOfFile:[[FBLBundleStore frameworkBundle] pathForResource:    ResourceExtension(@"closeWindow") ofType:@"png"]];
+    // Set close icon image
+    UIImage *closeImage = [UIImage imageNamed:[FBLBundleStore resourceNamed:@"closeWindow.png"]];
     [_closeButton setBackgroundImage:closeImage forState:UIControlStateNormal];
 
-    UIImage *closeImageSelected = [UIImage imageWithContentsOfFile:[[FBLBundleStore frameworkBundle] pathForResource:    ResourceExtension(@"closeWindowSelected") ofType:@"png"]];
+    // Set selected close state images
+    UIImage *closeImageSelected = [UIImage imageNamed:[FBLBundleStore resourceNamed:@"closeWindowSelected.png"]];
     [_closeButton setBackgroundImage:closeImageSelected forState:UIControlStateHighlighted];
     [_closeButton setBackgroundImage:closeImageSelected forState:UIControlStateSelected];
 }
