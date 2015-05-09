@@ -45,6 +45,7 @@
 #define BUNDLE_NAME @"FeedbackLoop.bundle"
 
 #define FEEDBACK_ERROR [UIColor colorWithRed:0.8 green:0.2 blue:0.47 alpha:1]
+#define FEEDBACK_SUCCESS [UIColor colorWithRed:0.36 green:0.91 blue:0.43 alpha:1]
 #define FEEDBACK_BLUE [UIColor colorWithRed:0.34 green:0.64 blue:0.94 alpha:1]
 #define FEEDBACK_BLUE_80 [UIColor colorWithRed:0.34 green:0.64 blue:0.94 alpha:0.8]
 #define FEEDBACK_GREY [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4]

@@ -420,6 +420,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
     if (![[FBLAuthenticationStore sharedInstance] userEmail]) {
         if (ValidateEmail(text)){
+            [self triggerGlobalNotificationWithMessage:@"Valid Email! Woo!" andColor:FEEDBACK_SUCCESS];
             [[FBLAuthenticationStore sharedInstance] setUserEmail:text];
             [JSQSystemSoundPlayer jsq_playMessageSentSound];
             [self authenticate];
