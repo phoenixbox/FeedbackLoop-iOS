@@ -6,9 +6,14 @@
 //  Copyright (c) 2015 REPL. All rights reserved.
 //
 
-#import "FBLChatViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "FeedbackLoop.h"
+
+// Components
+#import "FBLChatViewController.h"
+
+#import "FBLUserDetailsBGView.h"
+#import "FBLConnectionErrorBGView.h"
 
 // Constants
 #import "FBLAppConstants.h"
@@ -23,7 +28,6 @@
 #import "FBLMembersStore.h"
 #import "FBLSlackStore.h"
 #import "FBLAuthenticationStore.h"
-#import "FBLUserDetailsEmptyMessage.h"
 #import "FBLBundleStore.h"
 
 // Libs
@@ -34,7 +38,6 @@
 #import "FBLHelpers.h"
 #import "FBLViewHelpers.h"
 
-NSString *const kUserDetailsEmptyMessageView = @"FBLUserDetailsEmptyMessage";
 NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
 @interface FBLChatViewController ()
@@ -44,8 +47,9 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
 @property (nonatomic, strong) NSString *userChannelId;
 
-@property (nonatomic, strong) FBLUserDetailsEmptyMessage *userDetailsView;
-@property (nonatomic, strong) UIView *emptyMessage;
+// BackgroundViews
+@property (nonatomic, strong) FBLUserDetailsBGView *userDetailsBGView;
+@property (nonatomic, strong) FBLConnectionErrorBGView *connectionErrorBGView;
 
 @property (nonatomic, strong) UIView *navBar;
 
@@ -71,11 +75,11 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     [self setupHUD];
-    [self initializeCollectionErrorView];
+
     self.title = [NSString stringWithFormat:@"FeedbackLoop Chat"];
 
+    [self prepareBackgroundViews];
     [self provisionJSQMProperties];
 
     _users = [[NSMutableArray alloc] init];
@@ -89,11 +93,16 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
         // View Control Point
         [_hud hide:YES];
         [self placeholderChatbar:YES];
-
-        [self showMissingUserDetailsView];
+        // TODO Show background view by identifier
+        [self showBackgroundViewOfType:kConnectionErrorBGView];
     } else {
         [self authenticate];
     }
+}
+
+- (void)prepareBackgroundViews {
+    [self buildUserDetailsView];
+    [self buildConnectionErrorView];
 }
 
 - (void)authenticate {
@@ -114,43 +123,75 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     }
 }
 
+//- (void)setTableViewEmptyMessage:(BOOL)show withSelector:(NSString *)selectorName {
+//    if (selectorName) {
+//        SEL selector = NSSelectorFromString(selectorName);
+//        IMP imp = [self methodForSelector:selector];
+//        void (*func)(id, SEL) = (void *)imp;
+//
+//        func(self, selector);
+//    } else {
+//        if (show) {
+//            [self.collectionView.backgroundView setHidden:YES];
+//        } else {
+//            [self.collectionView.backgroundView setHidden:NO];
+//        }
+//    }
+//}
+//
 
-- (void)setTableViewEmptyMessage:(BOOL)show withSelector:(NSString *)selectorName {
-    if (selectorName) {
-        SEL selector = NSSelectorFromString(selectorName);
-        IMP imp = [self methodForSelector:selector];
-        void (*func)(id, SEL) = (void *)imp;
+- (void)buildUserDetailsView {
+    NSArray *nibContents = [[FBLBundleStore frameworkBundle] loadNibNamed:kUserDetailsBGView owner:nil options:nil];
 
-        func(self, selector);
-    } else {
-        if (show) {
-            [self.collectionView.backgroundView setHidden:YES];
-        } else {
-            [self.collectionView.backgroundView setHidden:NO];
-        }
-    }
-}
-
-- (void)showMissingUserDetailsView {
-    NSArray *nibContents = [[FBLBundleStore frameworkBundle] loadNibNamed:kUserDetailsEmptyMessageView owner:nil options:nil];
-
-    FBLUserDetailsEmptyMessage *userDetailsView = [nibContents lastObject];
-    userDetailsView.contentView.layer.cornerRadius = 20;
-    userDetailsView.contentView.layer.borderWidth = 1;
-    userDetailsView.contentView.layer.borderColor = (__bridge CGColorRef)(WHITE);
-    [userDetailsView.contentView setBackgroundColor:FEEDBACK_BLUE_80];
-    userDetailsView.contentView.clipsToBounds = YES;
-    [userDetailsView.welcomeTitle setFont:[UIFont fontWithName:FEEDBACK_FONT size:28]];
+    _userDetailsBGView = [nibContents lastObject];
+    _userDetailsBGView.contentView.layer.cornerRadius = 20;
+    _userDetailsBGView.contentView.layer.borderWidth = 1;
+    _userDetailsBGView.contentView.layer.borderColor = (__bridge CGColorRef)(WHITE);
+    [_userDetailsBGView.contentView setBackgroundColor:FEEDBACK_BLUE_80];
+    _userDetailsBGView.contentView.clipsToBounds = YES;
+    [_userDetailsBGView.welcomeTitle setFont:[UIFont fontWithName:FEEDBACK_FONT size:28]];
     float bodySize = [FBLViewHelpers bodyCopyForScreenSize];
-    [userDetailsView.title setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
-    [userDetailsView.lowerTitle setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
-    [userDetailsView.chattyImage setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"Chatty.png"]]];
-    [userDetailsView.chattyImage setContentMode:UIViewContentModeScaleAspectFit];
-
-    [self.collectionView setBackgroundView:userDetailsView];
-    // Show empty message by default
-    [self.collectionView.backgroundView setHidden:NO];
+    [_userDetailsBGView.title setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
+    [_userDetailsBGView.lowerTitle setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
+    [_userDetailsBGView.chattyImage setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"Chatty.png"]]];
+    [_userDetailsBGView.chattyImage setContentMode:UIViewContentModeScaleAspectFit];
 }
+
+- (void)buildConnectionErrorView {
+    NSArray *nibContents = [[FBLBundleStore frameworkBundle] loadNibNamed:kConnectionErrorBGView owner:nil options:nil];
+
+    _connectionErrorBGView = [nibContents lastObject];
+    _connectionErrorBGView.contentView.layer.cornerRadius = 20;
+    _connectionErrorBGView.contentView.layer.borderWidth = 1;
+    _connectionErrorBGView.contentView.layer.borderColor = (__bridge CGColorRef)(WHITE);
+    [_connectionErrorBGView.contentView setBackgroundColor:FEEDBACK_BLUE_80];
+    _connectionErrorBGView.contentView.clipsToBounds = YES;
+    [_connectionErrorBGView.title setText:@"Whoops!"];
+    [_connectionErrorBGView.title setFont:[UIFont fontWithName:FEEDBACK_FONT size:28]];
+    [_connectionErrorBGView.chatty setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"ChattyNeutral.png"]]];
+    [_connectionErrorBGView.chatty setContentMode:UIViewContentModeScaleAspectFit];
+
+    float bodySize = [FBLViewHelpers bodyCopyForScreenSize];
+    [_connectionErrorBGView.message setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
+    [_connectionErrorBGView.message setText:@"abananana"];
+
+
+
+    [_connectionErrorBGView.leftCloud setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"CloudA.png"]]];
+    [_connectionErrorBGView.leftCloud setContentMode:UIViewContentModeScaleAspectFit];
+
+    [_connectionErrorBGView.middleCloud setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"CloudB.png"]]];
+    [_connectionErrorBGView.middleCloud setContentMode:UIViewContentModeScaleAspectFit];
+
+    [_connectionErrorBGView.rightCloud setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"CloudA.png"]]];
+    [_connectionErrorBGView.rightCloud setContentMode:UIViewContentModeScaleAspectFit];
+//    float bodySize = [FBLViewHelpers bodyCopyForScreenSize];
+//    [_connectionErrorBGView.title setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
+//    [_connectionErrorBGView.lowerTitle setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
+//    [_connectionErrorBGView.chattyImage setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"Chatty.png"]]];
+//    [_connectionErrorBGView.chattyImage setContentMode:UIViewContentModeScaleAspectFit];
+}
+
 
 - (void)provisionJSQMProperties {
     // NOTE: We need to satisfy the JSQMessages internal prop requirements
@@ -175,47 +216,47 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     _avatarImageBlank = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"Persona.png"]] diameter:30.0];
 }
 
-- (void)initializeCollectionErrorView {
-    CGRect collectionViewBounds = [self.collectionView bounds];
-    _emptyMessage = [[UIView alloc] initWithFrame:collectionViewBounds];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,collectionViewBounds.size.width-20.0f, 50.0f)];
-    [label setText:@"Uh Oh! We had trouble connecting"];
-    [label setTextAlignment:NSTextAlignmentCenter];
-    [label setCenter:_emptyMessage.center];
-    [_emptyMessage addSubview:label];
+//- (void)initializeCollectionErrorView {
+//    CGRect collectionViewBounds = [self.collectionView bounds];
+//    _emptyMessage = [[UIView alloc] initWithFrame:collectionViewBounds];
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,collectionViewBounds.size.width-20.0f, 50.0f)];
+//    [label setText:@"Uh Oh! We had trouble connecting"];
+//    [label setTextAlignment:NSTextAlignmentCenter];
+//    [label setCenter:_emptyMessage.center];
+//    [_emptyMessage addSubview:label];
+//
+//    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(collectionViewBounds.size.width/4,
+//                                                                  label.frame.origin.y + label.frame.size.height + 10.0f,
+//                                                                  collectionViewBounds.size.width/2,
+//                                                                  40.0f)];
+//
+//    if ([[FBLAuthenticationStore sharedInstance] slackToken]) {
+//        [button addTarget:self action:@selector(noOauth)
+//         forControlEvents:UIControlEventTouchUpInside];
+//    } else {
+//        [button addTarget:self action:@selector(slackOauth)
+//         forControlEvents:UIControlEventTouchUpInside];
+//    }
+//
+//    [self styleButton:button withColor:[UIColor blackColor]];
+//
+//    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//
+//    [_emptyMessage addSubview:button];
+//    [self.collectionView setBackgroundView:_emptyMessage];
+//    [self showBackgroundView:YES];
+//}
+//
+//- (void)styleButton:(UIButton *)button withColor:(UIColor *)color {
+//    button.layer.cornerRadius = 4;
+//    button.layer.borderWidth = 2;
+//    button.layer.borderColor = color.CGColor;
+//    [button setBackgroundColor:[UIColor whiteColor]];
+//    [button setTitleColor:color forState:UIControlStateNormal];
+//    [button setTintColor:color];
+//}
 
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(collectionViewBounds.size.width/4,
-                                                                  label.frame.origin.y + label.frame.size.height + 10.0f,
-                                                                  collectionViewBounds.size.width/2,
-                                                                  40.0f)];
-
-    if ([[FBLAuthenticationStore sharedInstance] slackToken]) {
-        [button addTarget:self action:@selector(noOauth)
-         forControlEvents:UIControlEventTouchUpInside];
-    } else {
-        [button addTarget:self action:@selector(slackOauth)
-         forControlEvents:UIControlEventTouchUpInside];
-    }
-
-    [self styleButton:button withColor:[UIColor blackColor]];
-
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-
-    [_emptyMessage addSubview:button];
-    [self.collectionView setBackgroundView:_emptyMessage];
-    [self hideErrorView:YES];
-}
-
-- (void)styleButton:(UIButton *)button withColor:(UIColor *)color {
-    button.layer.cornerRadius = 4;
-    button.layer.borderWidth = 2;
-    button.layer.borderColor = color.CGColor;
-    [button setBackgroundColor:[UIColor whiteColor]];
-    [button setTitleColor:color forState:UIControlStateNormal];
-    [button setTintColor:color];
-}
-
-- (void)hideErrorView:(BOOL)show {
+- (void)showBackgroundView:(BOOL)show {
     if (show) {
         [self.collectionView.backgroundView setHidden:YES];
     } else {
@@ -225,7 +266,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
 - (void)noOauth {
     [_hud show:YES];
-    [self hideErrorView:YES];
+    [self showBackgroundView:YES];
 
     void(^websocketConnect)(NSError *err)=^(NSError *error) {
         [_hud hide:YES];
@@ -235,7 +276,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
             [self setupWebsocket];
             [self loadSlackMessages];
         } else {
-            [self hideErrorView:NO];
+            [self showBackgroundView:NO];
         }
     };
 
@@ -248,7 +289,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
 - (void)slackOauth {
     [_hud show:YES];
-    [self hideErrorView:YES];
+    [self showBackgroundView:YES];
 
     void(^refreshWebhook)(NSError *err)=^(NSError *error) {
         [_hud hide:YES];
@@ -258,7 +299,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
             [self setupWebsocket];
             [self loadSlackMessages];
         } else {
-            [self hideErrorView:NO];
+            [self showBackgroundView:NO];
         }
     };
 
@@ -344,7 +385,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
             }
             else {
                 [self triggerGlobalNotificationWithMessage:@"Error loading Messages" andColor:FEEDBACK_ERROR];
-                // TODO: Show the reconnect prompt backgorund view
+                [self showBackgroundViewOfType:kConnectionErrorBGView];
             }
 
             [self.collectionView reloadData];
@@ -353,6 +394,16 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
         [[FBLChatStore sharedStore] fetchHistoryForChannel:_userChannelId withCompletion:completionBlock];
     }
+}
+
+- (void)showBackgroundViewOfType:(NSString *)viewName {
+    if([viewName isEqualToString:kConnectionErrorBGView]) {
+        [self.collectionView setBackgroundView:_connectionErrorBGView];
+    } else if ([viewName isEqualToString:kUserDetailsBGView]) {
+        [self.collectionView setBackgroundView:_userDetailsBGView];
+    }
+
+    [self.collectionView setHidden:NO];
 }
 
 - (JSQMessage *)addSlackMessage:(FBLChat *)chat {
