@@ -81,13 +81,21 @@
     [manager GET:requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSMutableDictionary *response = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
 
-        if ([response objectForKey:@"ok"]) {
+        NSNumber *ok = [response objectForKey:@"ok"];
+        if (!ok) {
             _userChannelId = [[response objectForKey:@"channel"] objectForKey:@"id"];
+            block(nil);
         } else {
-            NSLog(@"Failed to join channel");
+            NSDictionary *userInfo = @{
+                                       NSLocalizedDescriptionKey: NSLocalizedString(@"Couldnt join channel!", nil),
+                                       NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"The operation timed out.", nil),
+                                       NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Have you tried turning it off and on again?", nil)
+                                       };
+            NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
+                                                 code:-1008
+                                             userInfo:userInfo];
+            block(error);
         }
-
-        block(nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         block(error);
     }];
@@ -129,10 +137,19 @@
             [[FBLMembersStore sharedStore] refreshMembersWithCollection:[rtm objectForKey:@"users"]];
             [[FBLMembersStore sharedStore] processMemberPhotos];
             [[FBLChannelStore sharedStore] refreshChannelsWithCollection:[rtm objectForKey:@"channels"]];
+
+            block(nil);
         } else {
-            NSLog(@"RTM request error");
+            NSDictionary *userInfo = @{
+                                       NSLocalizedDescriptionKey: NSLocalizedString(@"RTM request error!", nil),
+                                       NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"The operation timed out.", nil),
+                                       NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Have you tried turning it off and on again?", nil)
+                                       };
+            NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
+                                                 code:-1008
+                                             userInfo:userInfo];
+            block(error);
         }
-        block(nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         block(error);
     }];
