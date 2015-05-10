@@ -68,8 +68,8 @@
     [manager POST:requestURL parameters:textParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSMutableDictionary *sendMessageResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
 
-        if ([sendMessageResponse objectForKey:@"ok"]) {
-
+        NSNumber *ok = [sendMessageResponse objectForKey:@"ok"];
+        if (!ok) {
             FBLChat *chat = [[FBLChat alloc] initWithDictionary:[sendMessageResponse objectForKey:@"message"] error:nil];
 
             block(chat, nil);
