@@ -8,6 +8,15 @@
 
 #import "FBLConnectionErrorBGView.h"
 
+// Data Layer
+#import "FBLBundleStore.h"
+
+// Constants
+#import "FBLAppConstants.h"
+
+// Helpers
+#import "FBLViewHelpers.h"
+
 NSString *const kConnectionErrorBGView = @"FBLConnectionErrorBGView";
 NSString *const kConnectionRetry = @"feedbackLoop__connectionRetry";
 
@@ -20,6 +29,16 @@ NSString *const kConnectionRetry = @"feedbackLoop__connectionRetry";
     // Drawing code
 }
 */
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        // Cache the original rects of the cloud locations
+        NSLog(@"Left cloud width: %f", self.leftCloud.frame.size.width);
+    }
+    return self;
+}
 
 - (IBAction)cloudTrigger:(id)sender {
     // Animate the clouds
@@ -117,6 +136,69 @@ NSString *const kConnectionRetry = @"feedbackLoop__connectionRetry";
                                      }];
                                  } completion:nil];
 
+}
+
+- (IBAction)sendEmail:(id)sender {
+    NSLog(@"Compose Email Now");
+}
+
+- (void)setDefaultState {
+    [_emailButton setHidden:YES];
+    [self stopAnimatingClouds];
+    self.contentView.layer.cornerRadius = 20;
+    self.contentView.layer.borderWidth = 1;
+    self.contentView.layer.borderColor = (__bridge CGColorRef)(WHITE);
+    [self.contentView setBackgroundColor:FEEDBACK_BLUE_80];
+    self.contentView.clipsToBounds = YES;
+
+    [self.title setText:@"Whoops!"];
+    [self.title setFont:[UIFont fontWithName:FEEDBACK_FONT size:34]];
+    [self.chatty setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"ChattyNeutral.png"]]];
+    [self.chatty setContentMode:UIViewContentModeScaleAspectFit];
+
+    float bodySize = [FBLViewHelpers bodyCopyForScreenSize];
+    [self.message setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
+
+    [self.leftCloud setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"CloudA.png"]]];
+    [self.leftCloud setContentMode:UIViewContentModeScaleAspectFit];
+
+    [self.middleCloud setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"CloudB.png"]]];
+    [self.middleCloud setContentMode:UIViewContentModeScaleAspectFit];
+
+    [self.rightCloud setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"CloudA.png"]]];
+    [self.rightCloud setContentMode:UIViewContentModeScaleAspectFit];
+}
+
+-(void)stopAnimatingClouds {
+    NSArray *clouds = @[_leftCloud, _middleCloud, _rightCloud];
+
+    for (UIImageView *image in clouds) {
+        [image stopAnimating];
+    }
+}
+
+- (void)setRetryState {
+    [self stopAnimatingClouds];
+    [self.title setText:@"Hmmmmm..."];
+    [self.chatty setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"ChattyUnhappy.png"]]];
+    [self.message setText:@"Tap the Clouds to try once more :)"];
+}
+
+- (void)setTryLaterState {
+    [self stopAnimatingClouds];
+
+    // Hide conflicting views
+    [_cloudContainer setHidden:YES];
+    [_cloudTrigger setHidden:YES];
+
+    // Present the email dialog
+    [_emailButton setHidden:NO];
+    [_emailButton setTitle:@"Email Us" forState:UIControlStateNormal];
+    [FBLViewHelpers setBaseButtonStyle:_emailButton withBGColor:WHITE titleColor:FEEDBACK_BLUE borderColor:FEEDBACK_BLUE];
+
+    [self.title setText:@"Sorry!"];
+    [self.chatty setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"Chatty.png"]]];
+    [self.message setText:@"We can't connect right now"];
 }
 
 @end

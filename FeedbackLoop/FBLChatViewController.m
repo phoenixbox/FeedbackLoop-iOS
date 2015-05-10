@@ -80,6 +80,8 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     [self setupHUD];
     [self setupConnectionRetryListener];
 
+    _errorCounter = 0;
+
     self.title = [NSString stringWithFormat:@"FeedbackLoop Chat"];
     [self setupChatBatStyles];
 
@@ -155,29 +157,8 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     NSArray *nibContents = [[FBLBundleStore frameworkBundle] loadNibNamed:kConnectionErrorBGView owner:nil options:nil];
 
     _connectionErrorBGView = [nibContents lastObject];
-    _connectionErrorBGView.contentView.layer.cornerRadius = 20;
-    _connectionErrorBGView.contentView.layer.borderWidth = 1;
-    _connectionErrorBGView.contentView.layer.borderColor = (__bridge CGColorRef)(WHITE);
-    [_connectionErrorBGView.contentView setBackgroundColor:FEEDBACK_BLUE_80];
-    _connectionErrorBGView.contentView.clipsToBounds = YES;
-    [_connectionErrorBGView.title setText:@"Whoops!"];
-    [_connectionErrorBGView.title setFont:[UIFont fontWithName:FEEDBACK_FONT size:34]];
-    [_connectionErrorBGView.chatty setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"ChattyNeutral.png"]]];
-    [_connectionErrorBGView.chatty setContentMode:UIViewContentModeScaleAspectFit];
-
-    float bodySize = [FBLViewHelpers bodyCopyForScreenSize];
-    [_connectionErrorBGView.message setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
-
-        [_connectionErrorBGView.leftCloud setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"CloudA.png"]]];
-    [_connectionErrorBGView.leftCloud setContentMode:UIViewContentModeScaleAspectFit];
-
-    [_connectionErrorBGView.middleCloud setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"CloudB.png"]]];
-    [_connectionErrorBGView.middleCloud setContentMode:UIViewContentModeScaleAspectFit];
-
-    [_connectionErrorBGView.rightCloud setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"CloudA.png"]]];
-    [_connectionErrorBGView.rightCloud setContentMode:UIViewContentModeScaleAspectFit];
+    [_connectionErrorBGView setDefaultState];
 }
-
 
 - (void)provisionJSQMProperties {
     // NOTE: We need to satisfy the JSQMessages internal prop requirements
@@ -345,6 +326,12 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     if([viewName isEqualToString:kConnectionErrorBGView]) {
         // TODO CHECK THE COUNTER TO ERROR MESSAGE AND CHATTY
         [self.collectionView setBackgroundView:_connectionErrorBGView];
+
+        if (_errorCounter < 3) {
+            _errorCounter++;
+        };
+
+        [self setConnectionErrorBGViewState];
     } else if ([viewName isEqualToString:kUserDetailsBGView]) {
         [self.collectionView setBackgroundView:_userDetailsBGView];
     }
@@ -353,6 +340,30 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     [self.collectionView.backgroundView setHidden:NO];
     // Programatically resign the keyboard!
     [self.inputToolbar.contentView.textView resignFirstResponder];
+}
+
+- (void)setConnectionErrorBGViewState {
+    switch (_errorCounter) {
+        case 0:
+            // Default connection error state
+            [_connectionErrorBGView setDefaultState];
+            break;
+        case 1:
+            // Retry
+            [_connectionErrorBGView setDefaultState];
+            break;
+        case 2:
+            // Try again later
+            [_connectionErrorBGView setRetryState];
+            break;
+        case 3:
+            // Try again later
+            [_connectionErrorBGView setTryLaterState];
+            break;
+
+        default:
+            break;
+    }
 }
 
 - (void)setChatBarStateForCondition:(NSString *)condition {

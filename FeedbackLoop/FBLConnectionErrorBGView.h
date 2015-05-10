@@ -23,5 +23,11 @@ extern NSString* const kConnectionRetry;
 @property (weak, nonatomic) IBOutlet UIImageView *leftCloud;
 @property (weak, nonatomic) IBOutlet UIButton *cloudTrigger;
 - (IBAction)cloudTrigger:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *emailButton;
+- (IBAction)sendEmail:(id)sender;
+
+- (void)setDefaultState;
+- (void)setRetryState;
+- (void)setTryLaterState;
 
 @end
