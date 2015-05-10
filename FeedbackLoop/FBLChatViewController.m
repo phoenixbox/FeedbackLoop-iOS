@@ -324,7 +324,8 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
 - (void)showBackgroundViewOfType:(NSString *)viewName {
     if([viewName isEqualToString:kConnectionErrorBGView]) {
-        // TODO CHECK THE COUNTER TO ERROR MESSAGE AND CHATTY
+        [self setChatBarStateForCondition:kConnectionErrorBGView];
+        
         [self.collectionView setBackgroundView:_connectionErrorBGView];
 
         if (_errorCounter < 3) {
