@@ -167,17 +167,14 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     [_connectionErrorBGView.contentView setBackgroundColor:FEEDBACK_BLUE_80];
     _connectionErrorBGView.contentView.clipsToBounds = YES;
     [_connectionErrorBGView.title setText:@"Whoops!"];
-    [_connectionErrorBGView.title setFont:[UIFont fontWithName:FEEDBACK_FONT size:28]];
+    [_connectionErrorBGView.title setFont:[UIFont fontWithName:FEEDBACK_FONT size:34]];
     [_connectionErrorBGView.chatty setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"ChattyNeutral.png"]]];
     [_connectionErrorBGView.chatty setContentMode:UIViewContentModeScaleAspectFit];
 
     float bodySize = [FBLViewHelpers bodyCopyForScreenSize];
     [_connectionErrorBGView.message setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
-    [_connectionErrorBGView.message setText:@"abananana"];
 
-
-
-    [_connectionErrorBGView.leftCloud setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"CloudA.png"]]];
+        [_connectionErrorBGView.leftCloud setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"CloudA.png"]]];
     [_connectionErrorBGView.leftCloud setContentMode:UIViewContentModeScaleAspectFit];
 
     [_connectionErrorBGView.middleCloud setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"CloudB.png"]]];
@@ -185,11 +182,6 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
     [_connectionErrorBGView.rightCloud setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"CloudA.png"]]];
     [_connectionErrorBGView.rightCloud setContentMode:UIViewContentModeScaleAspectFit];
-//    float bodySize = [FBLViewHelpers bodyCopyForScreenSize];
-//    [_connectionErrorBGView.title setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
-//    [_connectionErrorBGView.lowerTitle setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
-//    [_connectionErrorBGView.chattyImage setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"Chatty.png"]]];
-//    [_connectionErrorBGView.chattyImage setContentMode:UIViewContentModeScaleAspectFit];
 }
 
 
