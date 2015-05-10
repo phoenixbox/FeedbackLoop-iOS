@@ -15,8 +15,10 @@
 
 + (FBLChatStore *)sharedStore;
 
+// TODO: Where are the error params here!
 - (void)sendSlackMessage:(NSString *)message toChannel:(FBLChannel *)channel withCompletion:(void (^)(FBLChat *chat, NSString *))block;
-
 - (void)fetchHistoryForChannel:(NSString *)channelId withCompletion:(void (^)(FBLChatCollection *chatCollection, NSString *))block;
+
+- (void)fetchImageForChat:(FBLChat *)chat withCompletion:(void (^)(UIImage *image, NSString *error))block;
 
 @end
