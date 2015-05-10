@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "JSONModel.h"
 
 @protocol FBLChat @end
@@ -17,10 +18,13 @@
 @property (nonatomic, strong) NSString *user;
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *type;
-@property (nonatomic, strong) NSString *sub_type;
+@property (nonatomic, strong) NSString *subtype;
 @property (nonatomic, strong) NSString *ts;
 @property (nonatomic, strong) NSArray *attachments;
+@property (nonatomic, strong) NSString *imgUrl;
+@property (nonatomic, strong) UIImage *img;
 
-
+- (BOOL)isMessage;
+- (BOOL)isMedia;
 
 @end
