@@ -30,11 +30,15 @@
 }
 
 - (void)refreshMembersWithCollection:(NSArray *)members {
-    NSDictionary *membersDict = @{@"members": members};
+    if (members) {
+        NSDictionary *membersDict = @{@"members": members};
 
-    FBLMemberCollection *memberCollection = [[FBLMemberCollection alloc] initWithDictionary:membersDict error:nil];
+        FBLMemberCollection *memberCollection = [[FBLMemberCollection alloc] initWithDictionary:membersDict error:nil];
 
-    _members = memberCollection.members;
+        _members = memberCollection.members;
+    } else {
+        _members = [[NSMutableArray alloc] init];
+    }
 }
 
 - (FBLMember *)find:(NSString *)memberId {
