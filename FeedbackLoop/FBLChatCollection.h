@@ -14,4 +14,6 @@
 
 @property (strong, nonatomic) NSMutableArray<FBLChat> *messages;
 
+- (void)loadMediaForMessages;
+
 @end
