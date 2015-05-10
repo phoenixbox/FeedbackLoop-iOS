@@ -204,7 +204,6 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
 - (void)noOauth {
     [_hud show:YES];
-    [self.collectionView.backgroundView setHidden:YES];
 
     void(^websocketConnect)(NSError *err)=^(NSError *error) {
         [_hud hide:YES];
@@ -214,12 +213,18 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
             [self setupWebsocket];
             [self loadSlackMessages];
         } else {
+            NSLog(@"SLACK AUTH HAS FAILED! - multiple times should increase the counter");
             [self showBackgroundViewOfType:kConnectionErrorBGView];
         }
     };
 
     void(^setupWebhook)(NSError *err)=^(NSError *error) {
-        [[FBLSlackStore sharedStore] setupWebhook:websocketConnect];
+        if (error == nil) {
+            [[FBLSlackStore sharedStore] setupWebhook:websocketConnect];
+        } else {
+            NSLog(@"SLACK AUTH HAS FAILED! - multiple times should increase the counter");
+            [self showBackgroundViewOfType:kConnectionErrorBGView];
+        }
     };
 
     [[FBLSlackStore sharedStore] joinOrCreateChannel:setupWebhook];
@@ -227,7 +232,6 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
 - (void)slackOauth {
     [_hud show:YES];
-    [self.collectionView.backgroundView setHidden:YES];
 
     void(^refreshWebhook)(NSError *err)=^(NSError *error) {
         [_hud hide:YES];
@@ -321,6 +325,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
                 [_hud hide:YES];
                 [self setChatBarStateForCondition:nil];
+                [self.collectionView.backgroundView setHidden:YES];
             }
             else {
                 [self triggerGlobalNotificationWithMessage:@"Error loading Messages" andColor:FEEDBACK_ERROR];
@@ -345,7 +350,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     }
 
     // TODO: Add A fade in/grow in function for background views - lower sharp reveal
-    [self.collectionView setHidden:NO];
+    [self.collectionView.backgroundView setHidden:NO];
     // Programatically resign the keyboard!
     [self.inputToolbar.contentView.textView resignFirstResponder];
 }
