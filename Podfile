@@ -7,6 +7,7 @@ pod 'JSONModel', '~> 1.0'
 pod 'JSQMessagesViewController', '~> 7.0'
 pod 'SocketRocket', '0.3.1-beta2'
 pod 'MBProgressHUD', '~> 0.9'
+pod 'URBMediaFocusViewController', '~> 0.5.7'
 end
 
 target 'FeedbackLoopTests' do

@@ -11,9 +11,9 @@
 
 // Components
 #import "FBLChatViewController.h"
-
 #import "FBLUserDetailsBGView.h"
 #import "FBLConnectionErrorBGView.h"
+#import "URBMediaFocusViewController.h"
 
 // Constants
 #import "FBLAppConstants.h"
@@ -42,34 +42,35 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
 @interface FBLChatViewController ()
 
-@property (nonatomic, assign) BOOL isLoading;
-@property (nonatomic, assign) BOOL initialized;
-
-@property (nonatomic, strong) NSString *userChannelId;
-
 // BackgroundViews
 @property (nonatomic, strong) FBLUserDetailsBGView *userDetailsBGView;
 @property (nonatomic, strong) FBLConnectionErrorBGView *connectionErrorBGView;
 
+// Accessory Views
 @property (nonatomic, strong) UIView *navBar;
+@property (nonatomic, strong) MBProgressHUD *hud;
+@property (nonatomic, strong) URBMediaFocusViewController *lightboxViewController;
 
+// Data iVars
 @property (nonatomic, strong) FBLChannel *channel;
-
 @property (nonatomic, strong) FBLChatCollection *chatCollection;
-
 @property (nonatomic, strong) NSMutableArray *users;
 @property (nonatomic, strong) NSMutableArray *messages;
 @property (nonatomic, strong) NSMutableDictionary *avatars;
+@property (nonatomic, strong) NSString *userChannelId;
 
-@property (nonatomic, strong) MBProgressHUD *hud;
+// State iVars
+@property (nonatomic, assign) BOOL isLoading;
+@property (nonatomic, assign) BOOL initialized;
+@property (nonatomic, assign) NSInteger errorCounter;
 
+// JSQMessages
 @property (nonatomic, strong) JSQMessagesBubbleImage *bubbleImageOutgoing;
 @property (nonatomic, strong) JSQMessagesBubbleImage *bubbleImageIncoming;
 @property (nonatomic, strong) JSQMessagesAvatarImage *avatarImageBlank;
 
+// Networking
 @property (nonatomic, strong) SRWebSocket *webSocket;
-
-@property (nonatomic, assign) NSInteger errorCounter;
 
 @end
 
@@ -627,9 +628,21 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath {
+
     JSQMessage *message = _messages[indexPath.item];
-    if (message.isMediaMessage)
-    {
+    if (message.isMediaMessage) {
+        NSLog(@"PresentImage");
+
+        _lightboxViewController = [[URBMediaFocusViewController alloc] initWithNibName:nil bundle:nil];
+        _lightboxViewController.shouldDismissOnImageTap = YES;
+        _lightboxViewController.shouldShowPhotoActions = YES;
+
+
+        JSQMessagesCollectionViewCell *targetCell = (JSQMessagesCollectionViewCell *)[self.collectionView cellForRowAtIndexPath:indexPath];
+        [_lightboxViewController showImage:cell.mediaItem.image fromView:targetCell];
+
+
+    } else if (message.isMediaMessage) {
         if ([message.media isKindOfClass:[JSQVideoMediaItem class]])
         {
             JSQVideoMediaItem *mediaItem = (JSQVideoMediaItem *)message.media;
