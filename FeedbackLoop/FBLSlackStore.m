@@ -43,16 +43,26 @@
 
     [manager GET:requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSMutableDictionary *rtmResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        
-        if ([rtmResponse objectForKey:@"ok"]) {
+
+        // Why doesnt onject for key return "0" resolve as false
+        NSNumber *ok = [rtmResponse objectForKey:@"ok"];
+        if (!ok) {
             self.webhookUrl = [rtmResponse objectForKey:@"url"];
+            [[FBLMembersStore sharedStore] refreshMembersWithCollection:[rtmResponse objectForKey:@"users"]];
+            [[FBLMembersStore sharedStore] processMemberPhotos];
+            [[FBLChannelStore sharedStore] refreshChannelsWithCollection:[rtmResponse objectForKey:@"channels"]];
+            block(nil);
+        } else {
+            NSDictionary *userInfo = @{
+                                       NSLocalizedDescriptionKey: NSLocalizedString(@"Couldnt setup webhook!", nil),
+                                       NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"The operation timed out.", nil),
+                                       NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Have you tried turning it off and on again?", nil)
+                                       };
+            NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
+                                                 code:-1008
+                                             userInfo:userInfo];
+            block(error);
         }
-
-        [[FBLMembersStore sharedStore] refreshMembersWithCollection:[rtmResponse objectForKey:@"users"]];
-        [[FBLMembersStore sharedStore] processMemberPhotos];
-        [[FBLChannelStore sharedStore] refreshChannelsWithCollection:[rtmResponse objectForKey:@"channels"]];
-
-        block(nil);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         block(error);
     }];
