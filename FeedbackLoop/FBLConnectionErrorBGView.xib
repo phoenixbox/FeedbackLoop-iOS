@@ -37,7 +37,7 @@
                             <rect key="frame" x="20" y="137" width="295" height="101"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B7P-6I-Akq">
-                                    <rect key="frame" x="98" y="0.0" width="119" height="77"/>
+                                    <rect key="frame" x="106" y="5" width="111" height="72"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="B7P-6I-Akq" secondAttribute="height" multiplier="20:13" id="8tp-8Y-zzC"/>
                                     </constraints>
@@ -70,7 +70,7 @@
                                 <constraint firstAttribute="trailing" secondItem="B7P-6I-Akq" secondAttribute="trailing" constant="78" id="cl0-Ef-jHQ"/>
                                 <constraint firstItem="weI-AA-niV" firstAttribute="top" secondItem="bug-wW-GxQ" secondAttribute="top" constant="18" id="jTG-Pp-QuK"/>
                                 <constraint firstAttribute="width" secondItem="bug-wW-GxQ" secondAttribute="height" multiplier="295:101" id="yOd-m7-uWs"/>
-                                <constraint firstItem="B7P-6I-Akq" firstAttribute="top" secondItem="bug-wW-GxQ" secondAttribute="top" id="zLb-ib-Vr0"/>
+                                <constraint firstItem="B7P-6I-Akq" firstAttribute="top" secondItem="bug-wW-GxQ" secondAttribute="top" constant="5" id="zLb-ib-Vr0"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">

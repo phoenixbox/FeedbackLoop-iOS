@@ -69,6 +69,8 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
 @property (nonatomic, strong) SRWebSocket *webSocket;
 
+@property (nonatomic, assign) NSInteger errorCounter;
+
 @end
 
 @implementation FBLChatViewController
@@ -78,6 +80,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     [self setupHUD];
 
     self.title = [NSString stringWithFormat:@"FeedbackLoop Chat"];
+    [self setupChatBatStyles];
 
     [self prepareBackgroundViews];
     [self provisionJSQMProperties];
@@ -92,12 +95,16 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     if (![[FBLAuthenticationStore sharedInstance] userEmail]) {
         // View Control Point
         [_hud hide:YES];
-        [self placeholderChatbar:YES];
-        // TODO Show background view by identifier
-        [self showBackgroundViewOfType:kConnectionErrorBGView];
+        [self setChatBarStateForCondition:kUserDetailsBGView];
+        [self showBackgroundViewOfType:kUserDetailsBGView];
     } else {
         [self authenticate];
     }
+}
+
+- (void)setupChatBatStyles {
+    [self.inputToolbar.contentView.textView setPlaceHolderTextColor:FEEDBACK_GREY];
+    [self setChatBarStateForCondition:@"initialization"];
 }
 
 - (void)prepareBackgroundViews {
@@ -112,33 +119,6 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
         [self slackOauth];
     }
 }
-
-- (void)placeholderChatbar:(BOOL)enabled {
-    [self.inputToolbar.contentView.textView setPlaceHolderTextColor:FEEDBACK_GREY];
-
-    if (enabled) {
-        [self.inputToolbar.contentView.textView setPlaceHolder:@"Hi! Type your email to start :)"];
-    } else {
-        [self.inputToolbar.contentView.textView setPlaceHolder:@"What's on your mind?"];
-    }
-}
-
-//- (void)setTableViewEmptyMessage:(BOOL)show withSelector:(NSString *)selectorName {
-//    if (selectorName) {
-//        SEL selector = NSSelectorFromString(selectorName);
-//        IMP imp = [self methodForSelector:selector];
-//        void (*func)(id, SEL) = (void *)imp;
-//
-//        func(self, selector);
-//    } else {
-//        if (show) {
-//            [self.collectionView.backgroundView setHidden:YES];
-//        } else {
-//            [self.collectionView.backgroundView setHidden:NO];
-//        }
-//    }
-//}
-//
 
 - (void)buildUserDetailsView {
     NSArray *nibContents = [[FBLBundleStore frameworkBundle] loadNibNamed:kUserDetailsBGView owner:nil options:nil];
@@ -373,11 +353,12 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
                 _initialized = YES;
 
                 [_hud hide:YES];
-                [self placeholderChatbar:NO];
+                [self setChatBarStateForCondition:nil];
             }
             else {
                 [self triggerGlobalNotificationWithMessage:@"Error loading Messages" andColor:FEEDBACK_ERROR];
                 [self showBackgroundViewOfType:kConnectionErrorBGView];
+                [self setChatBarStateForCondition:kConnectionErrorBGView];
             }
 
             [self.collectionView reloadData];
@@ -396,6 +377,22 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     }
 
     [self.collectionView setHidden:NO];
+}
+
+- (void)setChatBarStateForCondition:(NSString *)condition {
+    if([condition isEqualToString:kConnectionErrorBGView]) {
+        [self.inputToolbar setUserInteractionEnabled:NO];
+        [self.inputToolbar.contentView.textView setPlaceHolder:@"Whoops! No Connection"];
+    } else if ([condition isEqualToString:kUserDetailsBGView]) {
+        [self.inputToolbar setUserInteractionEnabled:YES];
+        [self.inputToolbar.contentView.textView setPlaceHolder:@"Hi! Type your email to start :)"];
+    } else if ([condition isEqualToString:@"initialization"]) {
+        [self.inputToolbar setUserInteractionEnabled:NO];
+        [self.inputToolbar.contentView.textView setPlaceHolder:@"Warming up..."];
+    } else {
+        [self.inputToolbar setUserInteractionEnabled:YES];
+        [self.inputToolbar.contentView.textView setPlaceHolder:@"What's on your mind?"];
+    }
 }
 
 - (JSQMessage *)addSlackMessage:(FBLChat *)chat {
