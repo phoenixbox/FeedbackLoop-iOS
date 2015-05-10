@@ -67,11 +67,16 @@
 
 
 - (void)refreshChannelsWithCollection:(NSArray *)channels {
-    NSDictionary *channelsDict = @{@"channels": channels};
 
-    FBLChannelCollection *channelCollection = [[FBLChannelCollection alloc] initWithDictionary:channelsDict error:nil];
+    if (channels) {
+        NSDictionary *channelsDict = @{@"channels": channels};
 
-    [self addUniqueChannelsToStore:channelCollection.channels];
+        FBLChannelCollection *channelCollection = [[FBLChannelCollection alloc] initWithDictionary:channelsDict error:nil];
+
+        [self addUniqueChannelsToStore:channelCollection.channels];
+    } else {
+        _channels = [NSMutableArray new];
+    }
 }
 
 // TODO: Two operations predicated on unique should be merged?
