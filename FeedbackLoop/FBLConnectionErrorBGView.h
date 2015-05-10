@@ -20,5 +20,7 @@ extern NSString* const kConnectionErrorBGView;
 @property (weak, nonatomic) IBOutlet UIImageView *rightCloud;
 @property (weak, nonatomic) IBOutlet UIImageView *middleCloud;
 @property (weak, nonatomic) IBOutlet UIImageView *leftCloud;
+@property (weak, nonatomic) IBOutlet UIButton *cloudTrigger;
+- (IBAction)cloudTrigger:(id)sender;
 
 @end

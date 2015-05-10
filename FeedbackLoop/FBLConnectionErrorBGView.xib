@@ -81,6 +81,15 @@
                                 </mask>
                             </variation>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DII-Pe-Kgh" userLabel="cloudTrigger">
+                            <rect key="frame" x="20" y="137" width="295" height="101"/>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="cloudTrigger:" destination="iN0-l3-epB" eventType="touchUpInside" id="7sH-cl-cF5"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -89,16 +98,20 @@
                         <constraint firstAttribute="centerX" secondItem="cWO-hF-KcD" secondAttribute="centerX" id="Cbz-2s-WpG"/>
                         <constraint firstAttribute="trailing" secondItem="bug-wW-GxQ" secondAttribute="trailing" constant="20" id="DLO-mC-xxI"/>
                         <constraint firstItem="cWO-hF-KcD" firstAttribute="top" secondItem="FoA-NV-tbj" secondAttribute="bottom" id="Ilo-ZW-eiV"/>
+                        <constraint firstItem="DII-Pe-Kgh" firstAttribute="centerX" secondItem="bug-wW-GxQ" secondAttribute="centerX" id="KYO-Gz-yOl"/>
                         <constraint firstAttribute="trailing" secondItem="cix-MG-OFV" secondAttribute="trailing" constant="20" id="Mx1-YC-Pqa"/>
                         <constraint firstAttribute="height" constant="325" id="RSc-3z-QRr"/>
+                        <constraint firstItem="DII-Pe-Kgh" firstAttribute="centerY" secondItem="bug-wW-GxQ" secondAttribute="centerY" id="Rqs-Yv-rmM"/>
                         <constraint firstItem="bug-wW-GxQ" firstAttribute="leading" secondItem="3LO-Wa-7lf" secondAttribute="leading" constant="20" id="TkN-Yl-eLu"/>
                         <constraint firstItem="cix-MG-OFV" firstAttribute="leading" secondItem="3LO-Wa-7lf" secondAttribute="leading" constant="20" id="XyC-lm-7sr"/>
                         <constraint firstItem="bug-wW-GxQ" firstAttribute="top" secondItem="cWO-hF-KcD" secondAttribute="bottom" constant="5" id="eAZ-a6-duu"/>
                         <constraint firstAttribute="width" secondItem="3LO-Wa-7lf" secondAttribute="height" multiplier="67:65" id="lAh-Cg-wuG"/>
                         <constraint firstAttribute="width" constant="335" id="nbE-gK-Syn"/>
                         <constraint firstItem="FoA-NV-tbj" firstAttribute="top" secondItem="3LO-Wa-7lf" secondAttribute="top" constant="10" id="oGi-oz-YgZ"/>
+                        <constraint firstItem="DII-Pe-Kgh" firstAttribute="width" secondItem="bug-wW-GxQ" secondAttribute="width" id="oS8-85-IJS"/>
                         <constraint firstItem="cix-MG-OFV" firstAttribute="top" secondItem="bug-wW-GxQ" secondAttribute="bottom" constant="5" id="olk-NG-5ez"/>
                         <constraint firstItem="FoA-NV-tbj" firstAttribute="leading" secondItem="3LO-Wa-7lf" secondAttribute="leading" constant="20" id="uWy-tB-8b5"/>
+                        <constraint firstItem="DII-Pe-Kgh" firstAttribute="height" secondItem="bug-wW-GxQ" secondAttribute="height" id="ydF-Bw-WNd"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -120,6 +133,7 @@
             <connections>
                 <outlet property="chatty" destination="cWO-hF-KcD" id="q62-q6-XsQ"/>
                 <outlet property="cloudContainer" destination="bug-wW-GxQ" id="vTZ-1U-MMP"/>
+                <outlet property="cloudTrigger" destination="DII-Pe-Kgh" id="OKz-Ly-ERg"/>
                 <outlet property="contentView" destination="3LO-Wa-7lf" id="uIp-je-FXA"/>
                 <outlet property="leftCloud" destination="wzA-19-owV" id="kME-H1-cyU"/>
                 <outlet property="message" destination="cix-MG-OFV" id="sA0-qb-qlm"/>

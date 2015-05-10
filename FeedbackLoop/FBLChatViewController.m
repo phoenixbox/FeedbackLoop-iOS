@@ -97,6 +97,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
         [_hud hide:YES];
         [self setChatBarStateForCondition:kUserDetailsBGView];
         [self showBackgroundViewOfType:kUserDetailsBGView];
+
     } else {
         [self authenticate];
     }
