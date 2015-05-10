@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 extern NSString* const kConnectionErrorBGView;
+extern NSString* const kConnectionRetry;
 
 @interface FBLConnectionErrorBGView : UIView
 @property (weak, nonatomic) IBOutlet UIView *contentView;

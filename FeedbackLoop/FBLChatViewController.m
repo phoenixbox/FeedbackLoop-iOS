@@ -78,6 +78,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupHUD];
+    [self setupConnectionRetryListener];
 
     self.title = [NSString stringWithFormat:@"FeedbackLoop Chat"];
     [self setupChatBatStyles];
@@ -92,6 +93,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     _isLoading = NO;
     _initialized = NO;
 
+    // If there is no token then show a no token error message.
     if (![[FBLAuthenticationStore sharedInstance] userEmail]) {
         // View Control Point
         [_hud hide:YES];
@@ -101,6 +103,15 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     } else {
         [self authenticate];
     }
+}
+
+- (void)setupConnectionRetryListener {
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+
+    [center addObserver:self
+               selector:@selector(authenticate)
+                   name:kConnectionRetry
+                 object:nil];
 }
 
 - (void)setupChatBatStyles {
@@ -113,6 +124,8 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     [self buildConnectionErrorView];
 }
 
+// TODO: Re-route away from authentication when already done
+// Compose store completion function internals into named functions for re-use
 - (void)authenticate {
     if ([[FBLAuthenticationStore sharedInstance] slackToken]) {
         [self noOauth];
@@ -189,57 +202,9 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     _avatarImageBlank = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"Persona.png"]] diameter:30.0];
 }
 
-//- (void)initializeCollectionErrorView {
-//    CGRect collectionViewBounds = [self.collectionView bounds];
-//    _emptyMessage = [[UIView alloc] initWithFrame:collectionViewBounds];
-//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0,0,collectionViewBounds.size.width-20.0f, 50.0f)];
-//    [label setText:@"Uh Oh! We had trouble connecting"];
-//    [label setTextAlignment:NSTextAlignmentCenter];
-//    [label setCenter:_emptyMessage.center];
-//    [_emptyMessage addSubview:label];
-//
-//    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(collectionViewBounds.size.width/4,
-//                                                                  label.frame.origin.y + label.frame.size.height + 10.0f,
-//                                                                  collectionViewBounds.size.width/2,
-//                                                                  40.0f)];
-//
-//    if ([[FBLAuthenticationStore sharedInstance] slackToken]) {
-//        [button addTarget:self action:@selector(noOauth)
-//         forControlEvents:UIControlEventTouchUpInside];
-//    } else {
-//        [button addTarget:self action:@selector(slackOauth)
-//         forControlEvents:UIControlEventTouchUpInside];
-//    }
-//
-//    [self styleButton:button withColor:[UIColor blackColor]];
-//
-//    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//
-//    [_emptyMessage addSubview:button];
-//    [self.collectionView setBackgroundView:_emptyMessage];
-//    [self showBackgroundView:YES];
-//}
-//
-//- (void)styleButton:(UIButton *)button withColor:(UIColor *)color {
-//    button.layer.cornerRadius = 4;
-//    button.layer.borderWidth = 2;
-//    button.layer.borderColor = color.CGColor;
-//    [button setBackgroundColor:[UIColor whiteColor]];
-//    [button setTitleColor:color forState:UIControlStateNormal];
-//    [button setTintColor:color];
-//}
-
-- (void)showBackgroundView:(BOOL)show {
-    if (show) {
-        [self.collectionView.backgroundView setHidden:YES];
-    } else {
-        [self.collectionView.backgroundView setHidden:NO];
-    }
-}
-
 - (void)noOauth {
     [_hud show:YES];
-    [self showBackgroundView:YES];
+    [self.collectionView.backgroundView setHidden:YES];
 
     void(^websocketConnect)(NSError *err)=^(NSError *error) {
         [_hud hide:YES];
@@ -249,7 +214,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
             [self setupWebsocket];
             [self loadSlackMessages];
         } else {
-            [self showBackgroundView:NO];
+            [self showBackgroundViewOfType:kConnectionErrorBGView];
         }
     };
 
@@ -262,7 +227,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
 - (void)slackOauth {
     [_hud show:YES];
-    [self showBackgroundView:YES];
+    [self.collectionView.backgroundView setHidden:YES];
 
     void(^refreshWebhook)(NSError *err)=^(NSError *error) {
         [_hud hide:YES];
@@ -272,7 +237,8 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
             [self setupWebsocket];
             [self loadSlackMessages];
         } else {
-            [self showBackgroundView:NO];
+            NSLog(@"SLACK AUTH HAS FAILED! - multiple times should increase the counter");
+            [self showBackgroundViewOfType:kConnectionErrorBGView];
         }
     };
 
@@ -372,12 +338,16 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
 - (void)showBackgroundViewOfType:(NSString *)viewName {
     if([viewName isEqualToString:kConnectionErrorBGView]) {
+        // TODO CHECK THE COUNTER TO ERROR MESSAGE AND CHATTY
         [self.collectionView setBackgroundView:_connectionErrorBGView];
     } else if ([viewName isEqualToString:kUserDetailsBGView]) {
         [self.collectionView setBackgroundView:_userDetailsBGView];
     }
 
+    // TODO: Add A fade in/grow in function for background views - lower sharp reveal
     [self.collectionView setHidden:NO];
+    // Programatically resign the keyboard!
+    [self.inputToolbar.contentView.textView resignFirstResponder];
 }
 
 - (void)setChatBarStateForCondition:(NSString *)condition {
@@ -715,5 +685,12 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
     NSLog(@"WEBSOCKET CLOSED");
 }
+
+#pragma mark - Notification Center
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 @end

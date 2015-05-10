@@ -9,6 +9,7 @@
 #import "FBLConnectionErrorBGView.h"
 
 NSString *const kConnectionErrorBGView = @"FBLConnectionErrorBGView";
+NSString *const kConnectionRetry = @"feedbackLoop__connectionRetry";
 
 @implementation FBLConnectionErrorBGView
 
@@ -21,9 +22,15 @@ NSString *const kConnectionErrorBGView = @"FBLConnectionErrorBGView";
 */
 
 - (IBAction)cloudTrigger:(id)sender {
+    // Animate the clouds
     [self floatLeftCloud];
     [self floatMiddleCloud];
     [self floatRightCloud];
+
+    // Post reconnection message
+    NSNotification *notification = [NSNotification notificationWithName:kConnectionRetry
+                                                                 object:self];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 - (void)floatLeftCloud {
