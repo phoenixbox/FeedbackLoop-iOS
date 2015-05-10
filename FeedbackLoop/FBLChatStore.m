@@ -69,7 +69,7 @@
         NSMutableDictionary *sendMessageResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
 
         NSNumber *ok = [sendMessageResponse objectForKey:@"ok"];
-        if (!ok) {
+        if ([ok isEqual:@(YES)]) {
             FBLChat *chat = [[FBLChat alloc] initWithDictionary:[sendMessageResponse objectForKey:@"message"] error:nil];
 
             block(chat, nil);
@@ -97,7 +97,8 @@
     [manager POST:requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSMutableDictionary *sendMessageResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
 
-        if ([sendMessageResponse objectForKey:@"ok"]) {
+        NSNumber *ok = [sendMessageResponse objectForKey:@"ok"];
+        if ([ok isEqual:@(YES)]) {
             NSString *rawJSON = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
 
             FBLChatCollection *chatCollection = [[FBLChatCollection alloc] initWithString:rawJSON error:nil];

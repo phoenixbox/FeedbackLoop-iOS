@@ -46,7 +46,7 @@
 
         // Why doesnt onject for key return "0" resolve as false
         NSNumber *ok = [rtmResponse objectForKey:@"ok"];
-        if (!ok) {
+        if ([ok isEqual:@(YES)]) {
             self.webhookUrl = [rtmResponse objectForKey:@"url"];
             [[FBLMembersStore sharedStore] refreshMembersWithCollection:[rtmResponse objectForKey:@"users"]];
             [[FBLMembersStore sharedStore] processMemberPhotos];
@@ -82,7 +82,7 @@
         NSMutableDictionary *response = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
 
         NSNumber *ok = [response objectForKey:@"ok"];
-        if (!ok) {
+        if ([ok isEqual:@(YES)]) {
             _userChannelId = [[response objectForKey:@"channel"] objectForKey:@"id"];
             block(nil);
         } else {
@@ -101,7 +101,7 @@
     }];
 }
 
-- (void)slackOAuth:(void (^)(NSError *err))block {
+- (void)feedbackLoopAuth:(void (^)(NSError *err))block {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
@@ -115,30 +115,42 @@
         // There must be a better accessor pattern here
         NSDictionary *rtm = [oauthRequest objectForKey:@"rtm"];
 
-        if (rtm && [rtm objectForKey:@"ok"]) {
+        if (rtm) {
+            NSNumber *ok = [oauthRequest objectForKey:@"ok"];
+            if ([ok isEqual:@(YES)]) {
+                self.webhookUrl = [rtm objectForKey:@"url"];
 
-            self.webhookUrl = [rtm objectForKey:@"url"];
+                // Set the team on the team store
+                NSDictionary *teamAttrs = [oauthRequest objectForKey:@"team"];
+                FBLTeam *team = [[FBLTeam alloc] initWithDictionary:teamAttrs error:nil];
+                [team buildToken];
 
-            // Set the team on the team store
-            NSDictionary *teamAttrs = [oauthRequest objectForKey:@"team"];
-            FBLTeam *team = [[FBLTeam alloc] initWithDictionary:teamAttrs error:nil];
-            [team buildToken];
+                // TODO: Clean up this interface: team doesnt need a slack token - the auth store does
+                [[FBLAuthenticationStore sharedInstance] setSlackToken:team.slackToken];
 
-            // TODO: Clean up this interface: team doesnt need a slack token - the auth store does
-            [[FBLAuthenticationStore sharedInstance] setSlackToken:team.slackToken];
-            
-            NSString *teamImage = [[[rtm objectForKey:@"team"] objectForKey:@"icon"] objectForKey:@"image_132"];
-            [team setTeamImage:teamImage];
-            [[FBLTeamStore sharedStore] setTeam:team];
+                NSString *teamImage = [[[rtm objectForKey:@"team"] objectForKey:@"icon"] objectForKey:@"image_132"];
+                [team setTeamImage:teamImage];
+                [[FBLTeamStore sharedStore] setTeam:team];
 
-            // Use the channel object
-            _userChannelId = [[oauthRequest objectForKey:@"channel"] objectForKey:@"channel_id"];
+                // Use the channel object
+                _userChannelId = [[oauthRequest objectForKey:@"channel"] objectForKey:@"channel_id"];
 
-            [[FBLMembersStore sharedStore] refreshMembersWithCollection:[rtm objectForKey:@"users"]];
-            [[FBLMembersStore sharedStore] processMemberPhotos];
-            [[FBLChannelStore sharedStore] refreshChannelsWithCollection:[rtm objectForKey:@"channels"]];
-
-            block(nil);
+                [[FBLMembersStore sharedStore] refreshMembersWithCollection:[rtm objectForKey:@"users"]];
+                [[FBLMembersStore sharedStore] processMemberPhotos];
+                [[FBLChannelStore sharedStore] refreshChannelsWithCollection:[rtm objectForKey:@"channels"]];
+                
+                block(nil);
+            } else {
+                NSDictionary *userInfo = @{
+                                           NSLocalizedDescriptionKey: NSLocalizedString(@"RTM Present but Response Not Ok!", nil),
+                                           NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"The operation timed out.", nil),
+                                           NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Have you tried turning it off and on again?", nil)
+                                           };
+                NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
+                                                     code:-1008
+                                                 userInfo:userInfo];
+                block(error);
+            }
         } else {
             NSDictionary *userInfo = @{
                                        NSLocalizedDescriptionKey: NSLocalizedString(@"RTM request error!", nil),

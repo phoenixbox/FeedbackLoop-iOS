@@ -17,7 +17,7 @@
 
 - (void)setupWebhook:(void (^)(NSError *err))block;
 
-- (void)slackOAuth:(void (^)(NSError *err))block;
+- (void)feedbackLoopAuth:(void (^)(NSError *err))block;
 
 - (void)joinOrCreateChannel:(void (^)(NSError *err))block;
 
