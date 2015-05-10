@@ -101,7 +101,6 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
         [_hud hide:YES];
         [self setChatBarStateForCondition:kUserDetailsBGView];
         [self showBackgroundViewOfType:kUserDetailsBGView];
-
     } else {
         [self authenticate];
     }
@@ -130,9 +129,9 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 // Compose store completion function internals into named functions for re-use
 - (void)authenticate {
     if ([[FBLAuthenticationStore sharedInstance] slackToken]) {
-        [self noOauth];
+        [self slackAuth];
     } else {
-        [self slackOauth];
+        [self feedbackLoopAuth];
     }
 }
 
@@ -183,7 +182,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     _avatarImageBlank = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"Persona.png"]] diameter:30.0];
 }
 
-- (void)noOauth {
+- (void)slackAuth {
     [_hud show:YES];
 
     void(^websocketConnect)(NSError *err)=^(NSError *error) {
@@ -194,7 +193,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
             [self setupWebsocket];
             [self loadSlackMessages];
         } else {
-            NSLog(@"SLACK AUTH HAS FAILED! - multiple times should increase the counter");
+            NSLog(@"Setup Webhook Fail!");
             [self showBackgroundViewOfType:kConnectionErrorBGView];
         }
     };
@@ -203,7 +202,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
         if (error == nil) {
             [[FBLSlackStore sharedStore] setupWebhook:websocketConnect];
         } else {
-            NSLog(@"SLACK AUTH HAS FAILED! - multiple times should increase the counter");
+            NSLog(@"JoinOrCreateFail!");
             [self showBackgroundViewOfType:kConnectionErrorBGView];
         }
     };
@@ -211,7 +210,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     [[FBLSlackStore sharedStore] joinOrCreateChannel:setupWebhook];
 }
 
-- (void)slackOauth {
+- (void)feedbackLoopAuth {
     [_hud show:YES];
 
     void(^refreshWebhook)(NSError *err)=^(NSError *error) {
@@ -227,7 +226,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
         }
     };
 
-    [[FBLSlackStore sharedStore] slackOAuth:refreshWebhook];
+    [[FBLSlackStore sharedStore] feedbackLoopAuth:refreshWebhook];
 }
 
 - (void)hideFeedbackLoopWindow {
@@ -325,7 +324,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 - (void)showBackgroundViewOfType:(NSString *)viewName {
     if([viewName isEqualToString:kConnectionErrorBGView]) {
         [self setChatBarStateForCondition:kConnectionErrorBGView];
-        
+
         [self.collectionView setBackgroundView:_connectionErrorBGView];
 
         if (_errorCounter < 3) {
@@ -390,32 +389,49 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     NSString *text;
     NSString *username = chat.username;
 
-    if ([username isEqualToString:@"bot"]) {
+    if (chat.isMessage) {
+        if ([username isEqualToString:@"bot"]) {
 
-        FBLMember *member = [[FBLMember alloc] init];
-        [member setId:self.senderId];
-        [member setEmail:self.senderDisplayName];
-        [member setProfileImage:nil];
+            FBLMember *member = [[FBLMember alloc] init];
+            [member setId:self.senderId];
+            [member setEmail:self.senderDisplayName];
+            [member setProfileImage:nil];
 
-        [_users addObject:member];
+            [_users addObject:member];
 
-        senderId = self.senderId;
-        displayName = self.senderDisplayName;
-        text = chat.text;
-    } else {
-        senderId = chat.user;
-        FBLMember *member = [[FBLMembersStore sharedStore] find:chat.user];
+            senderId = self.senderId;
+            displayName = self.senderDisplayName;
+            text = chat.text;
+        } else {
+            senderId = chat.user;
+            FBLMember *member = [[FBLMembersStore sharedStore] find:chat.user];
 
-        [_users addObject:member];
+            [_users addObject:member];
 
-        displayName = member.realName;
-        text = SanitizeMessage(chat.text);
+            displayName = member.realName;
+            text = SanitizeMessage(chat.text);
+        }
+
+        NSDate *dateStamp = [NSDate dateWithTimeIntervalSince1970:
+                             [chat.ts doubleValue]];
+        
+        message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:displayName date:dateStamp text:text];
+    } else if (chat.isMedia) {
+        JSQPhotoMediaItem *mediaItem = [[JSQPhotoMediaItem alloc] initWithImage:nil];
+
+        // TODO: Figure out sender data
+//        mediaItem.appliesMediaViewMaskAsOutgoing = [self.senderId isEqualToString:chat.user];
+//        message = [[JSQMessage alloc] initWithSenderId:user.objectId senderDisplayName:name date:object.createdAt media:mediaItem];
+//
+//        [filePicture getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
+//         {
+//             if (error == nil)
+//             {
+//                 mediaItem.image = [UIImage imageWithData:imageData];
+//                 [self.collectionView reloadData];
+//             }
+//         }];
     }
-
-    NSDate *dateStamp = [NSDate dateWithTimeIntervalSince1970:
-                         [chat.ts doubleValue]];
-
-    message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:displayName date:dateStamp text:text];
 
     [_messages addObject:message];
 
@@ -444,7 +460,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
     if (![[FBLAuthenticationStore sharedInstance] userEmail]) {
         if (ValidateEmail(text)){
-            [self triggerGlobalNotificationWithMessage:@"Valid Email! Woo!" andColor:FEEDBACK_SUCCESS];
+            [self triggerGlobalNotificationWithMessage:@"Success!" andColor:FEEDBACK_SUCCESS];
             [[FBLAuthenticationStore sharedInstance] setUserEmail:text];
             [JSQSystemSoundPlayer jsq_playMessageSentSound];
             [self authenticate];
@@ -646,8 +662,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-//    NSURL *video = info[UIImagePickerControllerMediaURL];
-//    UIImage *picture = info[UIImagePickerControllerEditedImage];
+    UIImage *picture = info[UIImagePickerControllerEditedImage];
 
     // TODO: Implement image picker transfer
 
