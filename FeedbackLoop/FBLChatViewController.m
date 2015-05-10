@@ -388,49 +388,47 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     NSString *displayName;
     NSString *text;
     NSString *username = chat.username;
+    NSDate *dateStamp = [NSDate dateWithTimeIntervalSince1970:
+                         [chat.ts doubleValue]];
+
+    if ([username isEqualToString:@"bot"]) {
+
+        FBLMember *member = [[FBLMember alloc] init];
+        [member setId:self.senderId];
+        [member setEmail:self.senderDisplayName];
+        [member setProfileImage:nil];
+
+        [_users addObject:member];
+
+        senderId = self.senderId;
+        displayName = self.senderDisplayName;
+        text = chat.text;
+    } else {
+        senderId = chat.user;
+        FBLMember *member = [[FBLMembersStore sharedStore] find:chat.user];
+
+        [_users addObject:member];
+
+        displayName = member.realName;
+        text = SanitizeMessage(chat.text);
+    }
 
     if (chat.isMessage) {
-        if ([username isEqualToString:@"bot"]) {
-
-            FBLMember *member = [[FBLMember alloc] init];
-            [member setId:self.senderId];
-            [member setEmail:self.senderDisplayName];
-            [member setProfileImage:nil];
-
-            [_users addObject:member];
-
-            senderId = self.senderId;
-            displayName = self.senderDisplayName;
-            text = chat.text;
-        } else {
-            senderId = chat.user;
-            FBLMember *member = [[FBLMembersStore sharedStore] find:chat.user];
-
-            [_users addObject:member];
-
-            displayName = member.realName;
-            text = SanitizeMessage(chat.text);
-        }
-
-        NSDate *dateStamp = [NSDate dateWithTimeIntervalSince1970:
-                             [chat.ts doubleValue]];
-        
         message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:displayName date:dateStamp text:text];
     } else if (chat.isMedia) {
         JSQPhotoMediaItem *mediaItem = [[JSQPhotoMediaItem alloc] initWithImage:nil];
 
-        // TODO: Figure out sender data
-//        mediaItem.appliesMediaViewMaskAsOutgoing = [self.senderId isEqualToString:chat.user];
-//        message = [[JSQMessage alloc] initWithSenderId:user.objectId senderDisplayName:name date:object.createdAt media:mediaItem];
-//
-//        [filePicture getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error)
-//         {
-//             if (error == nil)
-//             {
-//                 mediaItem.image = [UIImage imageWithData:imageData];
-//                 [self.collectionView reloadData];
-//             }
-//         }];
+        // TODO: Figure out sender data - should be doing a lookup to members based on userName??
+        mediaItem.appliesMediaViewMaskAsOutgoing = ![senderId isEqualToString:chat.user];
+        message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:displayName date:dateStamp media:mediaItem];
+
+        void(^completionBlock)(UIImage *img, NSString *error)=^(UIImage *img, NSString *error) {
+            if (error == nil) {
+                mediaItem.image = img;
+                [self.collectionView reloadData];
+            }
+        };
+        [[FBLChatStore sharedStore] fetchImageForChat:chat withCompletion:completionBlock];
     }
 
     [_messages addObject:message];
