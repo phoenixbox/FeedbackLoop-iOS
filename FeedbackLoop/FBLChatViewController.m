@@ -437,7 +437,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     return message;
 }
 
-- (void)sendMessageToSlack:(NSString *)text Video:(NSURL *)video Picture:(UIImage *)picture {
+- (void)sendMessageToSlack:(NSString *)text Video:(NSURL *)video Image:(UIImage *)image {
 
     void(^completionBlock)(FBLChat *chat, NSString *error)=^(FBLChat *chat, NSString *error) {
         if (error == nil) {
@@ -448,7 +448,11 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
         };
     };
 
-    [[FBLChatStore sharedStore] sendSlackMessage:text toChannel:self.channel withCompletion:completionBlock];
+    if (image) {
+        [[FBLChatStore sharedStore] sendSlackImage:image toChannel:self.channel withCompletion:completionBlock];
+    } else {
+        [[FBLChatStore sharedStore] sendSlackMessage:text toChannel:self.channel withCompletion:completionBlock];
+    }
 
     [self finishSendingMessage];
 }
@@ -467,7 +471,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
             [self triggerGlobalNotificationWithMessage:@"Invalid Email!" andColor:FEEDBACK_ERROR];
         }
     } else {
-        [self sendMessageToSlack:text Video:nil Picture:nil];
+        [self sendMessageToSlack:text Video:nil Image:nil];
     }
 }
 
@@ -638,10 +642,8 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
         _lightboxViewController.shouldShowPhotoActions = YES;
 
 
-        JSQMessagesCollectionViewCell *targetCell = (JSQMessagesCollectionViewCell *)[self.collectionView cellForRowAtIndexPath:indexPath];
-        [_lightboxViewController showImage:cell.mediaItem.image fromView:targetCell];
-
-
+        JSQMessagesCollectionViewCell *targetCell = (JSQMessagesCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+        [_lightboxViewController showImage:targetCell.messageBubbleImageView.image fromView:targetCell];
     } else if (message.isMediaMessage) {
         if ([message.media isKindOfClass:[JSQVideoMediaItem class]])
         {
@@ -673,7 +675,9 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    UIImage *picture = info[UIImagePickerControllerEditedImage];
+    UIImage *image = info[UIImagePickerControllerEditedImage];
+
+    [self sendMessageToSlack:nil Video:nil Image:image];
 
     // TODO: Implement image picker transfer
 

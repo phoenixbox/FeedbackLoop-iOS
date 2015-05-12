@@ -28,6 +28,9 @@
 //------- Message
 #define     SLACK_API_MESSAGE_POST @"/chat.postMessage"
 //PARAMS    "?token=#{token}  &  channel=#{channelName}"?token="
+
+#define     SLACK_API_FILE_POST @"/files.upload"
+
 //------- Members
 #define     SLACK_MEMBERS_URI @"/users.list"
 

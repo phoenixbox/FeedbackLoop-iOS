@@ -84,6 +84,56 @@
     }];
 }
 
+//token	xxxx-xxxxxxxxx-xxxx	Required
+//Authentication token (Requires scope: post)
+//file	...	Optional
+//File contents via multipart/form-data.
+//content	...	Optional
+//File contents via a POST var.
+//filetype	php	Optional
+//Slack-internal file type identifier.
+//filename	foo.txt	Optional
+//Filename of file.
+//title	My File	Optional
+//Title of file.
+//initial_comment	Best!	Optional
+//Initial comment to add to file.
+//channels	C1234567890
+
+- (void)sendSlackImage:(UIImage *)image toChannel:(FBLChannel *)channel withCompletion:(void (^)(FBLChat *chat, NSString *))block {
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSString *requestURL = [[FBLAuthenticationStore sharedInstance] oauthRequest:SLACK_API_BASE_URL withURLSegment:SLACK_API_FILE_POST];
+
+    NSString *channelIdParam = [NSString stringWithFormat:@"&channels=%@",channel.id];
+    requestURL = [requestURL stringByAppendingString:channelIdParam];
+
+    [manager POST:requestURL parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        // 'Name' is the param name to use
+        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 1.0) name:@"file" fileName:@"burner.jpg" mimeType:@"image/jpeg"];
+
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success: %@", responseObject);
+        NSMutableDictionary *sendMessageResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+
+        NSNumber *ok = [sendMessageResponse objectForKey:@"ok"];
+        if ([ok isEqual:@(YES)]) {
+            FBLChat *chat = [[FBLChat alloc] initWithDictionary:[sendMessageResponse objectForKey:@"message"] error:nil];
+
+            block(chat, nil);
+        } else {
+            NSString *errorType = [sendMessageResponse objectForKey:@"error"];
+
+            block(nil, errorType);
+        }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        block(nil, error.localizedDescription);
+    }];
+}
+
+
 - (void)fetchHistoryForChannel:(NSString *)channelId withCompletion:(void (^)(FBLChatCollection *chatCollection, NSString *))block {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
