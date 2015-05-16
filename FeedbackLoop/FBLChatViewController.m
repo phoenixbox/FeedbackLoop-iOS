@@ -7,6 +7,7 @@
 //
 
 #import <MediaPlayer/MediaPlayer.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "FeedbackLoop.h"
 
 // Components
@@ -668,11 +669,49 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     if (buttonIndex != actionSheet.cancelButtonIndex)
     {
         if (buttonIndex == 0) {
-            ShouldStartPhotoLibrary(self, YES);
+            void(^completionBlock)(UIImage *img, NSError *error)=^(UIImage *img, NSError *error) {
+                [self sendMessageToSlack:nil Video:nil Image:img];
+                if(error != nil) {
+                } else {
+                    NSLog(@"Error fetching last image %@", error.localizedDescription);
+                }
+            };
+
+            [self fetchLastPhotoWithCompletionBlock:completionBlock];
         } else {
-            NSLog(@"Error: No Action for Button Index");
+            ShouldStartPhotoLibrary(self, YES);
         }
     }
+}
+
+- (void)fetchLastPhotoWithCompletionBlock:(void (^)(UIImage *img, NSError *error))block {
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+
+    // Enumerate just the photos and videos group by using ALAssetsGroupSavedPhotos.
+    [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+
+        // Within the group enumeration block, filter to enumerate just photos.
+        [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+
+        // Chooses the photo at the last index
+        [group enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *alAsset, NSUInteger index, BOOL *innerStop) {
+
+            // The end of the enumeration is signaled by asset == nil.
+            if (alAsset) {
+                ALAssetRepresentation *representation = [alAsset defaultRepresentation];
+                UIImage *latestPhoto = [UIImage imageWithCGImage:[representation fullScreenImage]];
+
+                // Stop the enumerations
+                *stop = YES; *innerStop = YES;
+
+                // Do something interesting with the AV asset.
+                block(latestPhoto, nil);
+            }
+        }];
+    } failureBlock: ^(NSError *error) {
+        block(nil, error);
+    }];
+
 }
 
 #pragma mark - UIImagePickerControllerDelegate

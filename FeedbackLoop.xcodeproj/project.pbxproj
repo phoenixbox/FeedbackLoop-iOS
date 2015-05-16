@@ -54,6 +54,7 @@
 		CB6ADAC51AF706A8005DAD72 /* FBLContainerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CB6ADAC21AF706A7005DAD72 /* FBLContainerViewController.h */; };
 		CB6ADAC61AF706A8005DAD72 /* FBLContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6ADAC31AF706A7005DAD72 /* FBLContainerViewController.m */; };
 		CB6ADAC71AF86C1B005DAD72 /* FBLContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6ADAC41AF706A7005DAD72 /* FBLContainerViewController.xib */; };
+		CBA9391D1B08093700BD1CC8 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA9391C1B08093700BD1CC8 /* AssetsLibrary.framework */; };
 		CBC8F6641AEDB145001DDB07 /* FeedbackLoop.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CBC8F6631AEDB145001DDB07 /* FeedbackLoop.h */; };
 		CBC8F6661AEDB145001DDB07 /* FeedbackLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC8F6651AEDB145001DDB07 /* FeedbackLoop.m */; };
 		CBC8F66C1AEDB145001DDB07 /* libFeedbackLoop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8F6601AEDB145001DDB07 /* libFeedbackLoop.a */; };
@@ -182,6 +183,7 @@
 		CB6ADAC21AF706A7005DAD72 /* FBLContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLContainerViewController.h; sourceTree = "<group>"; };
 		CB6ADAC31AF706A7005DAD72 /* FBLContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLContainerViewController.m; sourceTree = "<group>"; };
 		CB6ADAC41AF706A7005DAD72 /* FBLContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLContainerViewController.xib; sourceTree = "<group>"; };
+		CBA9391C1B08093700BD1CC8 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		CBC8F6601AEDB145001DDB07 /* libFeedbackLoop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeedbackLoop.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC8F6631AEDB145001DDB07 /* FeedbackLoop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedbackLoop.h; sourceTree = "<group>"; };
 		CBC8F6651AEDB145001DDB07 /* FeedbackLoop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedbackLoop.m; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBA9391D1B08093700BD1CC8 /* AssetsLibrary.framework in Frameworks */,
 				CBC8F67D1AEDB6DB001DDB07 /* Foundation.framework in Frameworks */,
 				CBC8F67B1AEDB6D2001DDB07 /* UIKit.framework in Frameworks */,
 				CBE36FB91AF552CA008579F8 /* CoreGraphics.framework in Frameworks */,
@@ -292,6 +295,7 @@
 		311997FE4238AC7B20B60A0C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CBA9391C1B08093700BD1CC8 /* AssetsLibrary.framework */,
 				CBE36FB81AF552CA008579F8 /* CoreGraphics.framework */,
 				CBE36FB61AF552C1008579F8 /* QuartzCore.framework */,
 				CBE36FB41AF552B8008579F8 /* AVFoundation.framework */,
