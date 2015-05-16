@@ -13,7 +13,6 @@
 #import "FBLChatViewController.h"
 #import "FBLUserDetailsBGView.h"
 #import "FBLConnectionErrorBGView.h"
-#import "URBMediaFocusViewController.h"
 
 // Constants
 #import "FBLAppConstants.h"
@@ -32,6 +31,7 @@
 
 // Libs
 #import "MBProgressHUD.h"
+#import "URBMediaFocusViewController.h"
 
 // Utils
 #import "FBLCameraUtil.h"
@@ -49,6 +49,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 // Accessory Views
 @property (nonatomic, strong) UIView *navBar;
 @property (nonatomic, strong) MBProgressHUD *hud;
+@property (nonatomic, strong) UIViewController *mediaViewController;
 @property (nonatomic, strong) URBMediaFocusViewController *lightboxViewController;
 
 // Data iVars
@@ -637,13 +638,15 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     if (message.isMediaMessage) {
         NSLog(@"PresentImage");
 
-        _lightboxViewController = [[URBMediaFocusViewController alloc] initWithNibName:nil bundle:nil];
-        _lightboxViewController.shouldDismissOnImageTap = YES;
+        _lightboxViewController = [[URBMediaFocusViewController alloc] init];
+//        _lightboxViewController.shouldDismissOnImageTap = YES;
         _lightboxViewController.shouldShowPhotoActions = YES;
 
-
         JSQMessagesCollectionViewCell *targetCell = (JSQMessagesCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-        [_lightboxViewController showImage:targetCell.messageBubbleImageView.image fromView:targetCell];
+        JSQPhotoMediaItem *mediaItem = (JSQPhotoMediaItem *)message.media;
+        UIImage *targetImage = mediaItem.image;
+        
+        [_lightboxViewController showImage:targetImage fromView:targetCell];
     } else if (message.isMediaMessage) {
         if ([message.media isKindOfClass:[JSQVideoMediaItem class]])
         {

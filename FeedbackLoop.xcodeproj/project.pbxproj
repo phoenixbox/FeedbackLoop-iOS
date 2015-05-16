@@ -31,9 +31,6 @@
 		CB04C8811AF88DD300577694 /* closeWindowSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB04C87B1AF88DD300577694 /* closeWindowSelected@3x.png */; };
 		CB069F911AFC754C008C6A4E /* FBLViewHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = CB069F8F1AFC754C008C6A4E /* FBLViewHelpers.h */; };
 		CB069F921AFC754C008C6A4E /* FBLViewHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = CB069F901AFC754C008C6A4E /* FBLViewHelpers.m */; };
-		CB069F961AFC87D6008C6A4E /* Chatty.png in Resources */ = {isa = PBXBuildFile; fileRef = CB069F931AFC8670008C6A4E /* Chatty.png */; };
-		CB069F971AFC87DA008C6A4E /* Chatty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB069F941AFC8670008C6A4E /* Chatty@2x.png */; };
-		CB069F981AFC87DD008C6A4E /* Chatty@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB069F951AFC8670008C6A4E /* Chatty@3x.png */; };
 		CB1DDCC61AF5A1AB0003BFF7 /* FBLUserDetailsBGView.h in Headers */ = {isa = PBXBuildFile; fileRef = CB1DDCC41AF5A1AB0003BFF7 /* FBLUserDetailsBGView.h */; };
 		CB1DDCC71AF5A1AB0003BFF7 /* FBLUserDetailsBGView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1DDCC51AF5A1AB0003BFF7 /* FBLUserDetailsBGView.m */; };
 		CB1DDCC91AF5A8670003BFF7 /* FBLUserDetailsBGView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1DDCC81AF5A1BD0003BFF7 /* FBLUserDetailsBGView.xib */; };
@@ -160,9 +157,6 @@
 		CB04C87B1AF88DD300577694 /* closeWindowSelected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeWindowSelected@3x.png"; sourceTree = "<group>"; };
 		CB069F8F1AFC754C008C6A4E /* FBLViewHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLViewHelpers.h; sourceTree = "<group>"; };
 		CB069F901AFC754C008C6A4E /* FBLViewHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLViewHelpers.m; sourceTree = "<group>"; };
-		CB069F931AFC8670008C6A4E /* Chatty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Chatty.png; path = ../../../../../Desktop/feedback_loop/icons/chatty/Chatty.png; sourceTree = "<group>"; };
-		CB069F941AFC8670008C6A4E /* Chatty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Chatty@2x.png"; path = "../../../../../Desktop/feedback_loop/icons/chatty/Chatty@2x.png"; sourceTree = "<group>"; };
-		CB069F951AFC8670008C6A4E /* Chatty@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Chatty@3x.png"; path = "../../../../../Desktop/feedback_loop/icons/chatty/Chatty@3x.png"; sourceTree = "<group>"; };
 		CB1DDCC41AF5A1AB0003BFF7 /* FBLUserDetailsBGView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLUserDetailsBGView.h; sourceTree = "<group>"; };
 		CB1DDCC51AF5A1AB0003BFF7 /* FBLUserDetailsBGView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLUserDetailsBGView.m; sourceTree = "<group>"; };
 		CB1DDCC81AF5A1BD0003BFF7 /* FBLUserDetailsBGView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLUserDetailsBGView.xib; sourceTree = "<group>"; };
@@ -197,6 +191,9 @@
 		CBC8F67C1AEDB6DB001DDB07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CBC8F68C1AEDB902001DDB07 /* FeedbackLoop.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedbackLoop.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC8F68F1AEDB902001DDB07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CBD997B61B07FAD9001B5FBB /* Chatty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Chatty.png; sourceTree = "<group>"; };
+		CBD997B71B07FAD9001B5FBB /* Chatty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chatty@2x.png"; sourceTree = "<group>"; };
+		CBD997B81B07FAD9001B5FBB /* Chatty@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chatty@3x.png"; sourceTree = "<group>"; };
 		CBE36FAC1AF55280008579F8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CBE36FAE1AF55294008579F8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CBE36FB01AF552A0008579F8 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -386,6 +383,9 @@
 		CBF39E841AF584DE00744C71 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				CBD997B61B07FAD9001B5FBB /* Chatty.png */,
+				CBD997B71B07FAD9001B5FBB /* Chatty@2x.png */,
+				CBD997B81B07FAD9001B5FBB /* Chatty@3x.png */,
 				CB5F77031AFE812900159177 /* CloudA.png */,
 				CB5F77041AFE812900159177 /* CloudA@2x.png */,
 				CB5F77051AFE812900159177 /* CloudA@3x.png */,
@@ -398,9 +398,6 @@
 				CB5F76F31AFDE98B00159177 /* ChattyUnhappy.png */,
 				CB5F76F41AFDE98B00159177 /* ChattyUnhappy@2x.png */,
 				CB5F76F51AFDE98B00159177 /* ChattyUnhappy@3x.png */,
-				CB069F931AFC8670008C6A4E /* Chatty.png */,
-				CB069F941AFC8670008C6A4E /* Chatty@2x.png */,
-				CB069F951AFC8670008C6A4E /* Chatty@3x.png */,
 				CB04C8761AF88DD300577694 /* closeWindow.png */,
 				CB04C8771AF88DD300577694 /* closeWindow@2x.png */,
 				CB04C8781AF88DD300577694 /* closeWindow@3x.png */,
@@ -664,9 +661,6 @@
 				CB04C87C1AF88DD300577694 /* closeWindow.png in Resources */,
 				CB04C87D1AF88DD300577694 /* closeWindow@2x.png in Resources */,
 				CB5F76FB1AFDE98B00159177 /* ChattyUnhappy@3x.png in Resources */,
-				CB069F961AFC87D6008C6A4E /* Chatty.png in Resources */,
-				CB069F971AFC87DA008C6A4E /* Chatty@2x.png in Resources */,
-				CB069F981AFC87DD008C6A4E /* Chatty@3x.png in Resources */,
 				CB5F76F71AFDE98B00159177 /* ChattyNeutral@2x.png in Resources */,
 				CBF39EC61AF58DEE00744C71 /* Persona.png in Resources */,
 				CB5F76FA1AFDE98B00159177 /* ChattyUnhappy@2x.png in Resources */,
