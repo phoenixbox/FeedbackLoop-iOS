@@ -8,4 +8,4 @@
 
 #import <UIKit/UIKit.h>
 
-BOOL	ShouldStartPhotoLibrary		(id target, BOOL canEdit);
+BOOL ShouldStartPhotoLibrary(id target, BOOL canEdit);

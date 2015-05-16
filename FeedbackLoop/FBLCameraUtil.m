@@ -11,8 +11,7 @@
 #import <UIKit/UIKit.h>
 #import "FBLCameraUtil.h"
 
-BOOL ShouldStartPhotoLibrary(id target, BOOL canEdit)
-{
+BOOL ShouldStartPhotoLibrary(id target, BOOL canEdit) {
     if (([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary] == NO
          && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum] == NO)) {
         return NO;
