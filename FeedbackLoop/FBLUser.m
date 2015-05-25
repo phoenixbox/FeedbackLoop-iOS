@@ -10,4 +10,20 @@
 
 @implementation FBLUser
 
++(BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    return YES;
+}
+
++(JSONKeyMapper*)keyMapper {
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"app_id": @"appid",
+                                                       @"email": @"email",
+                                                       @"user_name": @"userName",
+                                                       @"created_at": @"createdAt",
+                                                       @"links": @"links"
+                                                       }];
+}
+
+
 @end
