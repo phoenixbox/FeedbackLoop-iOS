@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FBLUser.h"
 
 @interface FBLAuthenticationStore : NSObject
 
+@property (nonatomic, strong) FBLUser *user;
 @property (nonatomic, strong) NSString *slackToken;
 @property (nonatomic, strong) NSString *feedbackLoopToken;
 @property (nonatomic, strong) NSString *AppId;
@@ -21,9 +23,7 @@
 - (NSString *)authenticateRequest:(NSString *)requestURL;
 - (NSString *)oauthRequest:(NSString *)requestURL;
 - (NSString *)oauthRequest:(NSString *)requestURL withURLSegment:(NSString *)urlSegment;
-
 - (NSString *)authenticateRequest:(NSString *)requestURL withURLSegment:(NSString *)urlSegment;
-
 - (NSString *)channelForEmailRegUser;
 
 @end
