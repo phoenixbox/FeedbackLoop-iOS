@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+// Data Layer
+#import "FBLChatCollection.h"
+
 @interface FBLSlackStore : NSObject
 
 @property (nonatomic, strong) NSString *webhookUrl;
@@ -17,7 +20,7 @@
 
 - (void)setupWebhook:(void (^)(NSError *err))block;
 
-- (void)feedbackLoopAuth:(void (^)(NSError *err))block;
+- (void)feedbackLoopAuth:(void (^)(FBLChatCollection *chatHistory, NSError *err))block;
 
 - (void)joinOrCreateChannel:(void (^)(NSError *err))block;
 

@@ -101,56 +101,52 @@
     }];
 }
 
-- (void)feedbackLoopAuth:(void (^)(NSError *err))block {
+- (void)feedbackLoopAuth:(void (^)(FBLChatCollection *chatHistory, NSError *err))block {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
     NSString *requestURL = [[FBLAuthenticationStore sharedInstance] channelForEmailRegUser];
-    NSLog(@"Oauth request URL %@", requestURL);
+    NSLog(@"FeedbackLoop Oauth request URL %@", requestURL);
     
     [manager GET:requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        // Restart: make the local request and parse the necessary information
+        //        FeedbackLoop API Response
+        //        team ? {team ,rtm, channel} : {error}
         NSMutableDictionary *oauthRequest = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
 
-        // There must be a better accessor pattern here
-        NSDictionary *rtm = [oauthRequest objectForKey:@"rtm"];
+        NSString *err = [oauthRequest objectForKey:@"error"];
 
-        if (rtm) {
-            NSNumber *ok = [oauthRequest objectForKey:@"ok"];
-            if ([ok isEqual:@(YES)]) {
-                self.webhookUrl = [rtm objectForKey:@"url"];
+        if (!err) {
+            // **** 0. Extract the response objects
+            NSDictionary *teamAttrs = [oauthRequest objectForKey:@"team"];
+            NSDictionary *channel = [oauthRequest objectForKey:@"channel"];
+            NSDictionary *rtm = [oauthRequest objectForKey:@"rtm"];
 
-                // Set the team on the team store
-                NSDictionary *teamAttrs = [oauthRequest objectForKey:@"team"];
-                FBLTeam *team = [[FBLTeam alloc] initWithDictionary:teamAttrs error:nil];
-                [team buildToken];
+            // **** 1. Process the team attrs
+            // Set the team on the team store
+            FBLTeam *fblTeam = [[FBLTeam alloc] initWithDictionary:teamAttrs error:nil];
+            [fblTeam buildToken];
+            // TODO: Clean up this interface: team doesnt need a slack token - the auth store does
+            [[FBLAuthenticationStore sharedInstance] setSlackToken:fblTeam.slackToken];
+            NSString *teamImage = [[[rtm objectForKey:@"team"] objectForKey:@"icon"] objectForKey:@"image_132"];
+            [fblTeam setTeamImage:teamImage];
+            [[FBLTeamStore sharedStore] setTeam:fblTeam];
 
-                // TODO: Clean up this interface: team doesnt need a slack token - the auth store does
-                [[FBLAuthenticationStore sharedInstance] setSlackToken:team.slackToken];
+            // **** 2. Process the channel attrs
+            _userChannelId = [channel objectForKey:@"channel_id"];
+            // scheme {channel: {channel_id, messsages}}
+            // Chat history via JSON model has an array of messages which maps to the nested messages key
+            FBLChatCollection *chatHistory = [[FBLChatCollection alloc] initWithDictionary:channel error:nil];
+            [chatHistory loadMediaForMessages];
 
-                NSString *teamImage = [[[rtm objectForKey:@"team"] objectForKey:@"icon"] objectForKey:@"image_132"];
-                [team setTeamImage:teamImage];
-                [[FBLTeamStore sharedStore] setTeam:team];
+            // **** 3. Process the rtm
+            self.webhookUrl = [rtm objectForKey:@"url"];
 
-                // Use the channel object
-                _userChannelId = [[oauthRequest objectForKey:@"channel"] objectForKey:@"channel_id"];
+            [[FBLMembersStore sharedStore] refreshMembersWithCollection:[rtm objectForKey:@"users"]];
+            [[FBLMembersStore sharedStore] processMemberPhotos];
+            [[FBLChannelStore sharedStore] refreshChannelsWithCollection:[rtm objectForKey:@"channels"]];
 
-                [[FBLMembersStore sharedStore] refreshMembersWithCollection:[rtm objectForKey:@"users"]];
-                [[FBLMembersStore sharedStore] processMemberPhotos];
-                [[FBLChannelStore sharedStore] refreshChannelsWithCollection:[rtm objectForKey:@"channels"]];
-                
-                block(nil);
-            } else {
-                NSDictionary *userInfo = @{
-                                           NSLocalizedDescriptionKey: NSLocalizedString(@"RTM Present but Response Not Ok!", nil),
-                                           NSLocalizedFailureReasonErrorKey: NSLocalizedString(@"The operation timed out.", nil),
-                                           NSLocalizedRecoverySuggestionErrorKey: NSLocalizedString(@"Have you tried turning it off and on again?", nil)
-                                           };
-                NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
-                                                     code:-1008
-                                                 userInfo:userInfo];
-                block(error);
-            }
+
+            block(chatHistory, nil);
         } else {
             NSDictionary *userInfo = @{
                                        NSLocalizedDescriptionKey: NSLocalizedString(@"RTM request error!", nil),
@@ -160,10 +156,10 @@
             NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
                                                  code:-1008
                                              userInfo:userInfo];
-            block(error);
+            block(nil, error);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        block(error);
+        block(nil, error);
     }];
 }
 
