@@ -11,6 +11,7 @@
 // Data Layer
 #import "FBLAuthenticationStore.h"
 #import "FBLAppConstants.h"
+#import "FBLUser.h"
 
 #import "FBLBundleStore.h"
 
@@ -41,24 +42,24 @@ static NSString * const kContainerViewController = @"FBLContainerViewController"
     return feedbackLoop;
 }
 
-+ (void)initWithSlackToken:(NSString *)slackToken {
-    FBLAuthenticationStore *store = [FBLAuthenticationStore sharedInstance];
-    
-    [store setSlackToken:slackToken];
-}
-
 + (void)initWithAppId:(NSString *)appId {
     FBLAuthenticationStore *store = [FBLAuthenticationStore sharedInstance];
 
     [store setAppId:appId];
 }
 
-+ (void)setApiKey:(NSString *)apiKey forAppId:(NSString *)appId {
++ (void)registerAuthenticatedUser:(NSDictionary *)user {
+    FBLUser *currentUser = [[FBLUser alloc] initWithDictionary:user error:nil];
+    FBLAuthenticationStore *store = [FBLAuthenticationStore sharedInstance];
+    // TODO: Should have one referenceable object for attrs not spread across many
+    [store setUserEmail:currentUser.email];
+    [store setUser:currentUser];
 }
 
-+ (void)registerUserWithEmail:(NSString *)userEmail {
++ (void)registerUnauthenticatedUser:(NSDictionary *)user {
     FBLAuthenticationStore *store = [FBLAuthenticationStore sharedInstance];
-    [store setUserEmail:userEmail];
+
+    [store setUserEmail:[user objectForKey:@"email"]];
 }
 
 + (void)presentChatChannel {
