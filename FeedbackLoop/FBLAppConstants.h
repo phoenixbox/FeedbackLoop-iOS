@@ -34,9 +34,14 @@
 //------- Members
 #define     SLACK_MEMBERS_URI @"/users.list"
 
-//-------------------FEEDBACKLOOP ------------------------------
-#define     PROD_API_BASE_URL @"http://www.getfeedbackloop.com/api";
-#define     DEV_API_BASE_URL @"http://lvh.me:3000/api";
+//-------------------FEEDBACKLOOP API ------------------------------
+//-------Production
+#define     PROD_API_BASE_URL @"http://www.getfeedbackloop.com/api"
+
+//-------Development
+#define     DEV_API_TEAM_APP_ID @"64a702c6-d868-480a-aff1-1ec6ab90e267"
+#define     DEV_API_BASE_URL @"http://lvh.me:3000/api"
+#define     DEV_API_MESSAGES @"/messages"
 
 //#define     DEV_API_BASE_URL @"http://192.168.0.109:3000/api";
 
