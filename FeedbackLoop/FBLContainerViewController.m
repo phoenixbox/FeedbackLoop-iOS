@@ -68,7 +68,7 @@
     _logoImage.contentMode = UIViewContentModeScaleAspectFit;
 
     // Set title image
-    UIImage *titleImage = [UIImage imageNamed:[FBLBundleStore resourceNamed:@"FBLTitle.png"]];
+    UIImage *titleImage = [UIImage imageNamed:[FBLBundleStore resourceNamed:@"FeedbackLoopTitle.png"]];
     [_logoImage setImage:titleImage];
 
     // Set close icon image
