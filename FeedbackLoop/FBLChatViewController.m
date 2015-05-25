@@ -131,11 +131,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 // TODO: Re-route away from authentication when already done
 // Compose store completion function internals into named functions for re-use
 - (void)authenticate {
-    if ([[FBLAuthenticationStore sharedInstance] slackToken]) {
-        [self slackAuth];
-    } else {
-        [self feedbackLoopAuth];
-    }
+    [self feedbackLoopAuth];
 }
 
 - (void)buildUserDetailsView {
@@ -180,7 +176,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
     JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
     _bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:FEEDBACK_BLUE];
-    _bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
+    _bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
 
     _avatarImageBlank = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"Persona.png"]] diameter:30.0];
 }
@@ -216,12 +212,13 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 - (void)feedbackLoopAuth {
     [_hud show:YES];
 
-    void(^refreshWebhook)(NSError *err)=^(NSError *error) {
+    void(^completionBlock)(FBLChatCollection* chatHistory, NSError *err)=^(FBLChatCollection* chatHistory, NSError *error) {
         [_hud hide:YES];
 
         if (error == nil) {
             [self setChannelDetails];
             [self setupWebsocket];
+            _chatCollection = chatHistory;
             [self loadSlackMessages];
         } else {
             NSLog(@"SLACK AUTH HAS FAILED! - multiple times should increase the counter");
@@ -229,7 +226,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
         }
     };
 
-    [[FBLSlackStore sharedStore] feedbackLoopAuth:refreshWebhook];
+    [[FBLSlackStore sharedStore] feedbackLoopAuth:completionBlock];
 }
 
 - (void)hideFeedbackLoopWindow {
@@ -279,48 +276,36 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     if (_isLoading == NO) {
         _isLoading = YES;
 
-        void(^completionBlock)(FBLChatCollection *chatCollection, NSString *error)=^(FBLChatCollection *chatCollection, NSString *error) {
+        BOOL incoming = NO;
+        self.automaticallyScrollsToMostRecentMessage = NO;
 
-            if (error == nil) {
-                BOOL incoming = NO;
-                self.automaticallyScrollsToMostRecentMessage = NO;
+        for (FBLChat *chat in [_chatCollection.messages reverseObjectEnumerator])
+        {
+            [self addSlackMessage:chat];
 
-                for (FBLChat *chat in [chatCollection.messages reverseObjectEnumerator])
-                {
-                    [self addSlackMessage:chat];
-
-                    if (![chat.username isEqualToString:@"bot"]) {
-                        incoming = YES;
-                    }
-                }
-
-                if ([_messages count] != 0)
-                {
-                    if (_initialized && incoming) {
-                        [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
-                    }
-
-                    [self finishReceivingMessage];
-                    [self scrollToBottomAnimated:NO];
-                }
-                self.automaticallyScrollsToMostRecentMessage = YES;
-                _initialized = YES;
-
-                [_hud hide:YES];
-                [self setChatBarStateForCondition:nil];
-                [self.collectionView.backgroundView setHidden:YES];
+            if (![chat.username isEqualToString:@"bot"]) {
+                incoming = YES;
             }
-            else {
-                [self triggerGlobalNotificationWithMessage:@"Error loading Messages" andColor:FEEDBACK_ERROR];
-                [self showBackgroundViewOfType:kConnectionErrorBGView];
-                [self setChatBarStateForCondition:kConnectionErrorBGView];
+        }
+
+        if ([_messages count] != 0)
+        {
+            if (_initialized && incoming) {
+                [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
             }
 
-            [self.collectionView reloadData];
-            _isLoading = NO;
-        };
+            [self finishReceivingMessage];
+            [self scrollToBottomAnimated:NO];
+        }
+        self.automaticallyScrollsToMostRecentMessage = YES;
+        _initialized = YES;
 
-        [[FBLChatStore sharedStore] fetchHistoryForChannel:_userChannelId withCompletion:completionBlock];
+        [_hud hide:YES];
+        [self setChatBarStateForCondition:nil];
+        [self.collectionView.backgroundView setHidden:YES];
+
+        [self.collectionView reloadData];
+        _isLoading = NO;
     }
 }
 
@@ -394,8 +379,16 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     NSDate *dateStamp = [NSDate dateWithTimeIntervalSince1970:
                          [chat.ts doubleValue]];
 
-    if ([username isEqualToString:@"bot"]) {
+    // The username is nil for Slack supporters
+    if (username == nil) {
+        senderId = chat.user;
+        FBLMember *member = [[FBLMembersStore sharedStore] find:chat.user];
 
+        [_users addObject:member];
+
+        displayName = member.realName;
+        text = SanitizeMessage(chat.text);
+    } else {
         FBLMember *member = [[FBLMember alloc] init];
         [member setId:self.senderId];
         [member setEmail:self.senderDisplayName];
@@ -406,14 +399,6 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
         senderId = self.senderId;
         displayName = self.senderDisplayName;
         text = chat.text;
-    } else {
-        senderId = chat.user;
-        FBLMember *member = [[FBLMembersStore sharedStore] find:chat.user];
-
-        [_users addObject:member];
-
-        displayName = member.realName;
-        text = SanitizeMessage(chat.text);
     }
 
     if (chat.isMessage) {
@@ -439,6 +424,30 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     return message;
 }
 
+// API Message Sending
+- (void)sendMessageToAPI:(NSString *)text Video:(NSURL *)video Image:(UIImage *)image {
+    void(^completionBlock)(FBLChat *chat, NSString *error)=^(FBLChat *chat, NSString *error) {
+        if (error == nil) {
+            [JSQSystemSoundPlayer jsq_playMessageSentSound];
+        }
+        else {
+            // TODO:Add the header notifiacation bar
+            // Add the retry sending message helper to message button
+        };
+    };
+
+    if (image) {
+        NSLog(@"Need API support for images");
+//        [[FBLChatStore sharedStore] sendSlackImage:image toChannel:self.channel withCompletion:completionBlock];
+    } else {
+        [[FBLChatStore sharedStore] sendMessageToAPI:text toChannel:self.channel withCompletion:completionBlock];
+    }
+
+    [self finishSendingMessage];
+}
+
+
+// Legacy Message Sending
 - (void)sendMessageToSlack:(NSString *)text Video:(NSURL *)video Image:(UIImage *)image {
 
     void(^completionBlock)(FBLChat *chat, NSString *error)=^(FBLChat *chat, NSString *error) {
@@ -465,15 +474,19 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
     if (![[FBLAuthenticationStore sharedInstance] userEmail]) {
         if (ValidateEmail(text)){
+            // Set the email on the AuthStore
+            [FBLAuthenticationStore sharedInstance].userEmail = text;
+            // Show success message to the user
             [self triggerGlobalNotificationWithMessage:@"Success!" andColor:FEEDBACK_SUCCESS];
             [[FBLAuthenticationStore sharedInstance] setUserEmail:text];
             [JSQSystemSoundPlayer jsq_playMessageSentSound];
+            // Proceed with authentication
             [self authenticate];
         } else {
             [self triggerGlobalNotificationWithMessage:@"Invalid Email!" andColor:FEEDBACK_ERROR];
         }
     } else {
-        [self sendMessageToSlack:text Video:nil Image:nil];
+        [self sendMessageToAPI:text Video:nil Image:nil];
     }
 }
 
@@ -772,7 +785,8 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
-    NSLog(@"WEBSOCKET CLOSED");
+    NSLog(@"WEBSOCKET CLOSED WITH REASON :%@", reason);
+    [self showBackgroundViewOfType:kConnectionErrorBGView];
 }
 
 #pragma mark - Notification Center
