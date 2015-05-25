@@ -59,6 +59,12 @@
 		CB83162B1B1136E000AD7195 /* FeedbackLoopTitle@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8316281B1136E000AD7195 /* FeedbackLoopTitle@3x.png */; };
 		CB8316391B1298F300AD7195 /* FBLUser.h in Headers */ = {isa = PBXBuildFile; fileRef = CB8316371B1298F300AD7195 /* FBLUser.h */; };
 		CB83163A1B1298F300AD7195 /* FBLUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8316381B1298F300AD7195 /* FBLUser.m */; };
+		CB8316781B12F4F500AD7195 /* Bang.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8316721B12F4F500AD7195 /* Bang.png */; };
+		CB8316791B12F4F500AD7195 /* Bang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8316731B12F4F500AD7195 /* Bang@2x.png */; };
+		CB83167A1B12F4F500AD7195 /* Bang@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8316741B12F4F500AD7195 /* Bang@3x.png */; };
+		CB83167B1B12F4F500AD7195 /* BangBang.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8316751B12F4F500AD7195 /* BangBang.png */; };
+		CB83167C1B12F4F500AD7195 /* BangBang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8316761B12F4F500AD7195 /* BangBang@2x.png */; };
+		CB83167D1B12F4F500AD7195 /* BangBang@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8316771B12F4F500AD7195 /* BangBang@3x.png */; };
 		CBA9391D1B08093700BD1CC8 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA9391C1B08093700BD1CC8 /* AssetsLibrary.framework */; };
 		CBC8F6641AEDB145001DDB07 /* FeedbackLoop.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CBC8F6631AEDB145001DDB07 /* FeedbackLoop.h */; };
 		CBC8F6661AEDB145001DDB07 /* FeedbackLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC8F6651AEDB145001DDB07 /* FeedbackLoop.m */; };
@@ -190,6 +196,12 @@
 		CB8316281B1136E000AD7195 /* FeedbackLoopTitle@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FeedbackLoopTitle@3x.png"; sourceTree = "<group>"; };
 		CB8316371B1298F300AD7195 /* FBLUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLUser.h; sourceTree = "<group>"; };
 		CB8316381B1298F300AD7195 /* FBLUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLUser.m; sourceTree = "<group>"; };
+		CB8316721B12F4F500AD7195 /* Bang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bang.png; sourceTree = "<group>"; };
+		CB8316731B12F4F500AD7195 /* Bang@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bang@2x.png"; sourceTree = "<group>"; };
+		CB8316741B12F4F500AD7195 /* Bang@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bang@3x.png"; sourceTree = "<group>"; };
+		CB8316751B12F4F500AD7195 /* BangBang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BangBang.png; sourceTree = "<group>"; };
+		CB8316761B12F4F500AD7195 /* BangBang@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BangBang@2x.png"; sourceTree = "<group>"; };
+		CB8316771B12F4F500AD7195 /* BangBang@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BangBang@3x.png"; sourceTree = "<group>"; };
 		CBA9391C1B08093700BD1CC8 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		CBC8F6601AEDB145001DDB07 /* libFeedbackLoop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeedbackLoop.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC8F6631AEDB145001DDB07 /* FeedbackLoop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedbackLoop.h; sourceTree = "<group>"; };
@@ -391,6 +403,12 @@
 		CBF39E841AF584DE00744C71 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				CB8316721B12F4F500AD7195 /* Bang.png */,
+				CB8316731B12F4F500AD7195 /* Bang@2x.png */,
+				CB8316741B12F4F500AD7195 /* Bang@3x.png */,
+				CB8316751B12F4F500AD7195 /* BangBang.png */,
+				CB8316761B12F4F500AD7195 /* BangBang@2x.png */,
+				CB8316771B12F4F500AD7195 /* BangBang@3x.png */,
 				CB8316261B1136E000AD7195 /* FeedbackLoopTitle.png */,
 				CB8316271B1136E000AD7195 /* FeedbackLoopTitle@2x.png */,
 				CB8316281B1136E000AD7195 /* FeedbackLoopTitle@3x.png */,
@@ -669,9 +687,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB5F770E1AFE812A00159177 /* CloudB@3x.png in Resources */,
+				CB8316791B12F4F500AD7195 /* Bang@2x.png in Resources */,
 				CB04C87C1AF88DD300577694 /* closeWindow.png in Resources */,
 				CB04C87D1AF88DD300577694 /* closeWindow@2x.png in Resources */,
 				CB5F76FB1AFDE98B00159177 /* ChattyUnhappy@3x.png in Resources */,
+				CB83167B1B12F4F500AD7195 /* BangBang.png in Resources */,
 				CB5F76F71AFDE98B00159177 /* ChattyNeutral@2x.png in Resources */,
 				CBF39EC61AF58DEE00744C71 /* Persona.png in Resources */,
 				CB5F76FA1AFDE98B00159177 /* ChattyUnhappy@2x.png in Resources */,
@@ -682,9 +702,13 @@
 				CB5F770B1AFE812A00159177 /* CloudA@3x.png in Resources */,
 				CB04C8811AF88DD300577694 /* closeWindowSelected@3x.png in Resources */,
 				CB5F770A1AFE812A00159177 /* CloudA@2x.png in Resources */,
+				CB83167A1B12F4F500AD7195 /* Bang@3x.png in Resources */,
 				CBF39EC81AF58DEE00744C71 /* Persona@3x.png in Resources */,
 				CB5F76F61AFDE98B00159177 /* ChattyNeutral.png in Resources */,
+				CB83167C1B12F4F500AD7195 /* BangBang@2x.png in Resources */,
 				CB1DDCC91AF5A8670003BFF7 /* FBLUserDetailsBGView.xib in Resources */,
+				CB83167D1B12F4F500AD7195 /* BangBang@3x.png in Resources */,
+				CB8316781B12F4F500AD7195 /* Bang.png in Resources */,
 				CB04C87E1AF88DD300577694 /* closeWindow@3x.png in Resources */,
 				CB5F770D1AFE812A00159177 /* CloudB@2x.png in Resources */,
 				CB83162A1B1136E000AD7195 /* FeedbackLoopTitle@2x.png in Resources */,

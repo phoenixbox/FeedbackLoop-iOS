@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MBProgressHUD.h"
 
 extern NSString* const kConnectionErrorBGView;
 extern NSString* const kConnectionRetry;
@@ -16,13 +17,11 @@ extern NSString* const kConnectionRetry;
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (weak, nonatomic) IBOutlet UILabel *message;
 @property (weak, nonatomic) IBOutlet UIImageView *chatty;
-@property (weak, nonatomic) IBOutlet UIView *cloudContainer;
+@property (weak, nonatomic) IBOutlet UIButton *bubbleButton;
+- (IBAction)animateBubbles:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UIImageView *rightCloud;
-@property (weak, nonatomic) IBOutlet UIImageView *middleCloud;
-@property (weak, nonatomic) IBOutlet UIImageView *leftCloud;
-@property (weak, nonatomic) IBOutlet UIButton *cloudTrigger;
-- (IBAction)cloudTrigger:(id)sender;
+@property (nonatomic, strong) MBProgressHUD *hud;
+
 @property (weak, nonatomic) IBOutlet UIButton *emailButton;
 - (IBAction)sendEmail:(id)sender;
 
