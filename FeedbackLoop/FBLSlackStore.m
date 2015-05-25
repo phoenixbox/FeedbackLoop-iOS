@@ -105,7 +105,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 
-    NSString *requestURL = [[FBLAuthenticationStore sharedInstance] channelForEmailRegUser];
+    NSString *requestURL = [[FBLAuthenticationStore sharedInstance] feedbackLoopAuthURL];
     NSLog(@"FeedbackLoop Oauth request URL %@", requestURL);
     
     [manager GET:requestURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {

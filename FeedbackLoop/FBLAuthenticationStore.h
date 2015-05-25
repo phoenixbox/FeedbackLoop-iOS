@@ -24,6 +24,6 @@
 - (NSString *)oauthRequest:(NSString *)requestURL;
 - (NSString *)oauthRequest:(NSString *)requestURL withURLSegment:(NSString *)urlSegment;
 - (NSString *)authenticateRequest:(NSString *)requestURL withURLSegment:(NSString *)urlSegment;
-- (NSString *)channelForEmailRegUser;
+- (NSString *)feedbackLoopAuthURL;
 
 @end

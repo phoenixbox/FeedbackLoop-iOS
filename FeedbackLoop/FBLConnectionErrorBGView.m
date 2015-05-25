@@ -67,7 +67,7 @@ NSString *const kConnectionRetry = @"feedbackLoop__connectionRetry";
 
 - (void)setRetryState {
 //    [_hud hide:NO];
-    [self.title setText:@"Once More"];
+    [self.title setText:@"Try Again"];
     [self.chatty setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"BangBang.png"]]];
     [self.message setText:@"Tap to try once more :)"];
 }
