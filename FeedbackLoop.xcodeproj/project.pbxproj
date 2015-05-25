@@ -29,6 +29,9 @@
 		CB04C87F1AF88DD300577694 /* closeWindowSelected.png in Resources */ = {isa = PBXBuildFile; fileRef = CB04C8791AF88DD300577694 /* closeWindowSelected.png */; };
 		CB04C8801AF88DD300577694 /* closeWindowSelected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB04C87A1AF88DD300577694 /* closeWindowSelected@2x.png */; };
 		CB04C8811AF88DD300577694 /* closeWindowSelected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB04C87B1AF88DD300577694 /* closeWindowSelected@3x.png */; };
+		CB0597131B13D24100B224F0 /* Error.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0597101B13D24100B224F0 /* Error.png */; };
+		CB0597141B13D24100B224F0 /* Error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0597111B13D24100B224F0 /* Error@2x.png */; };
+		CB0597151B13D24100B224F0 /* Error@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0597121B13D24100B224F0 /* Error@3x.png */; };
 		CB069F911AFC754C008C6A4E /* FBLViewHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = CB069F8F1AFC754C008C6A4E /* FBLViewHelpers.h */; };
 		CB069F921AFC754C008C6A4E /* FBLViewHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = CB069F901AFC754C008C6A4E /* FBLViewHelpers.m */; };
 		CB1DDCC61AF5A1AB0003BFF7 /* FBLUserDetailsBGView.h in Headers */ = {isa = PBXBuildFile; fileRef = CB1DDCC41AF5A1AB0003BFF7 /* FBLUserDetailsBGView.h */; };
@@ -152,6 +155,9 @@
 		CB04C8791AF88DD300577694 /* closeWindowSelected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeWindowSelected.png; sourceTree = "<group>"; };
 		CB04C87A1AF88DD300577694 /* closeWindowSelected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeWindowSelected@2x.png"; sourceTree = "<group>"; };
 		CB04C87B1AF88DD300577694 /* closeWindowSelected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeWindowSelected@3x.png"; sourceTree = "<group>"; };
+		CB0597101B13D24100B224F0 /* Error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Error.png; sourceTree = "<group>"; };
+		CB0597111B13D24100B224F0 /* Error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Error@2x.png"; sourceTree = "<group>"; };
+		CB0597121B13D24100B224F0 /* Error@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Error@3x.png"; sourceTree = "<group>"; };
 		CB069F8F1AFC754C008C6A4E /* FBLViewHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLViewHelpers.h; sourceTree = "<group>"; };
 		CB069F901AFC754C008C6A4E /* FBLViewHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLViewHelpers.m; sourceTree = "<group>"; };
 		CB1DDCC41AF5A1AB0003BFF7 /* FBLUserDetailsBGView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLUserDetailsBGView.h; sourceTree = "<group>"; };
@@ -376,6 +382,9 @@
 		CBF39E841AF584DE00744C71 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				CB0597101B13D24100B224F0 /* Error.png */,
+				CB0597111B13D24100B224F0 /* Error@2x.png */,
+				CB0597121B13D24100B224F0 /* Error@3x.png */,
 				CB8316721B12F4F500AD7195 /* Bang.png */,
 				CB8316731B12F4F500AD7195 /* Bang@2x.png */,
 				CB8316741B12F4F500AD7195 /* Bang@3x.png */,
@@ -661,7 +670,10 @@
 				CB8316781B12F4F500AD7195 /* Bang.png in Resources */,
 				CB04C87E1AF88DD300577694 /* closeWindow@3x.png in Resources */,
 				CB83162A1B1136E000AD7195 /* FeedbackLoopTitle@2x.png in Resources */,
+				CB0597141B13D24100B224F0 /* Error@2x.png in Resources */,
 				CB04C8801AF88DD300577694 /* closeWindowSelected@2x.png in Resources */,
+				CB0597131B13D24100B224F0 /* Error.png in Resources */,
+				CB0597151B13D24100B224F0 /* Error@3x.png in Resources */,
 				CB83162B1B1136E000AD7195 /* FeedbackLoopTitle@3x.png in Resources */,
 				CB8316291B1136E000AD7195 /* FeedbackLoopTitle.png in Resources */,
 				CB6ADAC71AF86C1B005DAD72 /* FBLContainerViewController.xib in Resources */,

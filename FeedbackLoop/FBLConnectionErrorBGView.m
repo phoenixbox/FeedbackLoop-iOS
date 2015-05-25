@@ -76,12 +76,13 @@ NSString *const kConnectionRetry = @"feedbackLoop__connectionRetry";
     // Hide conflicting views
 //    [_hud hide:YES];
     [_bubbleButton setHidden:YES];
-    [_chatty setHidden:YES];
+    [self.chatty setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"Error.png"]]];
+    [self.chatty setContentMode:UIViewContentModeScaleAspectFit];
 
     // Present the email dialog
-    [_emailButton setHidden:NO];
-    [_emailButton setTitle:@"Email Us" forState:UIControlStateNormal];
-    [FBLViewHelpers setBaseButtonStyle:_emailButton withBGColor:WHITE titleColor:FEEDBACK_BLUE borderColor:FEEDBACK_BLUE];
+//    [_emailButton setHidden:NO];
+//    [_emailButton setTitle:@"Email Us" forState:UIControlStateNormal];
+//    [FBLViewHelpers setBaseButtonStyle:_emailButton withBGColor:WHITE titleColor:FEEDBACK_BLUE borderColor:FEEDBACK_BLUE];
 
     [self.title setText:@"Sorry!"];
     [self.message setText:@"We can't connect right now"];
