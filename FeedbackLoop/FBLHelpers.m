@@ -121,25 +121,32 @@ NSString* matchForPattern(NSString *text, NSString *pattern) {
 }
 
 NSString* SanitizeMessage(NSString *text) {
+    NSString *santized;
+
     NSString *mailtoPattern = @"mailto:(.+?)[\\s|]";
+    NSString *linkPattern = @"https://www(.+?)[\\s|]";
     NSString *emailPattern = @"(?<=:)(.*?)(?=\\|)";
     NSString *memberIdPattern = @"(?<=@)(.*?)(?=\\|)";
 
     if (![matchForPattern(text, mailtoPattern) isEqualToString:@""]) {
         NSString *mailto = matchForPattern(text, mailtoPattern);
-        NSString *email = matchForPattern(mailto, emailPattern);
-
-        return email;
+        santized = matchForPattern(mailto, emailPattern);
     } else if (![matchForPattern(text, memberIdPattern) isEqualToString:@""]) {
         NSString *memberId = matchForPattern(text, memberIdPattern);
 
         if (memberId) {
             FBLMember *member = [[FBLMembersStore sharedStore] find:memberId];
-            return [member.realName stringByAppendingString:@" joined the chat."];
+            santized = [member.realName stringByAppendingString:@" joined the chat."];
         }
+    } else if (![matchForPattern(text, linkPattern) isEqualToString:@""]) {
+        santized = [text stringByReplacingOccurrencesOfString:@"<" withString:@""];
+        santized = [santized stringByReplacingOccurrencesOfString:@">" withString:@""];
+    } else {
+        santized = [text stringByReplacingOccurrencesOfString:@"<" withString:@""];
+        santized = [santized stringByReplacingOccurrencesOfString:@">" withString:@""];
     }
-    
-    return text;
+
+    return santized;
 }
 
 BOOL ValidateEmail(NSString *email) {
