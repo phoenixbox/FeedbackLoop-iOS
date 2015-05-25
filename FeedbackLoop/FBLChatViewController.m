@@ -174,7 +174,7 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
 
     JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
     _bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:FEEDBACK_BLUE];
-    _bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleGreenColor]];
+    _bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
 
     _avatarImageBlank = [JSQMessagesAvatarImageFactory avatarImageWithImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"Persona.png"]] diameter:30.0];
 }
@@ -595,6 +595,10 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     {
         cell.textView.textColor = [UIColor blackColor];
     }
+
+    cell.textView.linkTextAttributes = @{ NSForegroundColorAttributeName : [UIColor blackColor],
+                                          NSUnderlineStyleAttributeName : @(NSUnderlineStyleSingle | NSUnderlinePatternSolid) };
+
     return cell;
 }
 
