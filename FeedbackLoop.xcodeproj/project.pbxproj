@@ -36,21 +36,9 @@
 		CB1DDCC91AF5A8670003BFF7 /* FBLUserDetailsBGView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1DDCC81AF5A1BD0003BFF7 /* FBLUserDetailsBGView.xib */; };
 		CB1DDCCC1AF5A9AE0003BFF7 /* FBLBundleStore.h in Headers */ = {isa = PBXBuildFile; fileRef = CB1DDCCA1AF5A9AE0003BFF7 /* FBLBundleStore.h */; };
 		CB1DDCCD1AF5A9AE0003BFF7 /* FBLBundleStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1DDCCB1AF5A9AE0003BFF7 /* FBLBundleStore.m */; };
-		CB5F76F61AFDE98B00159177 /* ChattyNeutral.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5F76F01AFDE98B00159177 /* ChattyNeutral.png */; };
-		CB5F76F71AFDE98B00159177 /* ChattyNeutral@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5F76F11AFDE98B00159177 /* ChattyNeutral@2x.png */; };
-		CB5F76F81AFDE98B00159177 /* ChattyNeutral@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5F76F21AFDE98B00159177 /* ChattyNeutral@3x.png */; };
-		CB5F76F91AFDE98B00159177 /* ChattyUnhappy.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5F76F31AFDE98B00159177 /* ChattyUnhappy.png */; };
-		CB5F76FA1AFDE98B00159177 /* ChattyUnhappy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5F76F41AFDE98B00159177 /* ChattyUnhappy@2x.png */; };
-		CB5F76FB1AFDE98B00159177 /* ChattyUnhappy@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5F76F51AFDE98B00159177 /* ChattyUnhappy@3x.png */; };
 		CB5F76FE1AFDEAFC00159177 /* FBLConnectionErrorBGView.h in Headers */ = {isa = PBXBuildFile; fileRef = CB5F76FC1AFDEAFC00159177 /* FBLConnectionErrorBGView.h */; };
 		CB5F76FF1AFDEAFC00159177 /* FBLConnectionErrorBGView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5F76FD1AFDEAFC00159177 /* FBLConnectionErrorBGView.m */; };
 		CB5F77021AFDEB1100159177 /* FBLConnectionErrorBGView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB5F77011AFDEB1100159177 /* FBLConnectionErrorBGView.xib */; };
-		CB5F77091AFE812900159177 /* CloudA.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5F77031AFE812900159177 /* CloudA.png */; };
-		CB5F770A1AFE812A00159177 /* CloudA@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5F77041AFE812900159177 /* CloudA@2x.png */; };
-		CB5F770B1AFE812A00159177 /* CloudA@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5F77051AFE812900159177 /* CloudA@3x.png */; };
-		CB5F770C1AFE812A00159177 /* CloudB.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5F77061AFE812900159177 /* CloudB.png */; };
-		CB5F770D1AFE812A00159177 /* CloudB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5F77071AFE812900159177 /* CloudB@2x.png */; };
-		CB5F770E1AFE812A00159177 /* CloudB@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5F77081AFE812900159177 /* CloudB@3x.png */; };
 		CB6ADAC51AF706A8005DAD72 /* FBLContainerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CB6ADAC21AF706A7005DAD72 /* FBLContainerViewController.h */; };
 		CB6ADAC61AF706A8005DAD72 /* FBLContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6ADAC31AF706A7005DAD72 /* FBLContainerViewController.m */; };
 		CB6ADAC71AF86C1B005DAD72 /* FBLContainerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6ADAC41AF706A7005DAD72 /* FBLContainerViewController.xib */; };
@@ -173,21 +161,9 @@
 		CB1DDCCB1AF5A9AE0003BFF7 /* FBLBundleStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLBundleStore.m; sourceTree = "<group>"; };
 		CB56A1B91AF4B9A40019BB70 /* FBLAuthenticationStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLAuthenticationStore.h; sourceTree = "<group>"; };
 		CB56A1BA1AF4B9A40019BB70 /* FBLAuthenticationStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLAuthenticationStore.m; sourceTree = "<group>"; };
-		CB5F76F01AFDE98B00159177 /* ChattyNeutral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChattyNeutral.png; sourceTree = "<group>"; };
-		CB5F76F11AFDE98B00159177 /* ChattyNeutral@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChattyNeutral@2x.png"; sourceTree = "<group>"; };
-		CB5F76F21AFDE98B00159177 /* ChattyNeutral@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChattyNeutral@3x.png"; sourceTree = "<group>"; };
-		CB5F76F31AFDE98B00159177 /* ChattyUnhappy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChattyUnhappy.png; sourceTree = "<group>"; };
-		CB5F76F41AFDE98B00159177 /* ChattyUnhappy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChattyUnhappy@2x.png"; sourceTree = "<group>"; };
-		CB5F76F51AFDE98B00159177 /* ChattyUnhappy@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChattyUnhappy@3x.png"; sourceTree = "<group>"; };
 		CB5F76FC1AFDEAFC00159177 /* FBLConnectionErrorBGView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLConnectionErrorBGView.h; sourceTree = "<group>"; };
 		CB5F76FD1AFDEAFC00159177 /* FBLConnectionErrorBGView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLConnectionErrorBGView.m; sourceTree = "<group>"; };
 		CB5F77011AFDEB1100159177 /* FBLConnectionErrorBGView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLConnectionErrorBGView.xib; sourceTree = "<group>"; };
-		CB5F77031AFE812900159177 /* CloudA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloudA.png; sourceTree = "<group>"; };
-		CB5F77041AFE812900159177 /* CloudA@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CloudA@2x.png"; sourceTree = "<group>"; };
-		CB5F77051AFE812900159177 /* CloudA@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CloudA@3x.png"; sourceTree = "<group>"; };
-		CB5F77061AFE812900159177 /* CloudB.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloudB.png; sourceTree = "<group>"; };
-		CB5F77071AFE812900159177 /* CloudB@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CloudB@2x.png"; sourceTree = "<group>"; };
-		CB5F77081AFE812900159177 /* CloudB@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CloudB@3x.png"; sourceTree = "<group>"; };
 		CB6ADAC21AF706A7005DAD72 /* FBLContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLContainerViewController.h; sourceTree = "<group>"; };
 		CB6ADAC31AF706A7005DAD72 /* FBLContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLContainerViewController.m; sourceTree = "<group>"; };
 		CB6ADAC41AF706A7005DAD72 /* FBLContainerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBLContainerViewController.xib; sourceTree = "<group>"; };
@@ -212,9 +188,6 @@
 		CBC8F67C1AEDB6DB001DDB07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CBC8F68C1AEDB902001DDB07 /* FeedbackLoop.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedbackLoop.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC8F68F1AEDB902001DDB07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CBD997B61B07FAD9001B5FBB /* Chatty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Chatty.png; sourceTree = "<group>"; };
-		CBD997B71B07FAD9001B5FBB /* Chatty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chatty@2x.png"; sourceTree = "<group>"; };
-		CBD997B81B07FAD9001B5FBB /* Chatty@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Chatty@3x.png"; sourceTree = "<group>"; };
 		CBE36FAC1AF55280008579F8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CBE36FAE1AF55294008579F8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		CBE36FB01AF552A0008579F8 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -412,21 +385,6 @@
 				CB8316261B1136E000AD7195 /* FeedbackLoopTitle.png */,
 				CB8316271B1136E000AD7195 /* FeedbackLoopTitle@2x.png */,
 				CB8316281B1136E000AD7195 /* FeedbackLoopTitle@3x.png */,
-				CBD997B61B07FAD9001B5FBB /* Chatty.png */,
-				CBD997B71B07FAD9001B5FBB /* Chatty@2x.png */,
-				CBD997B81B07FAD9001B5FBB /* Chatty@3x.png */,
-				CB5F77031AFE812900159177 /* CloudA.png */,
-				CB5F77041AFE812900159177 /* CloudA@2x.png */,
-				CB5F77051AFE812900159177 /* CloudA@3x.png */,
-				CB5F77061AFE812900159177 /* CloudB.png */,
-				CB5F77071AFE812900159177 /* CloudB@2x.png */,
-				CB5F77081AFE812900159177 /* CloudB@3x.png */,
-				CB5F76F01AFDE98B00159177 /* ChattyNeutral.png */,
-				CB5F76F11AFDE98B00159177 /* ChattyNeutral@2x.png */,
-				CB5F76F21AFDE98B00159177 /* ChattyNeutral@3x.png */,
-				CB5F76F31AFDE98B00159177 /* ChattyUnhappy.png */,
-				CB5F76F41AFDE98B00159177 /* ChattyUnhappy@2x.png */,
-				CB5F76F51AFDE98B00159177 /* ChattyUnhappy@3x.png */,
 				CB04C8761AF88DD300577694 /* closeWindow.png */,
 				CB04C8771AF88DD300577694 /* closeWindow@2x.png */,
 				CB04C8781AF88DD300577694 /* closeWindow@3x.png */,
@@ -686,38 +644,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB5F770E1AFE812A00159177 /* CloudB@3x.png in Resources */,
 				CB8316791B12F4F500AD7195 /* Bang@2x.png in Resources */,
 				CB04C87C1AF88DD300577694 /* closeWindow.png in Resources */,
 				CB04C87D1AF88DD300577694 /* closeWindow@2x.png in Resources */,
-				CB5F76FB1AFDE98B00159177 /* ChattyUnhappy@3x.png in Resources */,
 				CB83167B1B12F4F500AD7195 /* BangBang.png in Resources */,
-				CB5F76F71AFDE98B00159177 /* ChattyNeutral@2x.png in Resources */,
 				CBF39EC61AF58DEE00744C71 /* Persona.png in Resources */,
-				CB5F76FA1AFDE98B00159177 /* ChattyUnhappy@2x.png in Resources */,
-				CB5F770C1AFE812A00159177 /* CloudB.png in Resources */,
 				CB04C87F1AF88DD300577694 /* closeWindowSelected.png in Resources */,
 				CBF39EC71AF58DEE00744C71 /* Persona@2x.png in Resources */,
 				CB5F77021AFDEB1100159177 /* FBLConnectionErrorBGView.xib in Resources */,
-				CB5F770B1AFE812A00159177 /* CloudA@3x.png in Resources */,
 				CB04C8811AF88DD300577694 /* closeWindowSelected@3x.png in Resources */,
-				CB5F770A1AFE812A00159177 /* CloudA@2x.png in Resources */,
 				CB83167A1B12F4F500AD7195 /* Bang@3x.png in Resources */,
 				CBF39EC81AF58DEE00744C71 /* Persona@3x.png in Resources */,
-				CB5F76F61AFDE98B00159177 /* ChattyNeutral.png in Resources */,
 				CB83167C1B12F4F500AD7195 /* BangBang@2x.png in Resources */,
 				CB1DDCC91AF5A8670003BFF7 /* FBLUserDetailsBGView.xib in Resources */,
 				CB83167D1B12F4F500AD7195 /* BangBang@3x.png in Resources */,
 				CB8316781B12F4F500AD7195 /* Bang.png in Resources */,
 				CB04C87E1AF88DD300577694 /* closeWindow@3x.png in Resources */,
-				CB5F770D1AFE812A00159177 /* CloudB@2x.png in Resources */,
 				CB83162A1B1136E000AD7195 /* FeedbackLoopTitle@2x.png in Resources */,
 				CB04C8801AF88DD300577694 /* closeWindowSelected@2x.png in Resources */,
-				CB5F76F81AFDE98B00159177 /* ChattyNeutral@3x.png in Resources */,
 				CB83162B1B1136E000AD7195 /* FeedbackLoopTitle@3x.png in Resources */,
-				CB5F77091AFE812900159177 /* CloudA.png in Resources */,
 				CB8316291B1136E000AD7195 /* FeedbackLoopTitle.png in Resources */,
-				CB5F76F91AFDE98B00159177 /* ChattyUnhappy.png in Resources */,
 				CB6ADAC71AF86C1B005DAD72 /* FBLContainerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

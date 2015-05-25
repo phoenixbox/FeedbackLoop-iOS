@@ -147,8 +147,6 @@ NSString *const kGlobalNotification = @"feedbackLoop__globalNotification";
     float bodySize = [FBLViewHelpers bodyCopyForScreenSize];
     [_userDetailsBGView.title setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
     [_userDetailsBGView.lowerTitle setFont:[UIFont fontWithName:FEEDBACK_FONT size:bodySize]];
-    [_userDetailsBGView.chattyImage setImage:[UIImage imageNamed:[FBLBundleStore resourceNamed:@"Chatty.png"]]];
-    [_userDetailsBGView.chattyImage setContentMode:UIViewContentModeScaleAspectFit];
 }
 
 - (void)buildConnectionErrorView {

@@ -16,6 +16,5 @@ extern NSString* const kUserDetailsBGView;
 @property (weak, nonatomic) IBOutlet UILabel *welcomeTitle;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *title;
 @property (weak, nonatomic) IBOutlet UILabel *lowerTitle;
-@property (weak, nonatomic) IBOutlet UIImageView *chattyImage;
 
 @end

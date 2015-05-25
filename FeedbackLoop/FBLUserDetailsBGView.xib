@@ -15,7 +15,7 @@
                     <rect key="frame" x="20" y="100" width="335" height="335"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tell us who you are so we can help you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFX-Ie-HQf" userLabel="Title">
-                            <rect key="frame" x="20" y="65" width="295" height="41"/>
+                            <rect key="frame" x="20" y="104" width="295" height="41"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -27,52 +27,26 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kDx-as-FM9">
-                            <rect key="frame" x="20" y="26" width="295" height="29"/>
+                            <rect key="frame" x="20" y="65" width="295" height="29"/>
                             <fontDescription key="fontDescription" type="system" pointSize="24"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MPG-Bk-a8y">
-                            <rect key="frame" x="110" y="126" width="115" height="115"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="MPG-Bk-a8y" secondAttribute="height" multiplier="1:1" id="MbR-lp-SYK"/>
-                                <constraint firstAttribute="width" secondItem="MPG-Bk-a8y" secondAttribute="height" multiplier="1:1" id="c4r-8L-Vbj"/>
-                                <constraint firstAttribute="width" constant="100" id="oGx-3U-sR2"/>
-                                <constraint firstAttribute="height" constant="100" id="tvL-5q-xNi"/>
-                            </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="MbR-lp-SYK"/>
-                                    <exclude reference="oGx-3U-sR2"/>
-                                    <exclude reference="tvL-5q-xNi"/>
-                                </mask>
-                            </variation>
-                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="sWO-MC-fiw" firstAttribute="top" secondItem="MPG-Bk-a8y" secondAttribute="bottom" constant="38" id="1Bs-fc-h5Z"/>
                         <constraint firstItem="kDx-as-FM9" firstAttribute="leading" secondItem="IRp-2G-waE" secondAttribute="leading" constant="20" id="8Si-CF-pZI"/>
                         <constraint firstAttribute="width" secondItem="IRp-2G-waE" secondAttribute="height" multiplier="1:1" id="9QU-GV-drw"/>
                         <constraint firstItem="EFX-Ie-HQf" firstAttribute="top" secondItem="kDx-as-FM9" secondAttribute="bottom" constant="10" id="CB9-Xh-qnK"/>
                         <constraint firstAttribute="trailing" secondItem="kDx-as-FM9" secondAttribute="trailing" constant="20" id="FV6-sR-ieD"/>
                         <constraint firstAttribute="width" secondItem="IRp-2G-waE" secondAttribute="height" multiplier="335:442" id="Ilf-J5-FN2"/>
-                        <constraint firstItem="MPG-Bk-a8y" firstAttribute="top" secondItem="EFX-Ie-HQf" secondAttribute="bottom" constant="20" id="JNL-RR-9ls"/>
                         <constraint firstItem="EFX-Ie-HQf" firstAttribute="leading" secondItem="IRp-2G-waE" secondAttribute="leading" constant="20" id="L5G-LP-rFe"/>
-                        <constraint firstAttribute="trailing" secondItem="MPG-Bk-a8y" secondAttribute="trailing" constant="110" id="MD7-h3-xt3"/>
-                        <constraint firstItem="kDx-as-FM9" firstAttribute="top" secondItem="IRp-2G-waE" secondAttribute="top" constant="26" id="PVk-AK-9CG"/>
+                        <constraint firstItem="kDx-as-FM9" firstAttribute="top" secondItem="IRp-2G-waE" secondAttribute="top" constant="65" id="PVk-AK-9CG"/>
                         <constraint firstAttribute="trailing" secondItem="sWO-MC-fiw" secondAttribute="trailing" constant="20" id="RoM-ef-ILR"/>
                         <constraint firstAttribute="bottom" secondItem="sWO-MC-fiw" secondAttribute="bottom" constant="20" id="Srh-SG-9FI"/>
-                        <constraint firstItem="MPG-Bk-a8y" firstAttribute="leading" secondItem="IRp-2G-waE" secondAttribute="leading" constant="110" id="TqJ-wT-2Az"/>
                         <constraint firstAttribute="width" secondItem="IRp-2G-waE" secondAttribute="height" multiplier="1:1" id="fJy-bZ-bGp"/>
-                        <constraint firstAttribute="centerX" secondItem="MPG-Bk-a8y" secondAttribute="centerX" id="iR4-RA-NWw"/>
-                        <constraint firstAttribute="centerX" secondItem="MPG-Bk-a8y" secondAttribute="centerX" constant="0.5" id="jQY-Vv-1xJ"/>
-                        <constraint firstItem="MPG-Bk-a8y" firstAttribute="top" secondItem="EFX-Ie-HQf" secondAttribute="bottom" constant="20" id="jh1-4c-D7Y"/>
-                        <constraint firstItem="MPG-Bk-a8y" firstAttribute="top" secondItem="EFX-Ie-HQf" secondAttribute="bottom" constant="20" id="oVE-99-7sK"/>
                         <constraint firstItem="sWO-MC-fiw" firstAttribute="leading" secondItem="IRp-2G-waE" secondAttribute="leading" constant="20" id="oqk-12-1QO"/>
-                        <constraint firstAttribute="centerY" secondItem="MPG-Bk-a8y" secondAttribute="centerY" id="sJb-mR-LhT"/>
                         <constraint firstAttribute="trailing" secondItem="EFX-Ie-HQf" secondAttribute="trailing" constant="20" id="tW7-qv-SQI"/>
-                        <constraint firstItem="MPG-Bk-a8y" firstAttribute="centerX" secondItem="EFX-Ie-HQf" secondAttribute="centerX" id="yNs-ya-HVu"/>
                         <constraint firstItem="EFX-Ie-HQf" firstAttribute="top" secondItem="IRp-2G-waE" secondAttribute="top" constant="30" id="zvC-qL-dal"/>
                     </constraints>
                     <variation key="default">
@@ -80,12 +54,6 @@
                             <exclude reference="Ilf-J5-FN2"/>
                             <exclude reference="fJy-bZ-bGp"/>
                             <exclude reference="zvC-qL-dal"/>
-                            <exclude reference="JNL-RR-9ls"/>
-                            <exclude reference="iR4-RA-NWw"/>
-                            <exclude reference="jh1-4c-D7Y"/>
-                            <exclude reference="sJb-mR-LhT"/>
-                            <exclude reference="yNs-ya-HVu"/>
-                            <exclude reference="1Bs-fc-h5Z"/>
                         </mask>
                     </variation>
                 </view>
@@ -109,7 +77,6 @@
                 </mask>
             </variation>
             <connections>
-                <outlet property="chattyImage" destination="MPG-Bk-a8y" id="qW5-2h-vfD"/>
                 <outlet property="contentView" destination="IRp-2G-waE" id="bWk-wS-ZRO"/>
                 <outlet property="lowerTitle" destination="sWO-MC-fiw" id="gFy-eu-blJ"/>
                 <outlet property="title" destination="EFX-Ie-HQf" id="bpl-5h-8GG"/>
