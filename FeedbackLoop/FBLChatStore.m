@@ -84,6 +84,90 @@
     }];
 }
 
+// Required Scheme by the /api/messages endpoint
+//    user: {
+//      app_id:,
+//      user_name:,
+//      user_link:,
+//      email:
+//    },
+//    message: {
+//      token:
+//      channel:
+//      text:
+//    }
+
+- (void)sendMessageToAPI:(NSString *)message toChannel:(FBLChannel *)channel withCompletion:(void (^)(FBLChat *chat, NSString *error))block {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    FBLAuthenticationStore *authStore = [FBLAuthenticationStore sharedInstance];
+
+    // What params does the api expect
+    NSString *requestURL = [[FBLAuthenticationStore sharedInstance] oauthRequest:DEV_API_BASE_URL withURLSegment:DEV_API_MESSAGES];
+
+    NSString *channelIdParam = [NSString stringWithFormat:@"&channel=%@",channel.id];
+    requestURL = [requestURL stringByAppendingString:channelIdParam];
+
+    NSDictionary *userParams = [self userMessageParams];
+    NSDictionary *messageParams = @{
+                                 @"text": message,
+                                 @"user": @{
+                                            @"app_id": authStore.AppId,
+                                            @"email": [userParams objectForKey:@"email"],
+                                            @"user_name": [userParams objectForKey:@"username"],
+                                            @"user_link": [userParams objectForKey:@"links"],
+                                        },
+                                 @"message": @{
+                                         @"token": authStore.slackToken,
+                                         @"channel": channel.id,
+                                         @"text": message,
+                                         @"username": [userParams objectForKey:@"username"]
+                                 }
+                                };
+
+
+    [manager POST:requestURL parameters:messageParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSMutableDictionary *sendMessageResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+
+        NSNumber *ok = [sendMessageResponse objectForKey:@"ok"];
+        if ([ok isEqual:@(YES)]) {
+            FBLChat *chat = [[FBLChat alloc] initWithDictionary:[sendMessageResponse objectForKey:@"message"] error:nil];
+
+            block(chat, nil);
+        } else {
+            NSString *errorType = [sendMessageResponse objectForKey:@"error"];
+
+            block(nil, errorType);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+        block(nil, error.localizedDescription);
+    }];
+}
+
+- (NSDictionary *)userMessageParams {
+    FBLAuthenticationStore *authStore = [FBLAuthenticationStore sharedInstance];
+    NSString *username;
+    NSDictionary *links;
+    NSString *email;
+
+    if (authStore.user == nil) {
+        username = authStore.userEmail;
+        links = @{};
+        email = authStore.userEmail;
+    } else {
+        username = authStore.user.userName;
+        links = authStore.user.links;
+        email = authStore.user.email;
+    }
+
+    return @{
+             @"username": username,
+             @"links": links,
+             @"email": email
+             };
+}
+
 //token	xxxx-xxxxxxxxx-xxxx	Required
 //Authentication token (Requires scope: post)
 //file	...	Optional
@@ -132,7 +216,6 @@
         block(nil, error.localizedDescription);
     }];
 }
-
 
 - (void)fetchHistoryForChannel:(NSString *)channelId withCompletion:(void (^)(FBLChatCollection *chatCollection, NSString *))block {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
