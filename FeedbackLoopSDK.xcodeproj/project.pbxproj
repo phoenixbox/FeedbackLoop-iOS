@@ -59,7 +59,7 @@
 		CBA9391D1B08093700BD1CC8 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA9391C1B08093700BD1CC8 /* AssetsLibrary.framework */; };
 		CBC8F6641AEDB145001DDB07 /* FeedbackLoop.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = CBC8F6631AEDB145001DDB07 /* FeedbackLoop.h */; };
 		CBC8F6661AEDB145001DDB07 /* FeedbackLoop.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC8F6651AEDB145001DDB07 /* FeedbackLoop.m */; };
-		CBC8F66C1AEDB145001DDB07 /* libFeedbackLoop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8F6601AEDB145001DDB07 /* libFeedbackLoop.a */; };
+		CBC8F66C1AEDB145001DDB07 /* libFeedbackLoopSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8F6601AEDB145001DDB07 /* libFeedbackLoopSDK.a */; };
 		CBC8F67B1AEDB6D2001DDB07 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8F67A1AEDB6D2001DDB07 /* UIKit.framework */; };
 		CBC8F67D1AEDB6DB001DDB07 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBC8F67C1AEDB6DB001DDB07 /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		CBC8F67F1AEDB6FB001DDB07 /* FeedbackLoop.h in Headers */ = {isa = PBXBuildFile; fileRef = CBC8F6631AEDB145001DDB07 /* FeedbackLoop.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -185,14 +185,14 @@
 		CB8316761B12F4F500AD7195 /* BangBang@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BangBang@2x.png"; sourceTree = "<group>"; };
 		CB8316771B12F4F500AD7195 /* BangBang@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BangBang@3x.png"; sourceTree = "<group>"; };
 		CBA9391C1B08093700BD1CC8 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
-		CBC8F6601AEDB145001DDB07 /* libFeedbackLoop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeedbackLoop.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBC8F6601AEDB145001DDB07 /* libFeedbackLoopSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFeedbackLoopSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC8F6631AEDB145001DDB07 /* FeedbackLoop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedbackLoop.h; sourceTree = "<group>"; };
 		CBC8F6651AEDB145001DDB07 /* FeedbackLoop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedbackLoop.m; sourceTree = "<group>"; };
-		CBC8F66B1AEDB145001DDB07 /* FeedbackLoopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedbackLoopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBC8F66B1AEDB145001DDB07 /* FeedbackLoopSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedbackLoopSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC8F6711AEDB145001DDB07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CBC8F67A1AEDB6D2001DDB07 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CBC8F67C1AEDB6DB001DDB07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		CBC8F68C1AEDB902001DDB07 /* FeedbackLoop.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedbackLoop.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBC8F68C1AEDB902001DDB07 /* FeedbackLoopSDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedbackLoopSDK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC8F68F1AEDB902001DDB07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CBE36FAC1AF55280008579F8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CBE36FAE1AF55294008579F8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -264,7 +264,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBC8F66C1AEDB145001DDB07 /* libFeedbackLoop.a in Frameworks */,
+				CBC8F66C1AEDB145001DDB07 /* libFeedbackLoopSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,9 +320,9 @@
 		CBC8F6611AEDB145001DDB07 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CBC8F6601AEDB145001DDB07 /* libFeedbackLoop.a */,
-				CBC8F66B1AEDB145001DDB07 /* FeedbackLoopTests.xctest */,
-				CBC8F68C1AEDB902001DDB07 /* FeedbackLoop.bundle */,
+				CBC8F6601AEDB145001DDB07 /* libFeedbackLoopSDK.a */,
+				CBC8F66B1AEDB145001DDB07 /* FeedbackLoopSDKTests.xctest */,
+				CBC8F68C1AEDB902001DDB07 /* FeedbackLoopSDK.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -542,9 +542,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		CBC8F65F1AEDB145001DDB07 /* FeedbackLoop */ = {
+		CBC8F65F1AEDB145001DDB07 /* FeedbackLoopSDK */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CBC8F6741AEDB145001DDB07 /* Build configuration list for PBXNativeTarget "FeedbackLoop" */;
+			buildConfigurationList = CBC8F6741AEDB145001DDB07 /* Build configuration list for PBXNativeTarget "FeedbackLoopSDK" */;
 			buildPhases = (
 				FE0BCB6C2321F382E7F761E1 /* Check Pods Manifest.lock */,
 				CBC8F65C1AEDB145001DDB07 /* Sources */,
@@ -552,20 +552,20 @@
 				CBC8F65E1AEDB145001DDB07 /* CopyFiles */,
 				AADFF788039BF4AAA35C81B4 /* Copy Pods Resources */,
 				CBC8F67E1AEDB6EF001DDB07 /* Headers */,
-				CBC8F6801AEDB756001DDB07 /* Build Framework */,
+				CBC8F6801AEDB756001DDB07 /* BuildScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = FeedbackLoop;
+			name = FeedbackLoopSDK;
 			productName = FeedbackLoop;
-			productReference = CBC8F6601AEDB145001DDB07 /* libFeedbackLoop.a */;
+			productReference = CBC8F6601AEDB145001DDB07 /* libFeedbackLoopSDK.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		CBC8F66A1AEDB145001DDB07 /* FeedbackLoopTests */ = {
+		CBC8F66A1AEDB145001DDB07 /* FeedbackLoopSDKTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CBC8F6771AEDB145001DDB07 /* Build configuration list for PBXNativeTarget "FeedbackLoopTests" */;
+			buildConfigurationList = CBC8F6771AEDB145001DDB07 /* Build configuration list for PBXNativeTarget "FeedbackLoopSDKTests" */;
 			buildPhases = (
 				CBC8F6671AEDB145001DDB07 /* Sources */,
 				CBC8F6681AEDB145001DDB07 /* Frameworks */,
@@ -576,14 +576,14 @@
 			dependencies = (
 				CBC8F66E1AEDB145001DDB07 /* PBXTargetDependency */,
 			);
-			name = FeedbackLoopTests;
+			name = FeedbackLoopSDKTests;
 			productName = FeedbackLoopTests;
-			productReference = CBC8F66B1AEDB145001DDB07 /* FeedbackLoopTests.xctest */;
+			productReference = CBC8F66B1AEDB145001DDB07 /* FeedbackLoopSDKTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		CBC8F68B1AEDB901001DDB07 /* FeedbackLoopResources */ = {
+		CBC8F68B1AEDB901001DDB07 /* FeedbackLoopSDKResources */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CBC8F6901AEDB902001DDB07 /* Build configuration list for PBXNativeTarget "FeedbackLoopResources" */;
+			buildConfigurationList = CBC8F6901AEDB902001DDB07 /* Build configuration list for PBXNativeTarget "FeedbackLoopSDKResources" */;
 			buildPhases = (
 				CBC8F6881AEDB901001DDB07 /* Sources */,
 				CBC8F6891AEDB901001DDB07 /* Frameworks */,
@@ -593,9 +593,9 @@
 			);
 			dependencies = (
 			);
-			name = FeedbackLoopResources;
+			name = FeedbackLoopSDKResources;
 			productName = FeedbackLoopResources;
-			productReference = CBC8F68C1AEDB902001DDB07 /* FeedbackLoop.bundle */;
+			productReference = CBC8F68C1AEDB902001DDB07 /* FeedbackLoopSDK.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -621,7 +621,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CBC8F65B1AEDB145001DDB07 /* Build configuration list for PBXProject "FeedbackLoop" */;
+			buildConfigurationList = CBC8F65B1AEDB145001DDB07 /* Build configuration list for PBXProject "FeedbackLoopSDK" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -633,10 +633,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CBC8F65F1AEDB145001DDB07 /* FeedbackLoop */,
-				CBC8F66A1AEDB145001DDB07 /* FeedbackLoopTests */,
+				CBC8F65F1AEDB145001DDB07 /* FeedbackLoopSDK */,
+				CBC8F66A1AEDB145001DDB07 /* FeedbackLoopSDKTests */,
 				CBC8F6811AEDB781001DDB07 /* Framework */,
-				CBC8F68B1AEDB901001DDB07 /* FeedbackLoopResources */,
+				CBC8F68B1AEDB901001DDB07 /* FeedbackLoopSDKResources */,
 			);
 		};
 /* End PBXProject section */
@@ -698,14 +698,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FeedbackLoop/Pods-FeedbackLoop-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CBC8F6801AEDB756001DDB07 /* Build Framework */ = {
+		CBC8F6801AEDB756001DDB07 /* BuildScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Build Framework";
+			name = BuildScript;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -794,17 +794,17 @@
 /* Begin PBXTargetDependency section */
 		CBC8F66E1AEDB145001DDB07 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CBC8F65F1AEDB145001DDB07 /* FeedbackLoop */;
+			target = CBC8F65F1AEDB145001DDB07 /* FeedbackLoopSDK */;
 			targetProxy = CBC8F66D1AEDB145001DDB07 /* PBXContainerItemProxy */;
 		};
 		CBC8F6861AEDB78F001DDB07 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CBC8F65F1AEDB145001DDB07 /* FeedbackLoop */;
+			target = CBC8F65F1AEDB145001DDB07 /* FeedbackLoopSDK */;
 			targetProxy = CBC8F6851AEDB78F001DDB07 /* PBXContainerItemProxy */;
 		};
 		CBC8F6941AEDB96D001DDB07 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CBC8F68B1AEDB901001DDB07 /* FeedbackLoopResources */;
+			target = CBC8F68B1AEDB901001DDB07 /* FeedbackLoopSDKResources */;
 			targetProxy = CBC8F6931AEDB96D001DDB07 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -827,6 +827,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shane Rogers";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -848,6 +849,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "9f0d9d7f-e7ad-4159-ba77-d85d6fbe644d";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -869,6 +871,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shane Rogers";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -883,6 +886,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "9f0d9d7f-e7ad-4159-ba77-d85d6fbe644d";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -892,9 +896,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 02798D12E644895F9B4541B8 /* Pods-FeedbackLoop.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shane Rogers";
 				DEAD_CODE_STRIPPING = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FeedbackLoopSDK;
+				PROVISIONING_PROFILE = "9f0d9d7f-e7ad-4159-ba77-d85d6fbe644d";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = "non-global";
@@ -905,9 +912,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E73B38F933FEE30E849E8865 /* Pods-FeedbackLoop.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shane Rogers";
 				DEAD_CODE_STRIPPING = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FeedbackLoopSDK;
+				PROVISIONING_PROFILE = "9f0d9d7f-e7ad-4159-ba77-d85d6fbe644d";
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
 				SKIP_INSTALL = YES;
 				STRIP_STYLE = "non-global";
@@ -928,7 +938,7 @@
 				);
 				INFOPLIST_FILE = FeedbackLoopTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FeedbackLoopSDKTests;
 			};
 			name = Debug;
 		};
@@ -942,27 +952,33 @@
 				);
 				INFOPLIST_FILE = FeedbackLoopTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = FeedbackLoopSDKTests;
 			};
 			name = Release;
 		};
 		CBC8F6831AEDB781001DDB07 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shane Rogers";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9f0d9d7f-e7ad-4159-ba77-d85d6fbe644d";
 			};
 			name = Debug;
 		};
 		CBC8F6841AEDB781001DDB07 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shane Rogers";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9f0d9d7f-e7ad-4159-ba77-d85d6fbe644d";
 			};
 			name = Release;
 		};
 		CBC8F6911AEDB902001DDB07 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shane Rogers";
 				COMBINE_HIDPI_IMAGES = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -972,7 +988,9 @@
 				INFOPLIST_FILE = FeedbackLoopResources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_NAME = FeedbackLoop;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = FeedbackLoopSDK;
+				PROVISIONING_PROFILE = "9f0d9d7f-e7ad-4159-ba77-d85d6fbe644d";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
@@ -983,11 +1001,13 @@
 		CBC8F6921AEDB902001DDB07 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shane Rogers";
 				COMBINE_HIDPI_IMAGES = NO;
 				INFOPLIST_FILE = FeedbackLoopResources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_NAME = FeedbackLoop;
+				PRODUCT_NAME = FeedbackLoopSDK;
+				PROVISIONING_PROFILE = "9f0d9d7f-e7ad-4159-ba77-d85d6fbe644d";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
@@ -998,7 +1018,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CBC8F65B1AEDB145001DDB07 /* Build configuration list for PBXProject "FeedbackLoop" */ = {
+		CBC8F65B1AEDB145001DDB07 /* Build configuration list for PBXProject "FeedbackLoopSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CBC8F6721AEDB145001DDB07 /* Debug */,
@@ -1007,7 +1027,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CBC8F6741AEDB145001DDB07 /* Build configuration list for PBXNativeTarget "FeedbackLoop" */ = {
+		CBC8F6741AEDB145001DDB07 /* Build configuration list for PBXNativeTarget "FeedbackLoopSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CBC8F6751AEDB145001DDB07 /* Debug */,
@@ -1016,7 +1036,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CBC8F6771AEDB145001DDB07 /* Build configuration list for PBXNativeTarget "FeedbackLoopTests" */ = {
+		CBC8F6771AEDB145001DDB07 /* Build configuration list for PBXNativeTarget "FeedbackLoopSDKTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CBC8F6781AEDB145001DDB07 /* Debug */,
@@ -1034,7 +1054,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CBC8F6901AEDB902001DDB07 /* Build configuration list for PBXNativeTarget "FeedbackLoopResources" */ = {
+		CBC8F6901AEDB902001DDB07 /* Build configuration list for PBXNativeTarget "FeedbackLoopSDKResources" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CBC8F6911AEDB902001DDB07 /* Debug */,
