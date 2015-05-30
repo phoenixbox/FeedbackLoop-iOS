@@ -59,12 +59,12 @@
 
 - (NSString *)feedbackLoopAuthURL {
     // http://localhost:3000/api/teams/64a702c6-d868-480a-aff1-1ec6ab90e267?email=shane@gmail.com
-    NSString *base = PROD_API_BASE_URL;
+    NSString *BASE_URL = PROD_API_BASE_URL;
     // Reassign for local development
 #ifdef DEBUG
-    base = DEV_API_BASE_URL;
+    BASE_URL = DEV_API_BASE_URL;
 #endif
-    NSString *requestURL = [base stringByAppendingString:FBL_TEAMS_URI];
+    NSString *requestURL = [BASE_URL stringByAppendingString:FBL_TEAMS_URI];
     requestURL = [NSString stringWithFormat:@"%@/%@%@", requestURL, self.AppId,@"?"];
     requestURL = [NSString stringWithFormat:@"%@email=%@", requestURL, self.userEmail];
     

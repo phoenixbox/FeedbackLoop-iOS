@@ -102,14 +102,14 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     FBLAuthenticationStore *authStore = [FBLAuthenticationStore sharedInstance];
 
-    NSString *base = PROD_API_BASE_URL;
+    NSString *BASE_URL = PROD_API_BASE_URL;
 // Reassign for local development
 #ifdef DEBUG
-    base = DEV_API_BASE_URL;
+    BASE_URL = DEV_API_BASE_URL;
 #endif
 
     // What params does the api expect
-    NSString *requestURL = [[FBLAuthenticationStore sharedInstance] oauthRequest:DEV_API_BASE_URL withURLSegment:DEV_API_MESSAGES];
+    NSString *requestURL = [[FBLAuthenticationStore sharedInstance] oauthRequest:BASE_URL withURLSegment:DEV_API_MESSAGES];
 
     NSString *channelIdParam = [NSString stringWithFormat:@"&channel=%@",channel.id];
     requestURL = [requestURL stringByAppendingString:channelIdParam];
