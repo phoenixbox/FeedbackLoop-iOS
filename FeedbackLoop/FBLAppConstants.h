@@ -43,14 +43,12 @@
 #define     DEV_API_BASE_URL @"http://lvh.me:3000/api"
 #define     DEV_API_MESSAGES @"/messages"
 
-//#define     DEV_API_BASE_URL @"http://192.168.0.109:3000/api";
-
 //--------------FEEDBACKLOOP ENDPOINTS------------------------------
 
 #define     FBL_TEAMS_URI @"/teams"
 
 //--------------FEEDBACKLOOP GENERAL------------------------------
-#define BUNDLE_NAME @"FeedbackLoop.bundle"
+#define BUNDLE_NAME @"FeedbackLoopSDK.bundle"
 
 #define FEEDBACK_ERROR [UIColor colorWithRed:0.8 green:0.2 blue:0.47 alpha:1]
 #define FEEDBACK_SUCCESS [UIColor colorWithRed:0.36 green:0.91 blue:0.43 alpha:1]
