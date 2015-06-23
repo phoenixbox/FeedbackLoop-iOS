@@ -36,7 +36,7 @@
 
 //-------------------FEEDBACKLOOP API ------------------------------
 //-------Production
-#define     PROD_API_BASE_URL @"http://www.getfeedbackloop.com/api"
+#define     PROD_API_BASE_URL @"https://www.getfeedbackloop.com/api"
 
 //-------Development
 #define     DEV_API_TEAM_APP_ID @"64a702c6-d868-480a-aff1-1ec6ab90e267"

@@ -104,9 +104,9 @@
 
     NSString *BASE_URL = PROD_API_BASE_URL;
 // Reassign for local development
-#ifdef DEBUG
-    BASE_URL = DEV_API_BASE_URL;
-#endif
+//#ifdef DEBUG
+//    BASE_URL = DEV_API_BASE_URL;
+//#endif
 
     // What params does the api expect
     NSString *requestURL = [[FBLAuthenticationStore sharedInstance] oauthRequest:BASE_URL withURLSegment:DEV_API_MESSAGES];
